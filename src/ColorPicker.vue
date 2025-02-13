@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import { useContext } from './use-context';
+import { useContext } from './hooks/use-context';
 const { state } = useContext();
 
 export default {

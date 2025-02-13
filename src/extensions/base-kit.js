@@ -12,7 +12,7 @@ import { Placeholder } from '@tiptap/extension-placeholder';
 import { Text } from '@tiptap/extension-text';
 import { TextStyle } from '@tiptap/extension-text-style';
 import { defaultBubbleList, generateBubbleTypeMenu } from '../bubble';
-import { useContext } from '../use-context';
+import { useContext } from '../hooks/use-context';
 const { state } = useContext();
 
 /**

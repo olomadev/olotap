@@ -1,6 +1,6 @@
 import { createInjectionState } from '@vueuse/core'
 import { computed, reactive, watchEffect } from 'vue'
-import { useContext } from './use-context'
+import { useContext } from './use-context';
 
 export const [useProvideOlotapStore, useOlotapStore] = createInjectionState(() => {
   const { state: _state } = useContext()

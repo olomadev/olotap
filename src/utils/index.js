@@ -1,4 +1,19 @@
 import { differenceBy, isEqual, throttle } from 'lodash-unified';
+
+/**
+ * Merge objects
+ */
+export const mergeObjects = function(target, source) {
+  if (typeof target !== 'object' || typeof source !== 'object') return source;
+  for (const key in source) {
+    if (source[key] && typeof source[key] === 'object') {
+      target[key] = mergeDeep(target[key] || {}, source[key]);
+    } else {
+      target[key] = source[key];
+    }
+  }
+  return target;
+};
 /**
  * Convert file to base64 encoded object
  */

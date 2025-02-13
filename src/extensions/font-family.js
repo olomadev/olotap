@@ -1,6 +1,6 @@
 import { FontFamily as TiptapFontFamily } from '@tiptap/extension-font-family';
 import FontFamilySelectButton from '../FontFamilySelectButton.vue';
-import { useContext } from '../use-context';
+import { useContext } from './hooks/use-context';
 const { state } = useContext();
 
 const DEFAULT_FONT_FAMILY_LIST = state.constants.DEFAULT_FONT_FAMILY_LIST;

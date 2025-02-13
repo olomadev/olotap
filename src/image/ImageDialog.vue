@@ -35,7 +35,7 @@
 <script>
 import ImageUpload from './ImageUpload.vue';
 import ImageUrl from './ImageUrl.vue';
-import { useContext } from '../use-context';
+import { useContext } from './hooks/use-context';
 const { state } = useContext();
 
 export default {

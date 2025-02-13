@@ -46,7 +46,7 @@
 <script>
 import { isMobile } from '@/utils';
 import { reactive, unref } from 'vue';
-import { useContext } from '../use-context';
+import { useContext } from './hooks/use-context';
 const { state } = useContext();
 
 const TABLE_DEFAULT_SELECTED_GRID_SIZE = state.constants.TABLE_DEFAULT_SELECTED_GRID_SIZE;

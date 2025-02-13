@@ -3,7 +3,7 @@ import { VueNodeViewRenderer } from '@tiptap/vue-3';
 import ImageDialog from '../image/ImageDialog.vue';
 import ImageView from '../image/ImageView.vue';
 import ImageActionButton from '../ImageActionButton.vue';
-import { useContext } from '../use-context';
+import { useContext } from './hooks/use-context';
 const { state } = useContext();
 
 const IMAGE_SIZE = state.constants.IMAGE_SIZE;

@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { useContext } from './use-context';
+import { useContext } from './hooks/use-context';
 const { state } = useContext();
 import ActionButton from './ActionButton.vue';
 import ColorPicker from './ColorPicker.vue';
