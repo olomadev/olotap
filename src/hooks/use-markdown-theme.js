@@ -2,18 +2,17 @@
 import { isBoolean, isString } from '@/utils';
 import { computed, unref, watch } from 'vue';
 import { useContext } from './use-context';
-import { useOlotapStore } from './use-store'
 
 export function useMarkdownTheme(value, hooks) {
   const { state } = useContext();
 
   const markdownTheme = computed(() => {
-    if (isBoolean(unref(value))) return useOlotapStore().state.constants.DEFAULT_MARKDOWN_THEME_VALUE;
+    if (isBoolean(unref(value))) return state.constants.DEFAULT_MARKDOWN_THEME_VALUE;
     if (isString(state.defaultMarkdownTheme) && state.defaultMarkdownTheme) {
       return state.defaultMarkdownTheme;
     }
 
-    return useOlotapStore().state.constants.DEFAULT_MARKDOWN_THEME_VALUE;
+    return state.constants.DEFAULT_MARKDOWN_THEME_VALUE;
   });
 
   const markdownThemeStyle = computed(() => {

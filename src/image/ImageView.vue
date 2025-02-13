@@ -35,7 +35,8 @@
 <script>
 import { clamp, throttle, isNumber } from '@/utils';
 import { nodeViewProps, NodeViewWrapper } from '@tiptap/vue-3';
-import { useOlotapStore } from '../hooks/use-store'
+import { useContext } from '../use-context';
+const { state } = useContext();
 
 const IMAGE_MAX_SIZE = useOlotapStore().state.constants.IMAGE_MAX_SIZE;
 const IMAGE_MIN_SIZE = useOlotapStore().state.constants.IMAGE_MIN_SIZE;

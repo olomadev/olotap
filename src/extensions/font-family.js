@@ -1,8 +1,9 @@
 import { FontFamily as TiptapFontFamily } from '@tiptap/extension-font-family';
 import FontFamilySelectButton from '../FontFamilySelectButton.vue';
-import { useOlotapStore } from '../hooks/use-store'
+import { useContext } from '../use-context';
+const { state } = useContext();
 
-const DEFAULT_FONT_FAMILY_LIST = useOlotapStore().state.constants.DEFAULT_FONT_FAMILY_LIST;
+const DEFAULT_FONT_FAMILY_LIST = state.constants.DEFAULT_FONT_FAMILY_LIST;
 
 export const FontFamily = TiptapFontFamily.extend({
   addOptions() {
@@ -16,7 +17,7 @@ export const FontFamily = TiptapFontFamily.extend({
           title: k.title == 'editor.fontFamily.fonts.default' ? t(k.title) : t('editor.fontFamily.fonts.' + k.title),
           isActive: () => {
             const { fontFamily } = editor.getAttributes('textStyle');
-            const isDefault = k.value === useOlotapStore().state.constants.DEFAULT_FONT_FAMILY_VALUE;
+            const isDefault = k.value === state.constants.DEFAULT_FONT_FAMILY_VALUE;
             const notFontFamily = fontFamily === undefined;
             
             if (isDefault && notFontFamily) {
@@ -26,7 +27,7 @@ export const FontFamily = TiptapFontFamily.extend({
             return editor.isActive({ fontFamily: k.value }) || false;
           },
           action: () => {
-            if (k.value === useOlotapStore().state.constants.DEFAULT_FONT_FAMILY_VALUE) {
+            if (k.value === state.constants.DEFAULT_FONT_FAMILY_VALUE) {
               editor.chain().focus().unsetFontFamily().run();
               return;
             }

@@ -43,9 +43,8 @@
 </template>
 
 <script>
-import { useOlotapStore } from '../hooks/use-store'
-
-const COLORS_LIST = useOlotapStore().state.constants.COLORS_LIST;
+import { useContext } from './use-context';
+const { state } = useContext();
 
 export default {
   props: {
@@ -88,11 +87,14 @@ export default {
       this.$emit('change', color);
       this.inputValue = color;
       this.menu = false;
+
+      // this.editor.
+
     }
   },
   computed: {
     getColorList() {
-      return COLORS_LIST;
+      return state.constants.COLORS_LIST;
     }
   }
 

@@ -3,9 +3,10 @@ import { VueNodeViewRenderer } from '@tiptap/vue-3';
 import ImageDialog from '../image/ImageDialog.vue';
 import ImageView from '../image/ImageView.vue';
 import ImageActionButton from '../ImageActionButton.vue';
-import { useOlotapStore } from '../hooks/use-store'
+import { useContext } from '../use-context';
+const { state } = useContext();
 
-const IMAGE_SIZE = useOlotapStore().state.constants.IMAGE_SIZE;
+const IMAGE_SIZE = state.constants.IMAGE_SIZE;
 
 export const Image = TiptapImage.extend({
   addAttributes() {

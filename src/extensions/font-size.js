@@ -1,10 +1,11 @@
 import { getCssUnitWithDefault } from '@/utils';
 import { Extension } from '@tiptap/core';
 import ActionMenuButton from '../ActionMenuButton.vue';
-import { useOlotapStore } from '../hooks/use-store'
+import { useContext } from '../use-context';
+const { state } = useContext();
 
-const DEFAULT_FONT_SIZE_LIST = useOlotapStore().state.constants.DEFAULT_FONT_SIZE_LIST;
-const DEFAULT_FONT_SIZE_VALUE = useOlotapStore().state.constants.DEFAULT_FONT_SIZE_VALUE;
+const DEFAULT_FONT_SIZE_LIST = state.constants.DEFAULT_FONT_SIZE_LIST;
+const DEFAULT_FONT_SIZE_VALUE = state.constants.DEFAULT_FONT_SIZE_VALUE;
 
 export const FontSize = Extension.create({
   name: 'fontSize',

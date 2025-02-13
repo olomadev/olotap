@@ -62,7 +62,7 @@
 import { computed, watch, onUnmounted } from 'vue';
 import { Editor, EditorContent } from '@tiptap/vue-3';
 import { EDITOR_UPDATE_THROTTLE_WAIT_TIME, EDITOR_UPDATE_WATCH_THROTTLE_WAIT_TIME } from './constants/define';
-import { useMarkdownTheme, useProvideTiptapStore } from './hooks';
+import { useMarkdownTheme, useProvideOlotapStore } from './hooks';
 import { throttle, getCssUnitWithDefault, isBoolean, isEqual, differenceBy } from '@/utils';
 import { isMobile } from '@/utils';
 import BubbleMenu from './BubbleMenu.vue';
@@ -152,7 +152,7 @@ export default {
   },
   emits: ['enter', 'change', 'update:modelValue', 'update:markdownTheme'],
   setup() {
-    const { state, isFullscreen } = useProvideTiptapStore();
+    const { state, isFullscreen } = useProvideOlotapStore();
     return {
       state,
       isFullscreen,

@@ -46,11 +46,12 @@
 <script>
 import { isMobile } from '@/utils';
 import { reactive, unref } from 'vue';
-import { useOlotapStore } from '../hooks/use-store'
+import { useContext } from '../use-context';
+const { state } = useContext();
 
-const TABLE_DEFAULT_SELECTED_GRID_SIZE = useOlotapStore().state.constants.TABLE_DEFAULT_SELECTED_GRID_SIZE;
-const TABLE_INIT_GRID_SIZE = useOlotapStore().state.constants.TABLE_INIT_GRID_SIZE;
-const TABLE_MAX_GRID_SIZE = useOlotapStore().state.constants.TABLE_MAX_GRID_SIZE;
+const TABLE_DEFAULT_SELECTED_GRID_SIZE = state.constants.TABLE_DEFAULT_SELECTED_GRID_SIZE;
+const TABLE_INIT_GRID_SIZE = state.constants.TABLE_INIT_GRID_SIZE;
+const TABLE_MAX_GRID_SIZE = state.constants.TABLE_MAX_GRID_SIZE;
 
 export default {
   data() {
