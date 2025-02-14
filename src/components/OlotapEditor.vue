@@ -67,8 +67,6 @@ import { isMobile, mergeObjects } from '@/utils';
 import BubbleMenu from '../BubbleMenu.vue';
 import TipTapToolbar from '../TiptapToolbar.vue';
 import '../styles/index.scss'
-import { createContext, useContext } from '../hooks/use-context';
-import * as defaultConstants from '../constants/define.js';
 
 export default {
   name: 'OlotapEditor',
@@ -78,18 +76,6 @@ export default {
     TipTapToolbar,
   },
   props: {
-    constants: {
-      type: [Object],
-      default: {},
-    },
-    defaultLang: {
-      type: String,
-      default: "en",
-    },
-    i18n: {
-      type: Object,
-      required: true,
-    },
     extensions: {
       type: Array,
       default: () => [],
@@ -165,13 +151,6 @@ export default {
   },
   emits: ['enter', 'change', 'update:modelValue', 'update:markdownTheme'],
   setup(props) {
-    const mergedConstants = mergeObjects({ ...defaultConstants }, props.constants || {});
-    createContext({
-      constants: mergedConstants,
-      markdownTheme: props.markdownTheme,
-      extensions: props.extensions,
-      i18n: props.i18n,
-    });
     const { state, isFullscreen } = useProvideOlotapStore();
     return {
       state,

@@ -31,9 +31,8 @@ import { BubbleMenu } from '@tiptap/vue-3'
 import { TextSelection } from '@tiptap/pm/state'
 import { Editor, Extension } from '@tiptap/vue-3'
 import { NodeSelection } from '@tiptap/pm/state'
-import { useContext } from './hooks/use-context';
-const { state } = useContext();
-const i18n = state.i18n;
+import { getConfig } from "./config";
+const { i18n } = getConfig();
 
 export default {
   props: {

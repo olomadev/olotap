@@ -30,7 +30,7 @@ export const Table = TiptapTable.extend({
   addProseMirrorPlugins() {
     const plugins = this.parent?.() || [];
 
-    // custom buble menu plugin for table extension
+    // custom bubble menu plugin for table extension
     if (this.options.bubbleMenuPlugin) {
       plugins.push(
         new Plugin({

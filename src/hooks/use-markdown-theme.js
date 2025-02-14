@@ -1,17 +1,19 @@
 import { isBoolean, isString } from '@/utils';
 import { computed, unref, watch } from 'vue';
 import { useContext } from './use-context';
+import { getConfig } from "../config";
+const { DEFAULT_MARKDOWN_THEME_VALUE } = getConfig();
 
 export function useMarkdownTheme(value, hooks) {
   const { state } = useContext();
 
   const markdownTheme = computed(() => {
-    if (isBoolean(unref(value))) return state.constants.DEFAULT_MARKDOWN_THEME_VALUE;
+    if (isBoolean(unref(value))) return DEFAULT_MARKDOWN_THEME_VALUE;
     if (isString(state.defaultMarkdownTheme) && state.defaultMarkdownTheme) {
       return state.defaultMarkdownTheme;
     }
 
-    return state.constants.DEFAULT_MARKDOWN_THEME_VALUE;
+    return DEFAULT_MARKDOWN_THEME_VALUE;
   });
 
   const markdownThemeStyle = computed(() => {

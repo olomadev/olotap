@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { useTiptapStore } from './hooks/use-store';
+import { useContext } from './hooks/use-context';
 import ActionButton from './ActionButton.vue';
 import ColorPicker from './ColorPicker.vue';
 
@@ -39,7 +39,7 @@ export default {
   },
   data() {
     return {
-      state: useTiptapStore().state
+      state: useContext().state
     };
   },
   methods: {

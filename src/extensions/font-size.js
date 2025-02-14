@@ -1,11 +1,9 @@
 import { getCssUnitWithDefault } from '@/utils';
 import { Extension } from '@tiptap/core';
 import ActionMenuButton from '../ActionMenuButton.vue';
-import { useContext } from './hooks/use-context';
-const { state } = useContext();
 
-const DEFAULT_FONT_SIZE_LIST = state.constants.DEFAULT_FONT_SIZE_LIST;
-const DEFAULT_FONT_SIZE_VALUE = state.constants.DEFAULT_FONT_SIZE_VALUE;
+import { getConfig } from "../config";
+const { DEFAULT_FONT_SIZE_LIST, DEFAULT_FONT_SIZE_VALUE } = getConfig();
 
 export const FontSize = Extension.create({
   name: 'fontSize',

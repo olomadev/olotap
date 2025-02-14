@@ -2,10 +2,9 @@ import { getCssUnitWithDefault } from '@/utils';
 import { Node } from '@tiptap/core';
 import VideoDialog from '../video/VideoDialog.vue';
 import VideoActionButton from '../VideoActionButton.vue';
-import { useContext } from './hooks/use-context';
-const { state } = useContext();
 
-const VIDEO_SIZE = state.constants.VIDEO_SIZE;
+import { getConfig } from "../config";
+const { VIDEO_SIZE } = getConfig();
 
 function linkConvert(src) {
   // Youtube

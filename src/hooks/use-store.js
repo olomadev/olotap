@@ -6,23 +6,26 @@ export const [useProvideOlotapStore, useOlotapStore] = createInjectionState(() =
   const { state: _state } = useContext()
 
   const state = reactive({
-    i18n: _state.i18n ?? undefined,
-    extensions: _state.extensions ?? [],
-    defaultLang: _state.constants.DEFAULT_LANG_VALUE,
-    defaultMarkdownTheme: _state.constants.DEFAULT_MARKDOWN_THEME_VALUE,
+    defaultLang: DEFAULT_LANG_VALUE,
+    defaultMarkdownTheme: DEFAULT_MARKDOWN_THEME_VALUE,
     isFullscreen: false,
+    isImageEvent: false,
     color: undefined,
     highlight: undefined
   })
 
   const isFullscreen = computed(() => state.isFullscreen)
+  const isImageEvent = computed(() => state.isImageEvent)
 
   function toggleFullscreen() {
     state.isFullscreen = !state.isFullscreen
   }
 
+  function toggleImageEvent() {
+    state.isImageEvent = !state.isImageEvent
+  }
+
   watchEffect(() => {
-    state.extensions = _state.extensions
     state.defaultLang = _state.defaultLang
     state.defaultMarkdownTheme = _state.defaultMarkdownTheme
   })
@@ -30,6 +33,8 @@ export const [useProvideOlotapStore, useOlotapStore] = createInjectionState(() =
   return {
     state,
     isFullscreen,
-    toggleFullscreen
+    isImageEvent,
+    toggleFullscreen,
+    toggleImageEvent
   }
 })

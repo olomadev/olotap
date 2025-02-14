@@ -35,12 +35,9 @@
 <script>
 import { clamp, throttle, isNumber } from '@/utils';
 import { nodeViewProps, NodeViewWrapper } from '@tiptap/vue-3';
-import { useContext } from './hooks/use-context';
-const { state } = useContext();
 
-const IMAGE_MAX_SIZE = useOlotapStore().state.constants.IMAGE_MAX_SIZE;
-const IMAGE_MIN_SIZE = useOlotapStore().state.constants.IMAGE_MIN_SIZE;
-const IMAGE_THROTTLE_WAIT_TIME = useOlotapStore().state.constants.IMAGE_THROTTLE_WAIT_TIME;
+import { getConfig } from "../config";
+const { IMAGE_MAX_SIZE, IMAGE_MIN_SIZE, IMAGE_THROTTLE_WAIT_TIME } = getConfig();
 
 export default {
   props: {

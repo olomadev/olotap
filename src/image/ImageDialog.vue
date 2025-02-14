@@ -35,8 +35,7 @@
 <script>
 import ImageUpload from './ImageUpload.vue';
 import ImageUrl from './ImageUrl.vue';
-import { useContext } from './hooks/use-context';
-const { state } = useContext();
+import { useProvideOlotapStore } from '../hooks';
 
 export default {
   components: {
@@ -68,6 +67,12 @@ export default {
       type: Object,
       required: true,
     },
+  },
+  setup() {
+    const { toggleImageEvent } = useProvideOlotapStore();
+    return {
+      toggleImageEvent
+    }
   },
   data() {
     return {
@@ -117,7 +122,7 @@ export default {
         })
         .run();
 
-      state.applyImageEvent = true;
+      this.toggleImageEvent();
       this.close();
     },
     close() {
