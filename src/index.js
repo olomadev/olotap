@@ -1,23 +1,21 @@
 import OlotapEditor from "./components/OlotapEditor.vue";
-import * as Extensions from './extensions/index.js'; 
-import * as Hooks from './hooks/index.js';
-import { setConfig } from "./config";
-const { createContext } = Hooks;
+import Extensions from "./extensions/index.js";
 
-class OlotapPlugin {
-  install(options) {
+const OlotapPlugin = {
+  install(app, options = {}) {
     setConfig({
       i18n: options.i18n ?? undefined
-    })
+    });
+
     createContext({
       defaultLang: options.lang ?? "en",
       defaultMarkdownTheme: options.markdownTheme ?? "github",
     });
   }
-}
+};
 
-export default OlotapPlugin;
-export { OlotapEditor, Extensions, Hooks };
+export { OlotapPlugin, OlotapEditor, Extensions };
+
 
 // Usage
 
