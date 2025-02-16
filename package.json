@@ -1,19 +1,18 @@
 {
   "name": "olotap",
   "version": "1.0.0",
-  "main": "dist/olotap.cjs.js",
-  "module": "dist/olotap.es.js",
+  "main": "./dist/olotap.umd.js",
+  "module": "./dist/olotap.es.js",
   "files": [
     "LICENSE.md",
     "README.md",
-    "src",
-    "dist",
-    "package.json"
+    "dist"
   ],
   "exports": {
-    "import": "./dist/olotap.es.js",
-    "require": "./dist/olotap.cjs.js",
-    "default": "./dist/olotap.umd.js"
+    ".": {
+      "import": "./dist/olotap.es.js",
+      "require": "./dist/olotap.cjs.js"
+    }
   },
   "peerDependencies": {
     "vue": "^3.5.13"
