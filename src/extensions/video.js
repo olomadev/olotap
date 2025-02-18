@@ -2,9 +2,7 @@ import { getCssUnitWithDefault } from '@/utils';
 import { Node } from '@tiptap/core';
 import VideoDialog from '../video/VideoDialog.vue';
 import VideoActionButton from '../VideoActionButton.vue';
-
-import { getConfig } from "../config";
-const { VIDEO_SIZE } = getConfig();
+import { useContext } from "../hooks/use-context";
 
 function linkConvert(src) {
   // Youtube
@@ -100,6 +98,8 @@ export const Video = Node.create({
     };
   },
   addOptions() {
+    const { state } = useContext();
+    const { VIDEO_SIZE } = state;
     return {
       divider: false,
       spacer: false,
@@ -111,7 +111,7 @@ export const Video = Node.create({
         style: 'display: flex;justify-content: center;',
       },
       dialogComponent: () => VideoDialog,
-      button: ({ editor, extension, t }) => {
+      button: ({ editor, extension }) => {
         const { dialogComponent } = extension.options;
 
         return {
@@ -119,7 +119,7 @@ export const Video = Node.create({
           componentProps: {
             isActive: () => editor.isActive('video') || false,
             icon: "mdi-video-plus",
-            tooltip: t('editor.video.tooltip'),
+            tooltip: state.t('editor.video.tooltip'),
           },
           componentSlots: {
             dialog: dialogComponent(),

@@ -1,6 +1,6 @@
 <template>
   <bubble-menu v-show="items.length > 0" :editor="editor" :tippy-options="tippyOptions">
-    <v-card class="vuetify-pro-tiptap-editor__menu-bubble">
+    <v-card class="olotap-editor__menu-bubble">
       <v-card-text class="d-flex pa-0">
         <v-toolbar density="compact" flat height="auto" class="py-1 ps-1">
           <template v-for="(item, key) in items" :key="key">
@@ -31,8 +31,7 @@ import { BubbleMenu } from '@tiptap/vue-3'
 import { TextSelection } from '@tiptap/pm/state'
 import { Editor, Extension } from '@tiptap/vue-3'
 import { NodeSelection } from '@tiptap/pm/state'
-import { getConfig } from "./config";
-const { i18n } = getConfig();
+import { useContext } from './hooks/use-context';
 
 export default {
   props: {
@@ -47,6 +46,10 @@ export default {
   },
   components: {
     BubbleMenu
+  },
+  setup() {
+    const { state } = useContext();
+    return { i18n: state.i18n }
   },
   data() {
     return {
@@ -86,7 +89,7 @@ export default {
       const _button = button({
         editor: this.editor,
         extension: find,
-        t: i18n.global.t
+        t: this.i18n.global.t
       })
 
       return _button

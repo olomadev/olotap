@@ -5,9 +5,11 @@ import { TableRow } from '@tiptap/extension-table-row';
 import TableActionButton from '../TableActionButton.vue';
 import { Plugin, PluginKey } from "prosemirror-state";
 import { BubbleMenu } from "@tiptap/extension-bubble-menu";
+import { useContext } from "../hooks/use-context";
 
 export const Table = TiptapTable.extend({
   addOptions() {
+    const { state } = useContext();
     return {
       ...this.parent?.(),
       resizable: true,
@@ -15,13 +17,13 @@ export const Table = TiptapTable.extend({
       HTMLAttributes: {
         class: 'table-wrapper'
       },
-      button: ({ editor, t }) => ({
+      button: ({ editor }) => ({
         component: TableActionButton,
         componentProps: {
           isActive: () => editor.isActive('table') || false,
           disabled: !editor.can().insertTable(),
           icon: 'mdi-table',
-          tooltip: t('editor.table.tooltip'),
+          tooltip: state.t('editor.table.tooltip'),
           id: 'table-insert-button',
         }
       })
@@ -40,7 +42,6 @@ export const Table = TiptapTable.extend({
               mousemove: (view, event) => {
                 const target = event.target;
                 if (target.classList.contains("resize-handle")) {
-                  alert("ok")
                   document.body.style.cursor = "col-resize";
                 } else {
                   document.body.style.cursor = "";

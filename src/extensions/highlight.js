@@ -1,12 +1,14 @@
 import { Highlight as TiptapHighlight } from '@tiptap/extension-highlight';
 import HighlightActionButton from '../HighlightActionButton.vue';
+import { useContext } from "../hooks/use-context";
 
 export const Highlight = TiptapHighlight.extend({
   addOptions() {
+    const { state } = useContext();
     return {
       ...this.parent?.(),
       multicolor: true,
-      button: ({ editor, t }) => ({
+      button: ({ editor }) => ({
         component: HighlightActionButton,
         componentProps: {
           editor,
@@ -23,7 +25,7 @@ export const Highlight = TiptapHighlight.extend({
           isActive: () => editor.isActive('highlight') || false,
           disabled: !editor.can().setHighlight(),
           icon: 'mdi-format-color-highlight',
-          tooltip: t('editor.highlight.tooltip')
+          tooltip: state.t('editor.highlight.tooltip')
         }
       })
     };

@@ -1,33 +1,24 @@
 import OlotapEditor from "./components/OlotapEditor.vue";
+import * as Context from './hooks/use-context';
 import * as Extensions from './extensions';
-import { setConfig } from "./config";
+import { defaultBubbleList } from './bubble';
 
 const OlotapPlugin = {
-  install(app, options = {}) {
-    setConfig({
-      i18n: options.i18n ?? undefined
-    });
-    createContext({
-      defaultLang: options.lang ?? "en",
-      defaultMarkdownTheme: options.markdownTheme ?? "github",
-    });
+  install(app, config = {}) {
+    Context.createContext(config);
   }
 };
 
-export { OlotapPlugin, OlotapEditor, Extensions };
-
+export { OlotapPlugin, OlotapEditor, Extensions, defaultBubbleList };
 
 // Usage
-
 /*
-import { OlotapEditor, Extensions } from 'olotap';
+import { OlotapEditor, OlotapPlugin, Extension } from 'olotap';
 
-// Vue'ye eklemek için
 const app = createApp(App);
-app.use(OlotapPlugin, options = {  });
+app.use(OlotapPlugin, config = {  });
 
-// with register function
 export function registerPlugins(app) {
-    OlotapPlugin.install(options = {})
+  OlotapPlugin.install(config = {})
 }
 */

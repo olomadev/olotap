@@ -1,22 +1,22 @@
 import { FontFamily as TiptapFontFamily } from '@tiptap/extension-font-family';
 import FontFamilySelectButton from '../FontFamilySelectButton.vue';
-
-import { getConfig } from "../config";
-const { DEFAULT_FONT_FAMILY_LIST } = getConfig();
+import { useContext } from "../hooks/use-context";
 
 export const FontFamily = TiptapFontFamily.extend({
   addOptions() {
+    const { state } = useContext();
+    const { DEFAULT_FONT_FAMILY_LIST, DEFAULT_FONT_FAMILY_VALUE } = state;
     return {
       ...this.parent?.(),
       fontFamilies: DEFAULT_FONT_FAMILY_LIST,
-      button: ({ editor, extension, t }) => {
+      button: ({ editor, extension }) => {
         const fontFamilies = extension.options?.fontFamilies || [];
 
         const items = fontFamilies.map(k => ({
-          title: k.title == 'editor.fontFamily.fonts.default' ? t(k.title) : t('editor.fontFamily.fonts.' + k.title),
+          title: k.title == 'editor.fontFamily.fonts.default' ? state.t(k.title) : state.t('editor.fontFamily.fonts.' + k.title),
           isActive: () => {
             const { fontFamily } = editor.getAttributes('textStyle');
-            const isDefault = k.value === state.constants.DEFAULT_FONT_FAMILY_VALUE;
+            const isDefault = k.value === DEFAULT_FONT_FAMILY_VALUE;
             const notFontFamily = fontFamily === undefined;
             
             if (isDefault && notFontFamily) {
@@ -26,7 +26,7 @@ export const FontFamily = TiptapFontFamily.extend({
             return editor.isActive({ fontFamily: k.value }) || false;
           },
           action: () => {
-            if (k.value === state.constants.DEFAULT_FONT_FAMILY_VALUE) {
+            if (k.value === DEFAULT_FONT_FAMILY_VALUE) {
               editor.chain().focus().unsetFontFamily().run();
               return;
             }
@@ -44,7 +44,7 @@ export const FontFamily = TiptapFontFamily.extend({
           component: FontFamilySelectButton,
           componentProps: {
             icon: 'mdi-format-font',
-            tooltip: t('editor.fontFamily.tooltip'),
+            tooltip: state.t('editor.fontFamily.tooltip'),
             disabled,
             items,
             maxHeight: 280

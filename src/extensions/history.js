@@ -1,12 +1,14 @@
 import { History as TiptapHistory } from '@tiptap/extension-history';
 import ActionButton from '../ActionButton.vue';
+import { useContext } from "../hooks/use-context";
 
 export const History = TiptapHistory.extend({
   addOptions() {
+    const { state } = useContext();
     return {
       ...this.parent?.(),
       depth: 10,
-      button: ({ editor, t }) => {
+      button: ({ editor }) => {
         const historys = ['undo', 'redo'];
 
         return historys.map(item => ({
@@ -18,7 +20,7 @@ export const History = TiptapHistory.extend({
             },
             disabled: !editor.can()[item](),
             icon: item == "undo" ? "mdi-undo" : "mdi-redo",
-            tooltip: item == "undo" ? t('editor.undo.tooltip') : t('editor.redo.tooltip'),
+            tooltip: item == "undo" ? state.t('editor.undo.tooltip') : state.t('editor.redo.tooltip'),
           }
         }));
       }

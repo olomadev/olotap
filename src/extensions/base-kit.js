@@ -12,25 +12,28 @@ import { Placeholder } from '@tiptap/extension-placeholder';
 import { Text } from '@tiptap/extension-text';
 import { TextStyle } from '@tiptap/extension-text-style';
 import { defaultBubbleList, generateBubbleTypeMenu } from '../bubble';
-
-import { getConfig } from "../config";
-const { NODE_TYPE_MENU } = getConfig();
-
+import { useContext } from "../hooks/use-context";
 /**
  * Represents the interface for options in the base toolkit.
  */
 export const BaseKit = Extension.create({
   name: 'base-kit',
   addOptions() {
+    const { state } = useContext();
+    const { NODE_TYPE_MENU } = state;
     return {
       ...this.parent?.(),
       bubble: {
         list: NODE_TYPE_MENU,
         defaultBubbleList,
-        button: ({ editor, extension, t}) => {
+        button: ({ editor, extension }) => {
           const { list = {}, defaultBubbleList } = extension.options?.bubble ?? {};
           const defaultList = defaultBubbleList?.(editor) ?? [];
-          return generateBubbleTypeMenu(list, defaultList, { editor, extension, t });
+          return generateBubbleTypeMenu(list, defaultList, { 
+            editor, 
+            extension, 
+            t: (...args) => state.t(...args) // a wrapper function that directly calls function `t`
+          });
         }
       }
     };

@@ -44,7 +44,6 @@
 
 <script>
 import { useContext } from './hooks/use-context';
-const { state } = useContext();
 
 export default {
   props: {
@@ -94,7 +93,7 @@ export default {
   },
   computed: {
     getColorList() {
-      return state.constants.COLORS_LIST;
+      return useContext().state.COLORS_LIST;
     }
   }
 

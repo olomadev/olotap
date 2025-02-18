@@ -1,8 +1,7 @@
 import { isString } from '@/utils'
 import { deleteSelection } from '@tiptap/pm/commands'
 import ActionButton from './ActionButton.vue'
-import { getConfig } from "./config";
-const { IMAGE_SIZE, VIDEO_SIZE, i18n } = getConfig();
+import { useContext } from './hooks/use-context';
 
 /** Represents the floating types for bubble images */
 const BubbleImageFloatType = ['float-left', 'float-none', 'float-right']
@@ -75,6 +74,9 @@ const imageFloatMenus = (editor) => {
 }
 
 const imageSizeMenus = (editor) => {
+  const { state } = useContext();
+  const IMAGE_SIZE = state.IMAGE_SIZE;
+
   const types = ['size-small', 'size-medium', 'size-large']
   const icons = ['mdi-size-s', 'mdi-size-m', 'mdi-size-l']
 
@@ -91,6 +93,9 @@ const imageSizeMenus = (editor) => {
 }
 
 const videoSizeMenus = (editor) => {
+  const { state } = useContext();
+  const VIDEO_SIZE = state.IMAGE_SIZE;
+
   const types = ['size-small', 'size-medium', 'size-large']
   const icons = ['mdi-size-s', 'mdi-size-m', 'mdi-size-l']
 
@@ -177,7 +182,7 @@ export const defaultBubbleList = (editor) => [
 export const generateBubbleTypeMenu = (
   list,
   defaultList,
-  { editor, extension }
+  { editor, extension, t }
 ) => {
   const { extensions = [] } = editor.extensionManager
 
@@ -211,7 +216,7 @@ export const generateBubbleTypeMenu = (
           ...find,
           componentProps: {
             ...find.componentProps,
-            tooltip: find.componentProps.tooltip ? i18n.global.t(find.componentProps.tooltip) : undefined
+            tooltip: find.componentProps.tooltip ? t(find.componentProps.tooltip) : undefined
           },
           componentSlots: find.componentSlots
         })
@@ -221,7 +226,7 @@ export const generateBubbleTypeMenu = (
       const findExt = extensions.find(k => k.name === ext)
       if (findExt) {
         const { button } = findExt.options
-        const _button = button({ editor, extension: findExt, t: i18n.global.t })
+        const _button = button({ editor, extension: findExt, t })
 
         _items.push({
           type: ext,

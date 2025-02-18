@@ -33,11 +33,10 @@
 </template>
 
 <script>
+import { reactive } from 'vue';
 import { clamp, throttle, isNumber } from '@/utils';
 import { nodeViewProps, NodeViewWrapper } from '@tiptap/vue-3';
-
-import { getConfig } from "../config";
-const { IMAGE_MAX_SIZE, IMAGE_MIN_SIZE, IMAGE_THROTTLE_WAIT_TIME } = getConfig();
+import { useContext } from "../hooks/use-context";
 
 export default {
   props: {
@@ -50,6 +49,14 @@ export default {
   components: {
     NodeViewWrapper
   },
+  setup() {
+    const { state } = useContext();
+    const maxSize = reactive({
+      width: state.IMAGE_MAX_SIZE,
+      height: state.IMAGE_MAX_SIZE,
+    });
+    return { maxSize };
+  },
   data() {
     return {
       ResizeDirection: {
@@ -57,10 +64,6 @@ export default {
         TOP_RIGHT: 'tr',
         BOTTOM_LEFT: 'bl',
         BOTTOM_RIGHT: 'br',
-      },
-      maxSize: {
-        width: IMAGE_MAX_SIZE,
-        height: IMAGE_MAX_SIZE,
       },
       originalSize: {
         width: 0,
@@ -131,7 +134,7 @@ export default {
       const { editor } = this;
       const { width } = getComputedStyle(editor.view.dom);
       this.maxSize.width = Number.parseInt(width, 10);
-    }, IMAGE_THROTTLE_WAIT_TIME),
+    }, useContext().state.IMAGE_THROTTLE_WAIT_TIME),
     onMouseDown(e, dir) {
       e.preventDefault();
       e.stopPropagation();
@@ -168,6 +171,9 @@ export default {
       this.onEvents();
     },
     onMouseMove: throttle(function (e) {
+      const { state } = useContext()
+      const { IMAGE_MIN_SIZE } = state
+
       e.preventDefault();
       e.stopPropagation();
       if (!this.resizing) return;
@@ -184,14 +190,13 @@ export default {
         width,
         height,
       });
-    }, IMAGE_THROTTLE_WAIT_TIME),
+    }, useContext().state.IMAGE_THROTTLE_WAIT_TIME),
     onMouseUp(e) {
       e.preventDefault();
       e.stopPropagation();
       if (!this.resizing) return;
 
       this.resizing = false;
-
       this.resizerState = {
         x: 0,
         y: 0,

@@ -12,10 +12,13 @@
     ".": {
       "import": "./dist/olotap.es.js",
       "require": "./dist/olotap.cjs.js"
-    }
+    },
+    "./olotap.css": "./dist/olotap.css"
   },
+  "style": "./dist/olotap.css",
   "peerDependencies": {
-    "vue": "^3.5.13"
+    "vue": "^3.2.0",
+    "vuetify": "^3.0.0"
   },
   "scripts": {
     "build": "vite build",
@@ -23,9 +26,13 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.2.1",
+    "@vueuse/core": "^12.7.0",
+    "lodash-unified": "^1.0.3",
     "sass-embedded": "^1.85.0",
-    "vite": "^6.0.0",
-    "vue": "^3.5.13"
+    "unplugin-vue-components": "^28.1.0",
+    "vite": "^6.1.0",
+    "vue": "^3.2.47",
+    "vuetify": "^3.7.5"
   },
   "dependencies": {
     "@tiptap/core": "^2.10.3",
@@ -69,8 +76,6 @@
     "@tiptap/extension-underline": "^2.10.3",
     "@tiptap/html": "^2.10.3",
     "@tiptap/pm": "^2.10.3",
-    "@tiptap/vue-3": "^2.11.5",
-    "@vueuse/core": "^12.7.0",
-    "lodash-unified": "^1.0.3"
+    "@tiptap/vue-3": "^2.11.5"
   }
 }

@@ -1,13 +1,15 @@
 import { Extension } from '@tiptap/core'
 import ActionButton from '../ActionButton.vue'
+import { useContext } from "../hooks/use-context";
 
 export const Indent = Extension.create({
   name: 'indent',
   addOptions() {
+    const { state } = useContext();
     return {
       divider: false,
       spacer: false,
-      button: ({ editor, t }) => {
+      button: ({ editor }) => {
         const items = ['outdent', 'indent']
         const commands = {
           indent: 'sinkListItem',
@@ -22,7 +24,7 @@ export const Indent = Extension.create({
             },
             disabled: !editor.can()[commands[item]]('listItem'),
             icon: item == 'outdent' ? 'mdi-format-indent-decrease' : 'mdi-format-indent-increase',
-            tooltip: t(`editor.${item}.tooltip`)
+            tooltip: state.t(`editor.${item}.tooltip`)
           }
         }))
       }

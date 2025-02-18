@@ -1,8 +1,8 @@
 <template>
   <v-form :disabled="loading">
     <v-file-input
-      density="compact" 
-      variant="outlined"
+      :density="density" 
+      :variant="variant"
       v-model="form.file"
       :label="$t('editor.image.dialog.form.file')"
       accept="image/*"
@@ -13,8 +13,8 @@
     />
 
     <v-text-field
-      density="compact"
-      variant="outlined"
+      :density="density" 
+      :variant="variant"
       v-model="form.src"
       :label="$t('editor.image.dialog.form.link')"
       disabled
@@ -22,8 +22,8 @@
       prepend-icon="mdi-link-variant"
     />
     <v-text-field 
-      density="compact" 
-      variant="outlined" 
+      :density="density" 
+      :variant="variant"
       v-model="form.alt" 
       :label="$t('editor.image.dialog.form.alt')" 
       prepend-icon="mdi-text"
@@ -31,7 +31,7 @@
     </v-text-field>
 
     <v-checkbox 
-      density="compact" 
+      :density="density" 
       v-model="form.lockAspectRatio" 
       :label="$t('editor.image.dialog.form.aspectRatio')"
     ></v-checkbox>
@@ -43,6 +43,14 @@ import { unref } from 'vue';
 
 export default {
   props: {
+    density: {
+      type: String,
+      default: "compact",
+    },
+    variant: {
+      type: String,
+      default: "outlined",
+    },
     modelValue: {
       type: Object,
       default: () => ({}),

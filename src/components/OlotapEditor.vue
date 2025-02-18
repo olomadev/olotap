@@ -1,5 +1,5 @@
 <template>
-  <div v-if="editor" class="vuetify-pro-tiptap dense">
+  <div v-if="editor" class="olotap dense">
     
     <BubbleMenu v-if="!hideBubble" :editor="editor" :disabled="disableToolbar" />
 
@@ -13,8 +13,8 @@
           borderColor: $attrs['error-messages'] ? '#ff5252' : undefined,
           width: '100%',
         }"
-        class="vuetify-pro-tiptap-editor"
-        :class="{ 'vuetify-pro-tiptap-editor--fullscreen': isFullscreen }"
+        class="olotap-editor"
+        :class="{ 'olotap-editor--fullscreen': isFullscreen }"
       >
         <template v-if="label && !isFullscreen">
           <v-card-title :class="bg-grey-lighten-3">
@@ -25,16 +25,16 @@
 
         <TipTapToolbar
           v-if="!hideToolbar"
-          class="vuetify-pro-tiptap-editor__toolbar"
+          class="olotap-editor__toolbar"
           :editor="editor"
           :disabled="disableToolbar"
         />
         <slot
           name="editor"
-          v-bind="{ editor, props: { class: 'vuetify-pro-tiptap-editor__content', 'data-testid': 'value' } }"
+          v-bind="{ editor, props: { class: 'olotap-editor__content', 'data-testid': 'value' } }"
         >
           <editor-content
-            class="vuetify-pro-tiptap-editor__content"
+            class="olotap-editor__content"
             :class="contentDynamicClasses"
             :style="contentDynamicStyles"
             :editor="editor"
@@ -67,6 +67,7 @@ import { isMobile, mergeObjects } from '@/utils';
 import BubbleMenu from '../BubbleMenu.vue';
 import TipTapToolbar from '../TiptapToolbar.vue';
 import '../styles/index.scss'
+import { useContext } from '../hooks/use-context';
 
 export default {
   name: 'OlotapEditor',
@@ -91,10 +92,6 @@ export default {
     output: {
       type: String,
       default: 'html',
-    },
-    dark: {
-      type: Boolean,
-      default: undefined,
     },
     outlined: {
       type: Boolean,
@@ -151,7 +148,8 @@ export default {
   },
   emits: ['enter', 'change', 'update:modelValue', 'update:markdownTheme'],
   setup(props) {
-    const { state, isFullscreen } = useProvideOlotapStore();
+    const { isFullscreen } = useProvideOlotapStore();
+    const { state } = useContext();
     return {
       state,
       isFullscreen,
@@ -201,14 +199,14 @@ export default {
         //       return true;
         //     }
         //     return false;
-        //   }, EDITOR_UPDATE_THROTTLE_WAIT_TIME),
+        //   }, this.state.EDITOR_UPDATE_THROTTLE_WAIT_TIME),
         // },
         onUpdate: throttle(({ editor }) => {
           const output = this.getOutput(editor, this.output);
           this.$emit('update:modelValue', output);
           this.$emit('change', { editor, output });
-        }, state.constants.EDITOR_UPDATE_THROTTLE_WAIT_TIME),
-        extensions: this.sortExtensions(this.state, this.extensions),
+        }, this.state.EDITOR_UPDATE_THROTTLE_WAIT_TIME),
+        extensions: this.sortExtensions(this.extensions),
         autofocus: false,
         editable: !this.disabled,
         injectCSS: true,
@@ -262,15 +260,9 @@ export default {
       if (output === 'text') return editor.getText();
       return '';
     },
-    sortExtensions(state, extensions) {
-      const diff = differenceBy(extensions, state.extensions, 'name');
-      const exts = state.extensions.map((k) => {
-        const find = extensions.find((ext) => ext.name === k.name);
-        if (!find) return k;
-        return k.configure(find.options);
-      });
-      return [...exts, ...diff].map((k, i) => k.configure({ sort: i }));
-    },
+    sortExtensions(extensions) {
+      return extensions.map((ext, i) => ext.configure({ sort: i }));
+    }
   },
 };
 </script>

@@ -1,22 +1,22 @@
 import { getCssUnitWithDefault } from '@/utils';
 import { Extension } from '@tiptap/core';
 import ActionMenuButton from '../ActionMenuButton.vue';
-
-import { getConfig } from "../config";
-const { DEFAULT_FONT_SIZE_LIST, DEFAULT_FONT_SIZE_VALUE } = getConfig();
+import { useContext } from "../hooks/use-context";
 
 export const FontSize = Extension.create({
   name: 'fontSize',
   addOptions() {
+    const { state } = useContext();
+    const { DEFAULT_FONT_SIZE_LIST, DEFAULT_FONT_SIZE_VALUE } = state;
     return {
       ...this.parent?.(),
       types: ['textStyle'],
       fontSizes: [...DEFAULT_FONT_SIZE_LIST],
-      button: ({ editor, extension, t }) => {
+      button: ({ editor, extension }) => {
         const fontSizes = extension.options?.fontSizes || [];
 
         const items = [DEFAULT_FONT_SIZE_VALUE, ...fontSizes].map(k => ({
-          title: k === DEFAULT_FONT_SIZE_VALUE ? t('editor.default') : String(k),
+          title: k === DEFAULT_FONT_SIZE_VALUE ? state.t('editor.default') : String(k),
           isActive: () => {
             const { fontSize } = editor.getAttributes('textStyle');
 
@@ -47,7 +47,7 @@ export const FontSize = Extension.create({
           component: ActionMenuButton,
           componentProps: {
             icon: 'mdi-format-size',
-            tooltip: t('editor.fontSize.tooltip'),
+            tooltip: state.t('editor.fontSize.tooltip'),
             disabled,
             items,
             maxHeight: 280

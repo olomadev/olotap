@@ -1,11 +1,13 @@
 import { Color as TiptapColor } from '@tiptap/extension-color';
 import ColorActionButton from '../ColorActionButton.vue';
+import { useContext } from "../hooks/use-context";
 
 export const Color = TiptapColor.extend({
   addOptions() {
+    const { state } = useContext();
     return {
       ...this.parent?.(),
-      button: ({ editor, t }) => ({
+      button: ({ editor }) => ({
         component: ColorActionButton,
         componentProps: {
           editor,
@@ -19,7 +21,7 @@ export const Color = TiptapColor.extend({
           },
           disabled: !editor.can().setColor(''),
           icon: 'mdi-format-color-text',
-          tooltip: t('editor.color.tooltip')
+          tooltip: state.t('editor.color.tooltip')
         }
       })
     };

@@ -1,11 +1,13 @@
 import { Bold as TiptapBold } from '@tiptap/extension-bold';
 import ActionButton from '../ActionButton.vue';
+import { useContext } from "../hooks/use-context";
 
 export const Bold = TiptapBold.extend({
   addOptions() {
+    const { state } = useContext();
     return {
       ...this.parent?.(),
-      button: ({ editor, t }) => {
+      button: ({ editor }) => {
         return {
           component: ActionButton,
           componentProps: {
@@ -13,7 +15,7 @@ export const Bold = TiptapBold.extend({
             isActive: () => editor.isActive('bold') || false,
             disabled: !editor.can().toggleBold(),
             icon: 'mdi-format-bold',
-            tooltip: t('editor.bold.tooltip'),
+            tooltip: state.t('editor.bold.tooltip'),
           }
         };
       }
