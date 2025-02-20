@@ -75,7 +75,7 @@ const imageFloatMenus = (editor) => {
 
 const imageSizeMenus = (editor) => {
   const { state } = useContext();
-  const IMAGE_SIZE = state.IMAGE_SIZE;
+  const imageSize = state.imageSize;
 
   const types = ['size-small', 'size-medium', 'size-large']
   const icons = ['mdi-size-s', 'mdi-size-m', 'mdi-size-l']
@@ -86,15 +86,15 @@ const imageSizeMenus = (editor) => {
     componentProps: {
       tooltip: `editor.${size.replace('-', '.')}.tooltip`,
       icon: icons[i],
-      action: () => editor.chain().focus().updateImage({ width: IMAGE_SIZE[size], height: null }).run(),
-      isActive: () => editor.isActive('image', { width: IMAGE_SIZE[size] })
+      action: () => editor.chain().focus().updateImage({ width: imageSize[size], height: null }).run(),
+      isActive: () => editor.isActive('image', { width: imageSize[size] })
     }
   }))
 }
 
 const videoSizeMenus = (editor) => {
   const { state } = useContext();
-  const VIDEO_SIZE = state.IMAGE_SIZE;
+  const videoSize = state.imageSize;
 
   const types = ['size-small', 'size-medium', 'size-large']
   const icons = ['mdi-size-s', 'mdi-size-m', 'mdi-size-l']
@@ -105,8 +105,8 @@ const videoSizeMenus = (editor) => {
     componentProps: {
       tooltip: `editor.${size.replace('-', '.')}.tooltip`,
       icon: icons[i],
-      action: () => editor.chain().focus().updateVideo({ width: VIDEO_SIZE[size] }).run(),
-      isActive: () => editor.isActive('video', { width: VIDEO_SIZE[size] })
+      action: () => editor.chain().focus().updateVideo({ width: videoSize[size] }).run(),
+      isActive: () => editor.isActive('video', { width: videoSize[size] })
     }
   }))
 }

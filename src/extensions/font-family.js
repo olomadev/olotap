@@ -5,10 +5,10 @@ import { useContext } from "../hooks/use-context";
 export const FontFamily = TiptapFontFamily.extend({
   addOptions() {
     const { state } = useContext();
-    const { DEFAULT_FONT_FAMILY_LIST, DEFAULT_FONT_FAMILY_VALUE } = state;
+    const { defaultFontFamilyList, defaultFontFamilyValue } = state;
     return {
       ...this.parent?.(),
-      fontFamilies: DEFAULT_FONT_FAMILY_LIST,
+      fontFamilies: defaultFontFamilyList,
       button: ({ editor, extension }) => {
         const fontFamilies = extension.options?.fontFamilies || [];
 
@@ -16,7 +16,7 @@ export const FontFamily = TiptapFontFamily.extend({
           title: k.title == 'editor.fontFamily.fonts.default' ? state.t(k.title) : state.t('editor.fontFamily.fonts.' + k.title),
           isActive: () => {
             const { fontFamily } = editor.getAttributes('textStyle');
-            const isDefault = k.value === DEFAULT_FONT_FAMILY_VALUE;
+            const isDefault = k.value === defaultFontFamilyValue;
             const notFontFamily = fontFamily === undefined;
             
             if (isDefault && notFontFamily) {
@@ -26,7 +26,7 @@ export const FontFamily = TiptapFontFamily.extend({
             return editor.isActive({ fontFamily: k.value }) || false;
           },
           action: () => {
-            if (k.value === DEFAULT_FONT_FAMILY_VALUE) {
+            if (k.value === defaultFontFamilyValue) {
               editor.chain().focus().unsetFontFamily().run();
               return;
             }

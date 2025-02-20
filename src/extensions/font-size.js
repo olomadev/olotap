@@ -7,20 +7,20 @@ export const FontSize = Extension.create({
   name: 'fontSize',
   addOptions() {
     const { state } = useContext();
-    const { DEFAULT_FONT_SIZE_LIST, DEFAULT_FONT_SIZE_VALUE } = state;
+    const { defaultFontSizeList, defaultFontSizeValue } = state;
     return {
       ...this.parent?.(),
       types: ['textStyle'],
-      fontSizes: [...DEFAULT_FONT_SIZE_LIST],
+      fontSizes: [...defaultFontSizeList],
       button: ({ editor, extension }) => {
         const fontSizes = extension.options?.fontSizes || [];
 
-        const items = [DEFAULT_FONT_SIZE_VALUE, ...fontSizes].map(k => ({
-          title: k === DEFAULT_FONT_SIZE_VALUE ? state.t('editor.default') : String(k),
+        const items = [defaultFontSizeValue, ...fontSizes].map(k => ({
+          title: k === defaultFontSizeValue ? state.t('editor.default') : String(k),
           isActive: () => {
             const { fontSize } = editor.getAttributes('textStyle');
 
-            const isDefault = k === DEFAULT_FONT_SIZE_VALUE;
+            const isDefault = k === defaultFontSizeValue;
             const notFontSize = fontSize === undefined;
             if (isDefault && notFontSize) {
               return true;
@@ -29,7 +29,7 @@ export const FontSize = Extension.create({
             return editor.isActive({ fontSize: String(k) }) || false;
           },
           action: () => {
-            if (k === DEFAULT_FONT_SIZE_VALUE) {
+            if (k === defaultFontSizeValue) {
               editor.chain().focus().unsetFontSize().run();
               return;
             }
@@ -37,8 +37,8 @@ export const FontSize = Extension.create({
             editor.chain().focus().setFontSize(String(k)).run();
           },
           disabled: !editor.can().setFontSize(String(k)),
-          divider: k === DEFAULT_FONT_SIZE_VALUE,
-          default: k === DEFAULT_FONT_SIZE_VALUE
+          divider: k === defaultFontSizeValue,
+          default: k === defaultFontSizeValue
         }));
 
         const disabled = items.filter(k => k.disabled).length === items.length;

@@ -45,35 +45,36 @@
 
 <script>
 import { isMobile } from '@/utils';
-import { reactive, unref } from 'vue';
+import { computed, reactive, ref, unref } from 'vue';
 import { useContext } from '../hooks/use-context';
 
 export default {
   setup() {
     const { state } = useContext();
-    return { state }
+    const tableGridSize = reactive({
+      rows: isMobile() ? state.tableMaxGridSize : state.tableInitGridSize,
+      cols: isMobile() ? state.tableMaxGridSize : state.tableInitGridSize,
+    });
+    const selectedTableGridSize = reactive({
+      rows: state.tableDefaultSelectedGridSize,
+      cols: state.tableDefaultSelectedGridSize,
+    });
+    return { state, tableGridSize, selectedTableGridSize };
   },
   data() {
     return {
       menu: false,
       withHeaderRow: true,
-      tableGridSize: reactive({
-        rows: isMobile() ? state.TABLE_MAX_GRID_SIZE : state.TABLE_INIT_GRID_SIZE,
-        cols: isMobile() ? state.TABLE_MAX_GRID_SIZE : state.TABLE_INIT_GRID_SIZE
-      }),
-      selectedTableGridSize: reactive({
-        rows: state.TABLE_DEFAULT_SELECTED_GRID_SIZE,
-        cols: state.TABLE_DEFAULT_SELECTED_GRID_SIZE
-      })
     };
   },
   methods: {
     selectTableGridSize(rows, cols) {
-      if (rows === this.tableGridSize.rows) {
-        this.tableGridSize.rows = Math.min(rows + 1, state.TABLE_MAX_GRID_SIZE);
+      const tableGridSize = unref(this.tableGridSize);
+      if (rows === tableGridSize.rows) {
+        this.tableGridSize.rows = Math.min(rows + 1, this.state.tableMaxGridSize);
       }
-      if (cols === this.tableGridSize.cols) {
-        this.tableGridSize.cols = Math.min(cols + 1, state.TABLE_MAX_GRID_SIZE);
+      if (cols === tableGridSize.cols) {
+        this.tableGridSize.cols = Math.min(cols + 1, this.state.tableMaxGridSize);
       }
       this.selectedTableGridSize.rows = rows;
       this.selectedTableGridSize.cols = cols;
@@ -85,11 +86,11 @@ export default {
     resetTableGridSize() {
       this.menu = false;
       this.withHeaderRow = true;
-      this.tableGridSize.rows = state.TABLE_INIT_GRID_SIZE;
-      this.tableGridSize.cols = state.TABLE_INIT_GRID_SIZE;
-      this.selectedTableGridSize.rows = state.TABLE_DEFAULT_SELECTED_GRID_SIZE;
-      this.selectedTableGridSize.cols = state.TABLE_DEFAULT_SELECTED_GRID_SIZE;
-    }
-  }
+      this.tableGridSize.rows = this.state.tableInitGridSize;
+      this.tableGridSize.cols = this.state.tableInitGridSize;
+      this.selectedTableGridSize.rows = this.state.tableDefaultSelectedGridSize;
+      this.selectedTableGridSize.cols = this.state.tableDefaultSelectedGridSize;
+    },
+  },
 };
 </script>

@@ -1,29 +1,33 @@
 <template>
   <v-form :disabled="loading">
     <v-file-input
-      :density="density" 
-      :variant="variant"
+      :class="getClass"
+      :density="getDensity" 
+      :variant="getVariant" 
       v-model="form.file"
       :label="$t('editor.image.dialog.form.file')"
       accept="image/*"
       :loading="loading"
       prepend-icon="mdi-file-plus-outline"
       @update:model-value="onFileSelected"
-      @click:clear="form.src = undefined"
+      @click:clear="form = { ...form, src: undefined }"
     />
 
     <v-text-field
-      :density="density" 
-      :variant="variant"
+      :class="getClass"
+      :density="getDensity" 
+      :variant="getVariant" 
       v-model="form.src"
       :label="$t('editor.image.dialog.form.link')"
       disabled
       autofocus
       prepend-icon="mdi-link-variant"
     />
+
     <v-text-field 
-      :density="density" 
-      :variant="variant"
+      :class="getClass"
+      :density="getDensity" 
+      :variant="getVariant" 
       v-model="form.alt" 
       :label="$t('editor.image.dialog.form.alt')" 
       prepend-icon="mdi-text"
@@ -31,7 +35,8 @@
     </v-text-field>
 
     <v-checkbox 
-      :density="density" 
+      :class="getClass"
+      :density="getDensity" 
       v-model="form.lockAspectRatio" 
       :label="$t('editor.image.dialog.form.aspectRatio')"
     ></v-checkbox>
@@ -39,18 +44,11 @@
 </template>
 
 <script>
-import { unref } from 'vue';
+import { computed, unref } from 'vue';
+import { useContext } from "../hooks/use-context";
 
 export default {
   props: {
-    density: {
-      type: String,
-      default: "compact",
-    },
-    variant: {
-      type: String,
-      default: "outlined",
-    },
     modelValue: {
       type: Object,
       default: () => ({}),
@@ -64,7 +62,15 @@ export default {
   data() {
     return {
       loading: false,
-    };
+    }
+  },
+  setup() {
+    const context = useContext();
+    return {
+      getClass: computed(() => context.state.inputClass),
+      getDensity: computed(() => context.state.inputDensity),
+      getVariant: computed(() => context.state.inputVariant),
+    }
   },
   computed: {
     form: {
@@ -80,7 +86,8 @@ export default {
     async onFileSelected(files) {
       const file = files instanceof File ? files : files[0];
       if (!file) {
-        throw new Error('No files to upload');
+        console.error('No files to upload');
+        return;
       }
       try {
         this.loading = true;

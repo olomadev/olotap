@@ -4,14 +4,14 @@ import { useContext } from './use-context';
 
 export function useMarkdownTheme(value, hooks) {
   const { state } = useContext();
-  const { DEFAULT_MARKDOWN_THEME_VALUE } = state;
+  const { defaultMarkdownThemeValue } = state;
 
   const markdownTheme = computed(() => {
-    if (isBoolean(unref(value))) return DEFAULT_MARKDOWN_THEME_VALUE;
+    if (isBoolean(unref(value))) return defaultMarkdownThemeValue;
     if (isString(state.defaultMarkdownTheme) && state.defaultMarkdownTheme) {
       return state.defaultMarkdownTheme;
     }
-    return DEFAULT_MARKDOWN_THEME_VALUE;
+    return defaultMarkdownThemeValue;
   });
 
   const markdownThemeStyle = computed(() => {

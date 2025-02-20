@@ -19755,26 +19755,28 @@ img.ProseMirror-separator {
       return new VueNodeView(normalizedComponent, props, options);
     };
   }
-  const DEFAULT_FONT_FAMILY_VALUE = "Hanken Grotesk";
-  const DEFAULT_MARKDOWN_THEME_VALUE = "github";
-  const EDITOR_UPDATE_THROTTLE_WAIT_TIME = 200;
-  const state$2 = vue.reactive({
+  const defaultFontFamilyValue = "Hanken Grotesk";
+  const defaultMarkdownThemeValue = "github";
+  const editorUpdateThrottleWaitTime = 200;
+  const state$1 = vue.reactive({
     i18n: void 0,
     defaultLang: void 0,
     defaultMarkdownTheme: "github",
     t: (key) => key,
-    // default constants -------------------------
-    // 
-    DEFAULT_LANG_VALUE: "en",
-    EDITOR_UPDATE_THROTTLE_WAIT_TIME,
-    EDITOR_UPDATE_WATCH_THROTTLE_WAIT_TIME: EDITOR_UPDATE_THROTTLE_WAIT_TIME - 80,
-    IMAGE_MIN_SIZE: 20,
-    IMAGE_MAX_SIZE: 1e5,
-    IMAGE_THROTTLE_WAIT_TIME: 16,
-    TABLE_INIT_GRID_SIZE: 6,
-    TABLE_MAX_GRID_SIZE: 10,
-    TABLE_DEFAULT_SELECTED_GRID_SIZE: 2,
-    COLORS_LIST: [
+    defaultLangValue: "en",
+    editorUpdateThrottleWaitTime,
+    editorUpdateWatchThrottleWaitTime: editorUpdateThrottleWaitTime - 80,
+    inputDensity: "compact",
+    inputVariant: "outlined",
+    inputClass: "",
+    checkboxClass: "",
+    imageMinSize: 20,
+    imageMaxSize: 1e5,
+    imageThrottleWaitTime: 16,
+    tableInitGridSize: 6,
+    tableMaxGridSize: 10,
+    tableDefaultSelectedGridSize: 2,
+    colorsList: [
       "",
       // none
       "#f44336",
@@ -19802,9 +19804,9 @@ img.ProseMirror-separator {
       "#E8E8E8",
       "#EEEEEE"
     ],
-    DEFAULT_FONT_FAMILY_VALUE,
-    DEFAULT_FONT_FAMILY_LIST: [
-      { title: "default", value: DEFAULT_FONT_FAMILY_VALUE, divider: true, default: true },
+    defaultFontFamilyValue,
+    defaultFontFamilyList: [
+      { title: "default", value: defaultFontFamilyValue, divider: true, default: true },
       { title: "Arial", value: "Arial" },
       { title: "Arial Black", value: "Arial Black" },
       { title: "Georgia", value: "Georgia" },
@@ -19817,21 +19819,21 @@ img.ProseMirror-separator {
       { title: "Monaco", value: "Monaco" },
       { title: "Monospace", value: "monospace" }
     ],
-    DEFAULT_MARKDOWN_THEME_VALUE,
-    DEFAULT_MARKDOWN_THEME_LIST: [{ title: "default", value: DEFAULT_MARKDOWN_THEME_VALUE, default: true }],
-    DEFAULT_FONT_SIZE_LIST: [8, 10, 12, 14, 16, 18, 20, 24, 30, 36, 48, 60, 72],
-    DEFAULT_FONT_SIZE_VALUE: "default",
-    IMAGE_SIZE: {
+    defaultMarkdownThemeValue,
+    defaultMarkdownThemeList: [{ title: "default", value: defaultMarkdownThemeValue, default: true }],
+    defaultFontSizeList: [8, 10, 12, 14, 16, 18, 20, 24, 30, 36, 48, 60, 72],
+    defaultFontSizeValue: "default",
+    imageSize: {
       "size-small": 200,
       "size-medium": 500,
       "size-large": "100%"
     },
-    VIDEO_SIZE: {
+    videoSize: {
       "size-small": 480,
       "size-medium": 640,
       "size-large": "100%"
     },
-    NODE_TYPE_MENU: {
+    nodeTypeMenu: {
       image: [
         "float-left",
         "float-none",
@@ -19865,38 +19867,45 @@ img.ProseMirror-separator {
       video: ["video-size-small", "video-size-medium", "video-size-large", "divider", "video", "remove"]
     }
   });
-  function createContext(config) {
-    state$2.defaultLang = config.defaultLang ?? "en";
-    state$2.defaultMarkdownTheme = config.defaultMarkdownTheme ?? "github";
-    if (config.i18n) {
-      state$2.i18n = config.i18n;
-      state$2.t = config.i18n.global.t;
-    }
-    state$2.DEFAULT_LANG_VALUE = state$2.defaultLang;
-    state$2.EDITOR_UPDATE_THROTTLE_WAIT_TIME = config.EDITOR_UPDATE_THROTTLE_WAIT_TIME ?? state$2.EDITOR_UPDATE_THROTTLE_WAIT_TIME;
-    if (config["EDITOR_UPDATE_THROTTLE_WAIT_TIME"]) {
-      state$2.EDITOR_UPDATE_WATCH_THROTTLE_WAIT_TIME = config.EDITOR_UPDATE_THROTTLE_WAIT_TIME - 80;
-    }
-    state$2.IMAGE_MIN_SIZE = config.IMAGE_MIN_SIZE ?? state$2.IMAGE_MIN_SIZE;
-    state$2.IMAGE_MAX_SIZE = config.IMAGE_MAX_SIZE ?? state$2.IMAGE_MAX_SIZE;
-    state$2.IMAGE_THROTTLE_WAIT_TIME = config.IMAGE_THROTTLE_WAIT_TIME ?? state$2.IMAGE_THROTTLE_WAIT_TIME;
-    state$2.TABLE_INIT_GRID_SIZE = config.TABLE_INIT_GRID_SIZE ?? state$2.TABLE_INIT_GRID_SIZE;
-    state$2.TABLE_MAX_GRID_SIZE = config.TABLE_MAX_GRID_SIZE ?? state$2.TABLE_MAX_GRID_SIZE;
-    state$2.TABLE_DEFAULT_SELECTED_GRID_SIZE = config.TABLE_DEFAULT_SELECTED_GRID_SIZE ?? state$2.TABLE_DEFAULT_SELECTED_GRID_SIZE;
-    state$2.COLORS_LIST = config.COLORS_LIST ?? state$2.COLORS_LIST;
-    state$2.DEFAULT_FONT_FAMILY_VALUE = config.DEFAULT_FONT_FAMILY_VALUE ?? state$2.DEFAULT_FONT_FAMILY_VALUE;
-    state$2.DEFAULT_FONT_FAMILY_LIST = config.DEFAULT_FONT_FAMILY_LIST ?? state$2.DEFAULT_FONT_FAMILY_LIST;
-    state$2.DEFAULT_MARKDOWN_THEME_VALUE = config.DEFAULT_MARKDOWN_THEME_VALUE ?? state$2.DEFAULT_MARKDOWN_THEME_VALUE;
-    state$2.DEFAULT_MARKDOWN_THEME_LIST = config.DEFAULT_MARKDOWN_THEME_LIST ?? state$2.DEFAULT_MARKDOWN_THEME_LIST;
-    state$2.DEFAULT_FONT_SIZE_LIST = config.DEFAULT_FONT_SIZE_LIST ?? state$2.DEFAULT_FONT_SIZE_LIST;
-    state$2.DEFAULT_FONT_SIZE_VALUE = config.DEFAULT_FONT_SIZE_VALUE ?? state$2.DEFAULT_FONT_SIZE_VALUE;
-    state$2.IMAGE_SIZE = config.IMAGE_SIZE ?? state$2.IMAGE_SIZE;
-    state$2.VIDEO_SIZE = config.VIDEO_SIZE ?? state$2.VIDEO_SIZE;
-    state$2.NODE_TYPE_MENU = config.NODE_TYPE_MENU ?? state$2.NODE_TYPE_MENU;
+  async function createContext(config) {
+    return new Promise((resolve) => {
+      state$1.defaultLang = config.defaultLang ?? "en";
+      state$1.defaultMarkdownTheme = config.defaultMarkdownTheme ?? "github";
+      if (config.i18n) {
+        state$1.i18n = config.i18n;
+        state$1.t = config.i18n.global.t;
+      }
+      state$1.defaultLangValue = state$1.defaultLang;
+      state$1.editorUpdateThrottleWaitTime = config.editorUpdateThrottleWaitTime ?? state$1.editorUpdateThrottleWaitTime;
+      if (config["editorUpdateThrottleWaitTime"]) {
+        state$1.editorUpdateWatchThrottleWaitTime = config.editorUpdateThrottleWaitTime - 80;
+      }
+      state$1.inputDensity = config.inputDensity ?? state$1.inputDensity;
+      state$1.inputVariant = config.inputVariant ?? state$1.inputVariant;
+      state$1.inputClass = config.inputClass ?? state$1.inputClass;
+      state$1.checkboxClass = config.checkboxClass ?? state$1.checkboxClass;
+      state$1.imageMinSize = config.imageMinSize ?? state$1.imageMinSize;
+      state$1.imageMaxSize = config.imageMaxSize ?? state$1.imageMaxSize;
+      state$1.imageThrottleWaitTime = config.imageThrottleWaitTime ?? state$1.imageThrottleWaitTime;
+      state$1.tableInitGridSize = config.tableInitGridSize ?? state$1.tableInitGridSize;
+      state$1.tableMaxGridSize = config.tableMaxGridSize ?? state$1.tableMaxGridSize;
+      state$1.tableDefaultSelectedGridSize = config.tableDefaultSelectedGridSize ?? state$1.tableDefaultSelectedGridSize;
+      state$1.colorsList = config.colorsList ?? state$1.colorsList;
+      state$1.defaultFontFamilyValue = config.defaultFontFamilyValue ?? state$1.defaultFontFamilyValue;
+      state$1.defaultFontFamilyList = config.defaultFontFamilyList ?? state$1.defaultFontFamilyList;
+      state$1.defaultMarkdownThemeValue = config.defaultMarkdownThemeValue ?? state$1.defaultMarkdownThemeValue;
+      state$1.defaultMarkdownThemeList = config.defaultMarkdownThemeList ?? state$1.defaultMarkdownThemeList;
+      state$1.defaultFontSizeList = config.defaultFontSizeList ?? state$1.defaultFontSizeList;
+      state$1.defaultFontSizeValue = config.defaultFontSizeValue ?? state$1.defaultFontSizeValue;
+      state$1.imageSize = config.imageSize ?? state$1.imageSize;
+      state$1.videoSize = config.videoSize ?? state$1.videoSize;
+      state$1.nodeTypeMenu = config.nodeTypeMenu ?? state$1.nodeTypeMenu;
+      resolve();
+    });
   }
   function useContext() {
     return {
-      state: state$2
+      state: state$1
     };
   }
   var freeGlobal = typeof global == "object" && global && global.Object === Object && global;
@@ -19955,7 +19964,7 @@ img.ProseMirror-separator {
   function baseTrim(string) {
     return string ? string.slice(0, trimmedEndIndex(string) + 1).replace(reTrimStart, "") : string;
   }
-  function isObject(value) {
+  function isObject$1(value) {
     var type = typeof value;
     return value != null && (type == "object" || type == "function");
   }
@@ -19971,9 +19980,9 @@ img.ProseMirror-separator {
     if (isSymbol(value)) {
       return NAN;
     }
-    if (isObject(value)) {
+    if (isObject$1(value)) {
       var other = typeof value.valueOf == "function" ? value.valueOf() : value;
-      value = isObject(other) ? other + "" : other;
+      value = isObject$1(other) ? other + "" : other;
     }
     if (typeof value != "string") {
       return value === 0 ? value : +value;
@@ -19993,7 +20002,7 @@ img.ProseMirror-separator {
       throw new TypeError(FUNC_ERROR_TEXT$1);
     }
     wait = toNumber(wait) || 0;
-    if (isObject(options)) {
+    if (isObject$1(options)) {
       leading = !!options.leading;
       maxing = "maxWait" in options;
       maxWait = maxing ? nativeMax(toNumber(options.maxWait) || 0, wait) : maxWait;
@@ -20074,7 +20083,7 @@ img.ProseMirror-separator {
     if (typeof func != "function") {
       throw new TypeError(FUNC_ERROR_TEXT);
     }
-    if (isObject(options)) {
+    if (isObject$1(options)) {
       leading = "leading" in options ? !!options.leading : leading;
       trailing = "trailing" in options ? !!options.trailing : trailing;
     }
@@ -20129,13 +20138,13 @@ img.ProseMirror-separator {
   }
   function useMarkdownTheme(value, hooks) {
     const { state: state2 } = useContext();
-    const { DEFAULT_MARKDOWN_THEME_VALUE: DEFAULT_MARKDOWN_THEME_VALUE2 } = state2;
+    const { defaultMarkdownThemeValue: defaultMarkdownThemeValue2 } = state2;
     const markdownTheme = vue.computed(() => {
-      if (isBoolean(vue.unref(value))) return DEFAULT_MARKDOWN_THEME_VALUE2;
+      if (isBoolean(vue.unref(value))) return defaultMarkdownThemeValue2;
       if (isString(state2.defaultMarkdownTheme) && state2.defaultMarkdownTheme) {
         return state2.defaultMarkdownTheme;
       }
-      return DEFAULT_MARKDOWN_THEME_VALUE2;
+      return defaultMarkdownThemeValue2;
     });
     const markdownThemeStyle = vue.computed(() => {
       return {
@@ -20160,6 +20169,13 @@ img.ProseMirror-separator {
     return {
       markdownThemeStyle
     };
+  }
+  function tryOnScopeDispose(fn) {
+    if (vue.getCurrentScope()) {
+      vue.onScopeDispose(fn);
+      return true;
+    }
+    return false;
   }
   const localProvidedStateMap = /* @__PURE__ */ new WeakMap();
   const injectLocal = (...args) => {
@@ -20194,13 +20210,218 @@ img.ProseMirror-separator {
     const useInjectedState = () => injectLocal(key, defaultValue);
     return [useProvidingState, useInjectedState];
   }
+  const isClient = typeof window !== "undefined" && typeof document !== "undefined";
   typeof WorkerGlobalScope !== "undefined" && globalThis instanceof WorkerGlobalScope;
+  const toString = Object.prototype.toString;
+  const isObject = (val) => toString.call(val) === "[object Object]";
+  function toArray(value) {
+    return Array.isArray(value) ? value : [value];
+  }
+  function watchImmediate(source, cb, options) {
+    return vue.watch(
+      source,
+      cb,
+      {
+        ...options,
+        immediate: true
+      }
+    );
+  }
+  const defaultWindow = isClient ? window : void 0;
+  const defaultDocument = isClient ? window.document : void 0;
+  function unrefElement(elRef) {
+    var _a;
+    const plain = vue.toValue(elRef);
+    return (_a = plain == null ? void 0 : plain.$el) != null ? _a : plain;
+  }
+  function useEventListener(...args) {
+    const cleanups = [];
+    const cleanup = () => {
+      cleanups.forEach((fn) => fn());
+      cleanups.length = 0;
+    };
+    const register = (el, event, listener, options) => {
+      el.addEventListener(event, listener, options);
+      return () => el.removeEventListener(event, listener, options);
+    };
+    const firstParamTargets = vue.computed(() => {
+      const test = toArray(vue.toValue(args[0])).filter((e) => e != null);
+      return test.every((e) => typeof e !== "string") ? test : void 0;
+    });
+    const stopWatch = watchImmediate(
+      () => {
+        var _a, _b;
+        return [
+          (_b = (_a = firstParamTargets.value) == null ? void 0 : _a.map((e) => unrefElement(e))) != null ? _b : [defaultWindow].filter((e) => e != null),
+          toArray(vue.toValue(firstParamTargets.value ? args[1] : args[0])),
+          toArray(vue.unref(firstParamTargets.value ? args[2] : args[1])),
+          // @ts-expect-error - TypeScript gets the correct types, but somehow still complains
+          vue.toValue(firstParamTargets.value ? args[3] : args[2])
+        ];
+      },
+      ([raw_targets, raw_events, raw_listeners, raw_options]) => {
+        cleanup();
+        if (!(raw_targets == null ? void 0 : raw_targets.length) || !(raw_events == null ? void 0 : raw_events.length) || !(raw_listeners == null ? void 0 : raw_listeners.length))
+          return;
+        const optionsClone = isObject(raw_options) ? { ...raw_options } : raw_options;
+        cleanups.push(
+          ...raw_targets.flatMap(
+            (el) => raw_events.flatMap(
+              (event) => raw_listeners.map((listener) => register(el, event, listener, optionsClone))
+            )
+          )
+        );
+      },
+      { flush: "post" }
+    );
+    const stop = () => {
+      stopWatch();
+      cleanup();
+    };
+    tryOnScopeDispose(cleanup);
+    return stop;
+  }
+  function useMounted() {
+    const isMounted = vue.shallowRef(false);
+    const instance = vue.getCurrentInstance();
+    if (instance) {
+      vue.onMounted(() => {
+        isMounted.value = true;
+      }, instance);
+    }
+    return isMounted;
+  }
+  function useSupported(callback) {
+    const isMounted = useMounted();
+    return vue.computed(() => {
+      isMounted.value;
+      return Boolean(callback());
+    });
+  }
+  const eventHandlers = [
+    "fullscreenchange",
+    "webkitfullscreenchange",
+    "webkitendfullscreen",
+    "mozfullscreenchange",
+    "MSFullscreenChange"
+  ];
+  function useFullscreen(target, options = {}) {
+    const {
+      document: document2 = defaultDocument,
+      autoExit = false
+    } = options;
+    const targetRef = vue.computed(() => {
+      var _a;
+      return (_a = unrefElement(target)) != null ? _a : document2 == null ? void 0 : document2.documentElement;
+    });
+    const isFullscreen = vue.shallowRef(false);
+    const requestMethod = vue.computed(() => {
+      return [
+        "requestFullscreen",
+        "webkitRequestFullscreen",
+        "webkitEnterFullscreen",
+        "webkitEnterFullScreen",
+        "webkitRequestFullScreen",
+        "mozRequestFullScreen",
+        "msRequestFullscreen"
+      ].find((m) => document2 && m in document2 || targetRef.value && m in targetRef.value);
+    });
+    const exitMethod = vue.computed(() => {
+      return [
+        "exitFullscreen",
+        "webkitExitFullscreen",
+        "webkitExitFullScreen",
+        "webkitCancelFullScreen",
+        "mozCancelFullScreen",
+        "msExitFullscreen"
+      ].find((m) => document2 && m in document2 || targetRef.value && m in targetRef.value);
+    });
+    const fullscreenEnabled = vue.computed(() => {
+      return [
+        "fullScreen",
+        "webkitIsFullScreen",
+        "webkitDisplayingFullscreen",
+        "mozFullScreen",
+        "msFullscreenElement"
+      ].find((m) => document2 && m in document2 || targetRef.value && m in targetRef.value);
+    });
+    const fullscreenElementMethod = [
+      "fullscreenElement",
+      "webkitFullscreenElement",
+      "mozFullScreenElement",
+      "msFullscreenElement"
+    ].find((m) => document2 && m in document2);
+    const isSupported = useSupported(() => targetRef.value && document2 && requestMethod.value !== void 0 && exitMethod.value !== void 0 && fullscreenEnabled.value !== void 0);
+    const isCurrentElementFullScreen = () => {
+      if (fullscreenElementMethod)
+        return (document2 == null ? void 0 : document2[fullscreenElementMethod]) === targetRef.value;
+      return false;
+    };
+    const isElementFullScreen = () => {
+      if (fullscreenEnabled.value) {
+        if (document2 && document2[fullscreenEnabled.value] != null) {
+          return document2[fullscreenEnabled.value];
+        } else {
+          const target2 = targetRef.value;
+          if ((target2 == null ? void 0 : target2[fullscreenEnabled.value]) != null) {
+            return Boolean(target2[fullscreenEnabled.value]);
+          }
+        }
+      }
+      return false;
+    };
+    async function exit() {
+      if (!isSupported.value || !isFullscreen.value)
+        return;
+      if (exitMethod.value) {
+        if ((document2 == null ? void 0 : document2[exitMethod.value]) != null) {
+          await document2[exitMethod.value]();
+        } else {
+          const target2 = targetRef.value;
+          if ((target2 == null ? void 0 : target2[exitMethod.value]) != null)
+            await target2[exitMethod.value]();
+        }
+      }
+      isFullscreen.value = false;
+    }
+    async function enter2() {
+      if (!isSupported.value || isFullscreen.value)
+        return;
+      if (isElementFullScreen())
+        await exit();
+      const target2 = targetRef.value;
+      if (requestMethod.value && (target2 == null ? void 0 : target2[requestMethod.value]) != null) {
+        await target2[requestMethod.value]();
+        isFullscreen.value = true;
+      }
+    }
+    async function toggle() {
+      await (isFullscreen.value ? exit() : enter2());
+    }
+    const handlerCallback = () => {
+      const isElementFullScreenValue = isElementFullScreen();
+      if (!isElementFullScreenValue || isElementFullScreenValue && isCurrentElementFullScreen())
+        isFullscreen.value = isElementFullScreenValue;
+    };
+    const listenerOptions = { capture: false, passive: true };
+    useEventListener(document2, eventHandlers, handlerCallback, listenerOptions);
+    useEventListener(() => unrefElement(targetRef), eventHandlers, handlerCallback, listenerOptions);
+    if (autoExit)
+      tryOnScopeDispose(exit);
+    return {
+      isSupported,
+      isFullscreen,
+      enter: enter2,
+      exit,
+      toggle
+    };
+  }
   const [useProvideOlotapStore, useOlotapStore] = createInjectionState(() => {
     const { state: _state } = useContext();
-    const { DEFAULT_LANG_VALUE, DEFAULT_MARKDOWN_THEME_VALUE: DEFAULT_MARKDOWN_THEME_VALUE2 } = _state;
+    const { defaultLangValue, defaultMarkdownThemeValue: defaultMarkdownThemeValue2 } = _state;
     const state2 = vue.reactive({
-      defaultLang: DEFAULT_LANG_VALUE,
-      defaultMarkdownTheme: DEFAULT_MARKDOWN_THEME_VALUE2,
+      defaultLang: defaultLangValue,
+      defaultMarkdownTheme: defaultMarkdownThemeValue2,
       isFullscreen: false,
       isImageEvent: false,
       color: void 0,
@@ -20233,7 +20454,7 @@ img.ProseMirror-separator {
     }
     return target;
   };
-  const _sfc_main$k = {
+  const _sfc_main$l = {
     props: {
       editor: {
         type: Object,
@@ -20305,7 +20526,7 @@ img.ProseMirror-separator {
       }
     }
   };
-  function _sfc_render$k(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$l(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_v_divider = components.VDivider;
     const _component_v_toolbar = components.VToolbar;
     const _component_v_card_text = components.VCardText;
@@ -20367,8 +20588,8 @@ img.ProseMirror-separator {
       [vue.vShow, $options.items.length > 0]
     ]);
   }
-  const BubbleMenu = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["render", _sfc_render$k]]);
-  const _sfc_main$j = {
+  const BubbleMenu = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["render", _sfc_render$l]]);
+  const _sfc_main$k = {
     props: {
       editor: {
         type: Object,
@@ -20413,7 +20634,7 @@ img.ProseMirror-separator {
       }
     }
   };
-  function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$k(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_v_spacer = components.VSpacer;
     const _component_v_divider = components.VDivider;
     const _component_v_toolbar = components.VToolbar;
@@ -20452,8 +20673,8 @@ img.ProseMirror-separator {
       _: 1
     }, 16);
   }
-  const TipTapToolbar = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["render", _sfc_render$j]]);
-  const _sfc_main$i = {
+  const TipTapToolbar = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["render", _sfc_render$k]]);
+  const _sfc_main$j = {
     name: "OlotapEditor",
     components: {
       EditorContent,
@@ -20581,13 +20802,13 @@ img.ProseMirror-separator {
           //       return true;
           //     }
           //     return false;
-          //   }, this.state.EDITOR_UPDATE_THROTTLE_WAIT_TIME),
+          //   }, this.state.editorUpdateThrottleWaitTime),
           // },
           onUpdate: throttle(({ editor }) => {
             const output = this.getOutput(editor, this.output);
             this.$emit("update:modelValue", output);
             this.$emit("change", { editor, output });
-          }, this.state.EDITOR_UPDATE_THROTTLE_WAIT_TIME),
+          }, this.state.editorUpdateThrottleWaitTime),
           extensions: this.sortExtensions(this.extensions),
           autofocus: false,
           editable: !this.disabled,
@@ -20651,7 +20872,7 @@ img.ProseMirror-separator {
     key: 0,
     class: "olotap dense"
   };
-  function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_BubbleMenu = vue.resolveComponent("BubbleMenu");
     const _component_v_card_title = components.VCardTitle;
     const _component_v_divider = components.VDivider;
@@ -20718,7 +20939,7 @@ img.ProseMirror-separator {
                 vue.createElementVNode("button", {
                   onClick: _cache[0] || (_cache[0] = vue.withModifiers((...args) => $options.clickTableButton && $options.clickTableButton(...args), ["stop", "prevent"]))
                 }, [
-                  vue.createVNode(_component_v_icon, null, {
+                  vue.createVNode(_component_v_icon, { size: "small" }, {
                     default: vue.withCtx(() => _cache[1] || (_cache[1] = [
                       vue.createTextVNode("mdi-dots-vertical")
                     ])),
@@ -20736,7 +20957,228 @@ img.ProseMirror-separator {
       }, 8, ["error-messages"])
     ])) : vue.createCommentVNode("", true);
   }
-  const OlotapEditor = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["render", _sfc_render$i]]);
+  const OlotapEditor = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["render", _sfc_render$j]]);
+  const _sfc_main$i = {
+    props: {
+      icon: {
+        type: String,
+        default: void 0
+      },
+      tooltip: {
+        type: String,
+        default: void 0
+      },
+      disabled: {
+        type: Boolean,
+        default: false
+      },
+      color: {
+        type: String,
+        default: void 0
+      },
+      action: {
+        type: Function,
+        default: void 0
+      },
+      isActive: {
+        type: Function,
+        default: void 0
+      }
+    }
+  };
+  function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_v_icon = components.VIcon;
+    const _component_v_tooltip = components.VTooltip;
+    const _component_v_btn = components.VBtn;
+    return vue.openBlock(), vue.createBlock(_component_v_btn, {
+      class: vue.normalizeClass(["rounded me-1 ms-0", {
+        "v-btn--active": $props.isActive && $props.isActive()
+      }]),
+      density: "comfortable",
+      size: "small",
+      disabled: $props.disabled,
+      color: $props.color,
+      icon: "",
+      onClick: $props.action
+    }, {
+      default: vue.withCtx(() => [
+        vue.createVNode(_component_v_icon, { icon: $props.icon }, null, 8, ["icon"]),
+        vue.createVNode(_component_v_tooltip, {
+          eager: false,
+          activator: "parent",
+          location: "top",
+          text: $props.tooltip
+        }, null, 8, ["text"]),
+        vue.renderSlot(_ctx.$slots, "default")
+      ]),
+      _: 3
+    }, 8, ["disabled", "color", "class", "onClick"]);
+  }
+  const ActionButton = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["render", _sfc_render$i]]);
+  const imageFloatMenus = (editor) => {
+    const types = ["float-left", "float-none", "float-right"];
+    const icons = ["mdi-format-float-left", "mdi-format-float-none", "mdi-format-float-right"];
+    const display = ["left", "inline", "right"];
+    return types.map((float, i2) => ({
+      type: float,
+      component: ActionButton,
+      componentProps: {
+        tooltip: `editor.image.${float.replace("-", ".")}.tooltip`,
+        icon: icons[i2],
+        action: () => editor.chain().focus().updateImage({ display: display[i2] }).run(),
+        isActive: () => editor.isActive("image", { display: display[i2] })
+      }
+    }));
+  };
+  const imageSizeMenus = (editor) => {
+    const { state: state2 } = useContext();
+    const imageSize = state2.imageSize;
+    const types = ["size-small", "size-medium", "size-large"];
+    const icons = ["mdi-size-s", "mdi-size-m", "mdi-size-l"];
+    return types.map((size, i2) => ({
+      type: `image-${size}`,
+      component: ActionButton,
+      componentProps: {
+        tooltip: `editor.${size.replace("-", ".")}.tooltip`,
+        icon: icons[i2],
+        action: () => editor.chain().focus().updateImage({ width: imageSize[size], height: null }).run(),
+        isActive: () => editor.isActive("image", { width: imageSize[size] })
+      }
+    }));
+  };
+  const videoSizeMenus = (editor) => {
+    const { state: state2 } = useContext();
+    const videoSize = state2.imageSize;
+    const types = ["size-small", "size-medium", "size-large"];
+    const icons = ["mdi-size-s", "mdi-size-m", "mdi-size-l"];
+    return types.map((size, i2) => ({
+      type: `video-${size}`,
+      component: ActionButton,
+      componentProps: {
+        tooltip: `editor.${size.replace("-", ".")}.tooltip`,
+        icon: icons[i2],
+        action: () => editor.chain().focus().updateVideo({ width: videoSize[size] }).run(),
+        isActive: () => editor.isActive("video", { width: videoSize[size] })
+      }
+    }));
+  };
+  const defaultBubbleList = (editor) => [
+    ...imageFloatMenus(editor),
+    ...imageSizeMenus(editor),
+    ...videoSizeMenus(editor),
+    {
+      type: "image-aspect-ratio",
+      component: ActionButton,
+      componentProps: {
+        tooltip: "editor.image.dialog.form.aspectRatio",
+        icon: "mdi-aspect-ratio",
+        action: () => {
+          const isLock = editor.isActive("image", { lockAspectRatio: true });
+          editor.chain().focus().updateImage({
+            lockAspectRatio: !isLock,
+            height: isLock ? void 0 : null
+          }).run();
+        },
+        isActive: () => editor.isActive("image", { lockAspectRatio: true })
+      }
+    },
+    {
+      type: "unlink",
+      component: ActionButton,
+      componentProps: {
+        tooltip: "editor.link.unlink.tooltip",
+        icon: "mdi-link-variant-off",
+        action: () => {
+          const { href } = editor.getAttributes("link");
+          editor.chain().extendMarkRange("link", { href }).unsetLink().focus().run();
+        }
+      }
+    },
+    {
+      type: "link-open",
+      component: ActionButton,
+      componentProps: {
+        tooltip: "editor.link.open",
+        icon: "mdi-open-in-new",
+        action: () => {
+          const { href } = editor.getAttributes("link");
+          if (isString(href) && href) {
+            window.open(href, "_blank");
+          }
+        }
+      }
+    },
+    {
+      type: "remove",
+      component: ActionButton,
+      componentProps: {
+        tooltip: "editor.remove",
+        icon: "mdi-delete",
+        action: () => {
+          const { state: state2, dispatch } = editor.view;
+          deleteSelection$1(state2, dispatch);
+        }
+      }
+    }
+  ];
+  const generateBubbleTypeMenu = (list, defaultList, { editor, extension, t }) => {
+    const { extensions = [] } = editor.extensionManager;
+    const items = {};
+    for (const node of Object.keys(list)) {
+      const nodeType = list[node];
+      if (!nodeType) continue;
+      const _items = [];
+      for (const ext of nodeType) {
+        if (ext === "divider") {
+          const lastItem2 = _items[_items.length - 1];
+          if ((lastItem2 == null ? void 0 : lastItem2.type) === "divider") continue;
+          _items.push({
+            type: "divider",
+            component: void 0,
+            componentProps: {}
+          });
+          continue;
+        }
+        const find2 = defaultList.find((k) => k.type === ext);
+        if (find2) {
+          _items.push({
+            ...find2,
+            componentProps: {
+              ...find2.componentProps,
+              tooltip: find2.componentProps.tooltip ? t(find2.componentProps.tooltip) : void 0
+            },
+            componentSlots: find2.componentSlots
+          });
+          continue;
+        }
+        const findExt = extensions.find((k) => k.name === ext);
+        if (findExt) {
+          const { button } = findExt.options;
+          const _button = button({ editor, extension: findExt, t });
+          _items.push({
+            type: ext,
+            component: _button.component,
+            componentProps: _button.componentProps,
+            componentSlots: _button.componentSlots
+          });
+          continue;
+        }
+      }
+      const lastItem = _items[_items.length - 1];
+      const fristItem = _items[0];
+      if ((lastItem == null ? void 0 : lastItem.type) === "divider") _items.pop();
+      if ((fristItem == null ? void 0 : fristItem.type) === "divider") _items.shift();
+      items[node] = _items;
+    }
+    return items;
+  };
+  const OlotapPlugin = {
+    async install(app, config = {}) {
+      await createContext(config);
+      const Extensions = await Promise.resolve().then(() => index);
+      app.config.globalProperties.$extensions = Extensions;
+    }
+  };
   const CharacterCount = Extension.create({
     name: "characterCount",
     addOptions() {
@@ -21495,230 +21937,16 @@ img.ProseMirror-separator {
       };
     }
   });
-  const _sfc_main$h = {
-    props: {
-      icon: {
-        type: String,
-        default: void 0
-      },
-      tooltip: {
-        type: String,
-        default: void 0
-      },
-      disabled: {
-        type: Boolean,
-        default: false
-      },
-      color: {
-        type: String,
-        default: void 0
-      },
-      action: {
-        type: Function,
-        default: void 0
-      },
-      isActive: {
-        type: Function,
-        default: void 0
-      }
-    }
-  };
-  function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_v_icon = components.VIcon;
-    const _component_v_tooltip = components.VTooltip;
-    const _component_v_btn = components.VBtn;
-    return vue.openBlock(), vue.createBlock(_component_v_btn, {
-      class: vue.normalizeClass(["rounded me-1 ms-0", {
-        "v-btn--active": $props.isActive && $props.isActive()
-      }]),
-      density: "comfortable",
-      size: "small",
-      disabled: $props.disabled,
-      color: $props.color,
-      icon: "",
-      onClick: $props.action
-    }, {
-      default: vue.withCtx(() => [
-        vue.createVNode(_component_v_icon, { icon: $props.icon }, null, 8, ["icon"]),
-        vue.createVNode(_component_v_tooltip, {
-          eager: false,
-          activator: "parent",
-          location: "top",
-          text: $props.tooltip
-        }, null, 8, ["text"]),
-        vue.renderSlot(_ctx.$slots, "default")
-      ]),
-      _: 3
-    }, 8, ["disabled", "color", "class", "onClick"]);
-  }
-  const ActionButton = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["render", _sfc_render$h]]);
-  const imageFloatMenus = (editor) => {
-    const types = ["float-left", "float-none", "float-right"];
-    const icons = ["mdi-format-float-left", "mdi-format-float-none", "mdi-format-float-right"];
-    const display = ["left", "inline", "right"];
-    return types.map((float, i2) => ({
-      type: float,
-      component: ActionButton,
-      componentProps: {
-        tooltip: `editor.image.${float.replace("-", ".")}.tooltip`,
-        icon: icons[i2],
-        action: () => editor.chain().focus().updateImage({ display: display[i2] }).run(),
-        isActive: () => editor.isActive("image", { display: display[i2] })
-      }
-    }));
-  };
-  const imageSizeMenus = (editor) => {
-    const { state: state2 } = useContext();
-    const IMAGE_SIZE = state2.IMAGE_SIZE;
-    const types = ["size-small", "size-medium", "size-large"];
-    const icons = ["mdi-size-s", "mdi-size-m", "mdi-size-l"];
-    return types.map((size, i2) => ({
-      type: `image-${size}`,
-      component: ActionButton,
-      componentProps: {
-        tooltip: `editor.${size.replace("-", ".")}.tooltip`,
-        icon: icons[i2],
-        action: () => editor.chain().focus().updateImage({ width: IMAGE_SIZE[size], height: null }).run(),
-        isActive: () => editor.isActive("image", { width: IMAGE_SIZE[size] })
-      }
-    }));
-  };
-  const videoSizeMenus = (editor) => {
-    const { state: state2 } = useContext();
-    const VIDEO_SIZE = state2.IMAGE_SIZE;
-    const types = ["size-small", "size-medium", "size-large"];
-    const icons = ["mdi-size-s", "mdi-size-m", "mdi-size-l"];
-    return types.map((size, i2) => ({
-      type: `video-${size}`,
-      component: ActionButton,
-      componentProps: {
-        tooltip: `editor.${size.replace("-", ".")}.tooltip`,
-        icon: icons[i2],
-        action: () => editor.chain().focus().updateVideo({ width: VIDEO_SIZE[size] }).run(),
-        isActive: () => editor.isActive("video", { width: VIDEO_SIZE[size] })
-      }
-    }));
-  };
-  const defaultBubbleList = (editor) => [
-    ...imageFloatMenus(editor),
-    ...imageSizeMenus(editor),
-    ...videoSizeMenus(editor),
-    {
-      type: "image-aspect-ratio",
-      component: ActionButton,
-      componentProps: {
-        tooltip: "editor.image.dialog.form.aspectRatio",
-        icon: "mdi-aspect-ratio",
-        action: () => {
-          const isLock = editor.isActive("image", { lockAspectRatio: true });
-          editor.chain().focus().updateImage({
-            lockAspectRatio: !isLock,
-            height: isLock ? void 0 : null
-          }).run();
-        },
-        isActive: () => editor.isActive("image", { lockAspectRatio: true })
-      }
-    },
-    {
-      type: "unlink",
-      component: ActionButton,
-      componentProps: {
-        tooltip: "editor.link.unlink.tooltip",
-        icon: "mdi-link-variant-off",
-        action: () => {
-          const { href } = editor.getAttributes("link");
-          editor.chain().extendMarkRange("link", { href }).unsetLink().focus().run();
-        }
-      }
-    },
-    {
-      type: "link-open",
-      component: ActionButton,
-      componentProps: {
-        tooltip: "editor.link.open",
-        icon: "mdi-open-in-new",
-        action: () => {
-          const { href } = editor.getAttributes("link");
-          if (isString(href) && href) {
-            window.open(href, "_blank");
-          }
-        }
-      }
-    },
-    {
-      type: "remove",
-      component: ActionButton,
-      componentProps: {
-        tooltip: "editor.remove",
-        icon: "mdi-delete",
-        action: () => {
-          const { state: state2, dispatch } = editor.view;
-          deleteSelection$1(state2, dispatch);
-        }
-      }
-    }
-  ];
-  const generateBubbleTypeMenu = (list, defaultList, { editor, extension, t }) => {
-    const { extensions = [] } = editor.extensionManager;
-    const items = {};
-    for (const node of Object.keys(list)) {
-      const nodeType = list[node];
-      if (!nodeType) continue;
-      const _items = [];
-      for (const ext of nodeType) {
-        if (ext === "divider") {
-          const lastItem2 = _items[_items.length - 1];
-          if ((lastItem2 == null ? void 0 : lastItem2.type) === "divider") continue;
-          _items.push({
-            type: "divider",
-            component: void 0,
-            componentProps: {}
-          });
-          continue;
-        }
-        const find2 = defaultList.find((k) => k.type === ext);
-        if (find2) {
-          _items.push({
-            ...find2,
-            componentProps: {
-              ...find2.componentProps,
-              tooltip: find2.componentProps.tooltip ? t(find2.componentProps.tooltip) : void 0
-            },
-            componentSlots: find2.componentSlots
-          });
-          continue;
-        }
-        const findExt = extensions.find((k) => k.name === ext);
-        if (findExt) {
-          const { button } = findExt.options;
-          const _button = button({ editor, extension: findExt, t });
-          _items.push({
-            type: ext,
-            component: _button.component,
-            componentProps: _button.componentProps,
-            componentSlots: _button.componentSlots
-          });
-          continue;
-        }
-      }
-      const lastItem = _items[_items.length - 1];
-      const fristItem = _items[0];
-      if ((lastItem == null ? void 0 : lastItem.type) === "divider") _items.pop();
-      if ((fristItem == null ? void 0 : fristItem.type) === "divider") _items.shift();
-      items[node] = _items;
-    }
-    return items;
-  };
   const BaseKit = Extension.create({
     name: "base-kit",
     addOptions() {
       var _a;
       const { state: state2 } = useContext();
-      const { NODE_TYPE_MENU } = state2;
+      const { nodeTypeMenu } = state2;
       return {
         ...(_a = this.parent) == null ? void 0 : _a.call(this),
         bubble: {
-          list: NODE_TYPE_MENU,
+          list: nodeTypeMenu,
           defaultBubbleList,
           button: ({ editor, extension }) => {
             var _a2;
@@ -22773,7 +23001,7 @@ img.ProseMirror-separator {
       });
     }
   });
-  const _sfc_main$g = {
+  const _sfc_main$h = {
     components: {
       ActionButton
     },
@@ -22817,7 +23045,7 @@ img.ProseMirror-separator {
       }
     }
   };
-  function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_v_icon = components.VIcon;
     const _component_v_list_item_title = components.VListItemTitle;
     const _component_v_list_item = components.VListItem;
@@ -22882,7 +23110,7 @@ img.ProseMirror-separator {
       _: 1
     }, 8, ["icon", "tooltip", "disabled", "color", "is-active"]);
   }
-  const ActionMenuButton = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["render", _sfc_render$g]]);
+  const ActionMenuButton = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["render", _sfc_render$h]]);
   const Heading = Heading$1.extend({
     addOptions() {
       var _a;
@@ -23060,7 +23288,7 @@ img.ProseMirror-separator {
       };
     }
   });
-  const _sfc_main$f = {
+  const _sfc_main$g = {
     components: {
       ActionButton
     },
@@ -23105,7 +23333,7 @@ img.ProseMirror-separator {
       }
     }
   };
-  function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_v_icon = components.VIcon;
     const _component_v_list_item_title = components.VListItemTitle;
     const _component_v_list_item = components.VListItem;
@@ -23172,15 +23400,15 @@ img.ProseMirror-separator {
       _: 1
     }, 8, ["tooltip", "disabled", "color", "is-active"]);
   }
-  const FontFamilySelectButton = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["render", _sfc_render$f]]);
+  const FontFamilySelectButton = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["render", _sfc_render$g]]);
   const FontFamily = FontFamily$1.extend({
     addOptions() {
       var _a;
       const { state: state2 } = useContext();
-      const { DEFAULT_FONT_FAMILY_LIST, DEFAULT_FONT_FAMILY_VALUE: DEFAULT_FONT_FAMILY_VALUE2 } = state2;
+      const { defaultFontFamilyList, defaultFontFamilyValue: defaultFontFamilyValue2 } = state2;
       return {
         ...(_a = this.parent) == null ? void 0 : _a.call(this),
-        fontFamilies: DEFAULT_FONT_FAMILY_LIST,
+        fontFamilies: defaultFontFamilyList,
         button: ({ editor, extension }) => {
           var _a2;
           const fontFamilies = ((_a2 = extension.options) == null ? void 0 : _a2.fontFamilies) || [];
@@ -23188,7 +23416,7 @@ img.ProseMirror-separator {
             title: k.title == "editor.fontFamily.fonts.default" ? state2.t(k.title) : state2.t("editor.fontFamily.fonts." + k.title),
             isActive: () => {
               const { fontFamily } = editor.getAttributes("textStyle");
-              const isDefault = k.value === DEFAULT_FONT_FAMILY_VALUE2;
+              const isDefault = k.value === defaultFontFamilyValue2;
               const notFontFamily = fontFamily === void 0;
               if (isDefault && notFontFamily) {
                 return true;
@@ -23196,7 +23424,7 @@ img.ProseMirror-separator {
               return editor.isActive({ fontFamily: k.value }) || false;
             },
             action: () => {
-              if (k.value === DEFAULT_FONT_FAMILY_VALUE2) {
+              if (k.value === defaultFontFamilyValue2) {
                 editor.chain().focus().unsetFontFamily().run();
                 return;
               }
@@ -23227,19 +23455,19 @@ img.ProseMirror-separator {
     addOptions() {
       var _a;
       const { state: state2 } = useContext();
-      const { DEFAULT_FONT_SIZE_LIST, DEFAULT_FONT_SIZE_VALUE } = state2;
+      const { defaultFontSizeList, defaultFontSizeValue } = state2;
       return {
         ...(_a = this.parent) == null ? void 0 : _a.call(this),
         types: ["textStyle"],
-        fontSizes: [...DEFAULT_FONT_SIZE_LIST],
+        fontSizes: [...defaultFontSizeList],
         button: ({ editor, extension }) => {
           var _a2;
           const fontSizes = ((_a2 = extension.options) == null ? void 0 : _a2.fontSizes) || [];
-          const items = [DEFAULT_FONT_SIZE_VALUE, ...fontSizes].map((k) => ({
-            title: k === DEFAULT_FONT_SIZE_VALUE ? state2.t("editor.default") : String(k),
+          const items = [defaultFontSizeValue, ...fontSizes].map((k) => ({
+            title: k === defaultFontSizeValue ? state2.t("editor.default") : String(k),
             isActive: () => {
               const { fontSize } = editor.getAttributes("textStyle");
-              const isDefault = k === DEFAULT_FONT_SIZE_VALUE;
+              const isDefault = k === defaultFontSizeValue;
               const notFontSize = fontSize === void 0;
               if (isDefault && notFontSize) {
                 return true;
@@ -23247,15 +23475,15 @@ img.ProseMirror-separator {
               return editor.isActive({ fontSize: String(k) }) || false;
             },
             action: () => {
-              if (k === DEFAULT_FONT_SIZE_VALUE) {
+              if (k === defaultFontSizeValue) {
                 editor.chain().focus().unsetFontSize().run();
                 return;
               }
               editor.chain().focus().setFontSize(String(k)).run();
             },
             disabled: !editor.can().setFontSize(String(k)),
-            divider: k === DEFAULT_FONT_SIZE_VALUE,
-            default: k === DEFAULT_FONT_SIZE_VALUE
+            divider: k === defaultFontSizeValue,
+            default: k === defaultFontSizeValue
           }));
           const disabled = items.filter((k) => k.disabled).length === items.length;
           return {
@@ -23300,6 +23528,100 @@ img.ProseMirror-separator {
         unsetFontSize: () => ({ chain }) => {
           return chain().setMark("textStyle", { fontSize: null }).removeEmptyTextStyle().run();
         }
+      };
+    }
+  });
+  const _sfc_main$f = {
+    props: {
+      disabled: {
+        type: Boolean,
+        default: false
+      },
+      color: String,
+      isActive: Function,
+      useWindow: {
+        type: Boolean,
+        default: false
+      }
+    },
+    setup(props) {
+      const { state: state2, toggleFullscreen } = useOlotapStore();
+      const { isFullscreen, enter: enter2, exit } = useFullscreen();
+      vue.watch(isFullscreen, (val) => {
+        if (!val && state2.isFullscreen && props.useWindow) {
+          onAction();
+        }
+      });
+      const text = vue.computed(() => {
+        const tooltip = state2.isFullscreen ? "editor.fullscreen.tooltip.exit" : "editor.fullscreen.tooltip.fullscreen";
+        if (!tooltip) return void 0;
+        return useContext().state.t(tooltip);
+      });
+      const icon = vue.computed(() => {
+        const _icon = state2.isFullscreen ? "mdi-fullscreen-exit" : "mdi-fullscreen";
+        return _icon;
+      });
+      function onAction(_useWindow = false) {
+        toggleFullscreen();
+        if (state2.isFullscreen) {
+          document.documentElement.classList.add("overflow-y-hidden");
+          _useWindow && enter2();
+        } else {
+          document.documentElement.classList.remove("overflow-y-hidden");
+          _useWindow && exit();
+        }
+      }
+      return {
+        onAction,
+        text,
+        icon,
+        props
+      };
+    }
+  };
+  function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
+    var _a;
+    const _component_v_icon = components.VIcon;
+    const _component_v_tooltip = components.VTooltip;
+    const _component_v_btn = components.VBtn;
+    return vue.openBlock(), vue.createBlock(_component_v_btn, {
+      class: vue.normalizeClass(["rounded me-1 ms-0", {
+        "v-btn--active": (_a = $props.isActive) == null ? void 0 : _a.call($props)
+      }]),
+      density: "comfortable",
+      size: "small",
+      disabled: $props.disabled,
+      color: $props.color,
+      icon: "",
+      onClick: _cache[0] || (_cache[0] = ($event) => $setup.onAction($props.useWindow))
+    }, {
+      default: vue.withCtx(() => [
+        vue.createVNode(_component_v_icon, { icon: $setup.icon }, null, 8, ["icon"]),
+        vue.createVNode(_component_v_tooltip, {
+          eager: false,
+          activator: "parent",
+          location: "top",
+          text: $setup.text
+        }, null, 8, ["text"]),
+        vue.renderSlot(_ctx.$slots, "default")
+      ]),
+      _: 3
+    }, 8, ["disabled", "color", "class"]);
+  }
+  const FullscreenActionButton = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["render", _sfc_render$f]]);
+  const Fullscreen = Extension.create({
+    name: "fullscreen",
+    addOptions() {
+      var _a;
+      return {
+        ...(_a = this.parent) == null ? void 0 : _a.call(this),
+        useWindow: false,
+        button: ({ editor, extension }) => ({
+          component: FullscreenActionButton,
+          componentProps: {
+            useWindow: extension.options.useWindow ?? false
+          }
+        })
       };
     }
   });
@@ -23369,6 +23691,14 @@ img.ProseMirror-separator {
         default: true
       }
     },
+    setup() {
+      const context = useContext();
+      return {
+        getDensity: vue.computed(() => context.state.inputDensity),
+        getVariant: vue.computed(() => context.state.inputVariant),
+        getColorList: vue.computed(() => context.state.colorsList)
+      };
+    },
     data() {
       return {
         inputValue: "",
@@ -23386,11 +23716,6 @@ img.ProseMirror-separator {
         this.$emit("change", color);
         this.inputValue = color;
         this.menu = false;
-      }
-    },
-    computed: {
-      getColorList() {
-        return useContext().state.COLORS_LIST;
       }
     }
   };
@@ -23420,7 +23745,7 @@ img.ProseMirror-separator {
               "max-width": 230
             }, {
               default: vue.withCtx(() => [
-                (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($options.getColorList, (color) => {
+                (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($setup.getColorList, (color) => {
                   return vue.openBlock(), vue.createElementBlock(vue.Fragment, { key: color }, [
                     color == "" ? (vue.openBlock(), vue.createBlock(_component_v_btn, {
                       key: 0,
@@ -23457,10 +23782,10 @@ img.ProseMirror-separator {
                   modelValue: $data.inputValue,
                   "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $data.inputValue = $event),
                   class: "mt-2 mx-1",
+                  density: $setup.getDensity,
+                  variant: $setup.getVariant,
                   "append-inner-icon": "mdi-check",
-                  density: "compact",
                   label: "HEX",
-                  variant: "outlined",
                   flat: "",
                   "hide-details": "",
                   "single-line": "",
@@ -23478,7 +23803,7 @@ img.ProseMirror-separator {
                     ]),
                     key: "0"
                   } : void 0
-                ]), 1032, ["modelValue"])
+                ]), 1032, ["modelValue", "density", "variant"])
               ]),
               _: 1
             })
@@ -23490,7 +23815,7 @@ img.ProseMirror-separator {
     }, 8, ["modelValue", "nudge-left", "nudge-top", "origin"]);
   }
   const ColorPicker = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["render", _sfc_render$e]]);
-  const { state: state$1 } = useContext();
+  const { state } = useContext();
   const _sfc_main$d = {
     components: {
       ActionButton,
@@ -23524,7 +23849,7 @@ img.ProseMirror-separator {
     },
     data() {
       return {
-        state: state$1
+        state
       };
     },
     methods: {
@@ -25830,14 +26155,6 @@ img.ProseMirror-separator {
   });
   const _sfc_main$9 = {
     props: {
-      density: {
-        type: String,
-        default: "compact"
-      },
-      variant: {
-        type: String,
-        default: "outlined"
-      },
       modelValue: {
         type: Object,
         default: () => ({})
@@ -25851,6 +26168,14 @@ img.ProseMirror-separator {
     data() {
       return {
         loading: false
+      };
+    },
+    setup() {
+      const context = useContext();
+      return {
+        getClass: vue.computed(() => context.state.inputClass),
+        getDensity: vue.computed(() => context.state.inputDensity),
+        getVariant: vue.computed(() => context.state.inputVariant)
       };
     },
     computed: {
@@ -25868,7 +26193,8 @@ img.ProseMirror-separator {
         var _a;
         const file = files instanceof File ? files : files[0];
         if (!file) {
-          throw new Error("No files to upload");
+          console.error("No files to upload");
+          return;
         }
         try {
           this.loading = true;
@@ -25896,8 +26222,9 @@ img.ProseMirror-separator {
     return vue.openBlock(), vue.createBlock(_component_v_form, { disabled: $data.loading }, {
       default: vue.withCtx(() => [
         vue.createVNode(_component_v_file_input, {
-          density: $props.density,
-          variant: $props.variant,
+          class: vue.normalizeClass($setup.getClass),
+          density: $setup.getDensity,
+          variant: $setup.getVariant,
           modelValue: $options.form.file,
           "onUpdate:modelValue": [
             _cache[0] || (_cache[0] = ($event) => $options.form.file = $event),
@@ -25907,32 +26234,35 @@ img.ProseMirror-separator {
           accept: "image/*",
           loading: $data.loading,
           "prepend-icon": "mdi-file-plus-outline",
-          "onClick:clear": _cache[1] || (_cache[1] = ($event) => $options.form.src = void 0)
-        }, null, 8, ["density", "variant", "modelValue", "label", "loading", "onUpdate:modelValue"]),
+          "onClick:clear": _cache[1] || (_cache[1] = ($event) => $options.form = { ...$options.form, src: void 0 })
+        }, null, 8, ["class", "density", "variant", "modelValue", "label", "loading", "onUpdate:modelValue"]),
         vue.createVNode(_component_v_text_field, {
-          density: $props.density,
-          variant: $props.variant,
+          class: vue.normalizeClass($setup.getClass),
+          density: $setup.getDensity,
+          variant: $setup.getVariant,
           modelValue: $options.form.src,
           "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => $options.form.src = $event),
           label: _ctx.$t("editor.image.dialog.form.link"),
           disabled: "",
           autofocus: "",
           "prepend-icon": "mdi-link-variant"
-        }, null, 8, ["density", "variant", "modelValue", "label"]),
+        }, null, 8, ["class", "density", "variant", "modelValue", "label"]),
         vue.createVNode(_component_v_text_field, {
-          density: $props.density,
-          variant: $props.variant,
+          class: vue.normalizeClass($setup.getClass),
+          density: $setup.getDensity,
+          variant: $setup.getVariant,
           modelValue: $options.form.alt,
           "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => $options.form.alt = $event),
           label: _ctx.$t("editor.image.dialog.form.alt"),
           "prepend-icon": "mdi-text"
-        }, null, 8, ["density", "variant", "modelValue", "label"]),
+        }, null, 8, ["class", "density", "variant", "modelValue", "label"]),
         vue.createVNode(_component_v_checkbox, {
-          density: $props.density,
+          class: vue.normalizeClass($setup.getClass),
+          density: $setup.getDensity,
           modelValue: $options.form.lockAspectRatio,
           "onUpdate:modelValue": _cache[4] || (_cache[4] = ($event) => $options.form.lockAspectRatio = $event),
           label: _ctx.$t("editor.image.dialog.form.aspectRatio")
-        }, null, 8, ["density", "modelValue", "label"])
+        }, null, 8, ["class", "density", "modelValue", "label"])
       ]),
       _: 1
     }, 8, ["disabled"]);
@@ -25946,6 +26276,14 @@ img.ProseMirror-separator {
       }
     },
     emits: ["update:modelValue"],
+    setup() {
+      const context = useContext();
+      return {
+        getClass: vue.computed(() => context.state.inputClass),
+        getDensity: vue.computed(() => context.state.inputDensity),
+        getVariant: vue.computed(() => context.state.inputVariant)
+      };
+    },
     computed: {
       form: {
         get() {
@@ -25964,29 +26302,32 @@ img.ProseMirror-separator {
     return vue.openBlock(), vue.createBlock(_component_v_form, null, {
       default: vue.withCtx(() => [
         vue.createVNode(_component_v_text_field, {
-          density: "compact",
-          variant: "outlined",
+          class: vue.normalizeClass($setup.getClass),
+          density: $setup.getDensity,
+          variant: $setup.getVariant,
           modelValue: $options.form.src,
           "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $options.form.src = $event),
           label: _ctx.$t("editor.image.dialog.form.link"),
           autofocus: "",
           "prepend-icon": "mdi-link-variant"
-        }, null, 8, ["modelValue", "label"]),
+        }, null, 8, ["class", "density", "variant", "modelValue", "label"]),
         vue.createVNode(_component_v_text_field, {
-          density: "compact",
-          variant: "outlined",
+          class: vue.normalizeClass($setup.getClass),
+          density: $setup.getDensity,
+          variant: $setup.getVariant,
           modelValue: $options.form.alt,
           "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => $options.form.alt = $event),
           label: _ctx.$t("editor.image.dialog.form.alt"),
           "prepend-icon": "mdi-text"
-        }, null, 8, ["modelValue", "label"]),
+        }, null, 8, ["class", "density", "variant", "modelValue", "label"]),
         vue.createVNode(_component_v_checkbox, {
-          density: "compact",
-          variant: "outlined",
+          class: vue.normalizeClass($setup.getClass),
+          density: $setup.getDensity,
+          variant: $setup.getVariant,
           modelValue: $options.form.lockAspectRatio,
           "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => $options.form.lockAspectRatio = $event),
           label: _ctx.$t("editor.image.dialog.form.aspectRatio")
-        }, null, 8, ["modelValue", "label"])
+        }, null, 8, ["class", "density", "variant", "modelValue", "label"])
       ]),
       _: 1
     });
@@ -26223,12 +26564,11 @@ img.ProseMirror-separator {
     },
     setup() {
       const { state: state2 } = useContext();
-      const { IMAGE_MAX_SIZE } = state2;
-      console.error("BUBBLE menü --> IMAGE_MAX_SIZE: ");
-      console.error(IMAGE_MAX_SIZE);
-      return {
-        IMAGE_MAX_SIZE
-      };
+      const maxSize = vue.reactive({
+        width: state2.imageMaxSize,
+        height: state2.imageMaxSize
+      });
+      return { maxSize };
     },
     data() {
       return {
@@ -26237,10 +26577,6 @@ img.ProseMirror-separator {
           TOP_RIGHT: "tr",
           BOTTOM_LEFT: "bl",
           BOTTOM_RIGHT: "br"
-        },
-        maxSize: {
-          width: useContext().state.IMAGE_MAX_SIZE,
-          height: useContext().state.IMAGE_MAX_SIZE
         },
         originalSize: {
           width: 0,
@@ -26308,7 +26644,7 @@ img.ProseMirror-separator {
         const { editor } = this;
         const { width } = getComputedStyle(editor.view.dom);
         this.maxSize.width = Number.parseInt(width, 10);
-      }, useContext().state.IMAGE_THROTTLE_WAIT_TIME),
+      }, useContext().state.imageThrottleWaitTime),
       onMouseDown(e, dir) {
         e.preventDefault();
         e.stopPropagation();
@@ -26340,20 +26676,20 @@ img.ProseMirror-separator {
       },
       onMouseMove: throttle(function(e) {
         const { state: state2 } = useContext();
-        const { IMAGE_MIN_SIZE } = state2;
+        const { imageMinSize } = state2;
         e.preventDefault();
         e.stopPropagation();
         if (!this.resizing) return;
         const { x, y, w, h, dir } = this.resizerState;
         const dx = (e.clientX - x) * (/l/.test(dir) ? -1 : 1);
         const dy = (e.clientY - y) * (/t/.test(dir) ? -1 : 1);
-        const width = clamp(w + dx, IMAGE_MIN_SIZE, this.maxSize.width);
-        const height = this.lockAspectRatio ? null : Math.max(h + dy, IMAGE_MIN_SIZE);
+        const width = clamp(w + dx, imageMinSize, this.maxSize.width);
+        const height = this.lockAspectRatio ? null : Math.max(h + dy, imageMinSize);
         this.updateAttributes({
           width,
           height
         });
-      }, useContext().state.IMAGE_THROTTLE_WAIT_TIME),
+      }, useContext().state.imageThrottleWaitTime),
       onMouseUp(e) {
         e.preventDefault();
         e.stopPropagation();
@@ -26579,26 +26915,22 @@ img.ProseMirror-separator {
     addOptions() {
       var _a;
       const { state: state2 } = useContext();
-      const { IMAGE_SIZE } = state2;
+      const { imageSize } = state2;
       return {
         ...(_a = this.parent) == null ? void 0 : _a.call(this),
         upload: void 0,
-        width: IMAGE_SIZE["size-medium"],
+        width: imageSize["size-medium"],
         display: "inline",
-        density: "compact",
-        variant: "outlined",
         imageTabs: [],
         hiddenTabs: [],
         inline: true,
         dialogComponent: () => ImageDialog,
         button: ({ editor, extension }) => {
-          const { upload, density, variant, imageTabs, hiddenTabs, dialogComponent } = extension.options;
+          const { upload, imageTabs, hiddenTabs, dialogComponent } = extension.options;
           return {
             component: ImageActionButton,
             componentProps: {
               editor,
-              density,
-              variant,
               upload,
               imageTabs,
               hiddenTabs,
@@ -26894,13 +27226,13 @@ img.ProseMirror-separator {
     },
     addOptions() {
       const { state: state2 } = useContext();
-      const { VIDEO_SIZE } = state2;
+      const { videoSize } = state2;
       return {
         divider: false,
         spacer: false,
         allowFullscreen: true,
         frameborder: false,
-        width: VIDEO_SIZE["size-medium"],
+        width: videoSize["size-medium"],
         HTMLAttributes: {
           class: "iframe-wrapper",
           style: "display: flex;justify-content: center;"
@@ -29478,29 +29810,30 @@ img.ProseMirror-separator {
   const _sfc_main$2 = {
     setup() {
       const { state: state2 } = useContext();
-      return { state: state2 };
+      const tableGridSize = vue.reactive({
+        rows: isMobile() ? state2.tableMaxGridSize : state2.tableInitGridSize,
+        cols: isMobile() ? state2.tableMaxGridSize : state2.tableInitGridSize
+      });
+      const selectedTableGridSize = vue.reactive({
+        rows: state2.tableDefaultSelectedGridSize,
+        cols: state2.tableDefaultSelectedGridSize
+      });
+      return { state: state2, tableGridSize, selectedTableGridSize };
     },
     data() {
       return {
         menu: false,
-        withHeaderRow: true,
-        tableGridSize: vue.reactive({
-          rows: isMobile() ? state.TABLE_MAX_GRID_SIZE : state.TABLE_INIT_GRID_SIZE,
-          cols: isMobile() ? state.TABLE_MAX_GRID_SIZE : state.TABLE_INIT_GRID_SIZE
-        }),
-        selectedTableGridSize: vue.reactive({
-          rows: state.TABLE_DEFAULT_SELECTED_GRID_SIZE,
-          cols: state.TABLE_DEFAULT_SELECTED_GRID_SIZE
-        })
+        withHeaderRow: true
       };
     },
     methods: {
       selectTableGridSize(rows, cols) {
-        if (rows === this.tableGridSize.rows) {
-          this.tableGridSize.rows = Math.min(rows + 1, state.TABLE_MAX_GRID_SIZE);
+        const tableGridSize = vue.unref(this.tableGridSize);
+        if (rows === tableGridSize.rows) {
+          this.tableGridSize.rows = Math.min(rows + 1, this.state.tableMaxGridSize);
         }
-        if (cols === this.tableGridSize.cols) {
-          this.tableGridSize.cols = Math.min(cols + 1, state.TABLE_MAX_GRID_SIZE);
+        if (cols === tableGridSize.cols) {
+          this.tableGridSize.cols = Math.min(cols + 1, this.state.tableMaxGridSize);
         }
         this.selectedTableGridSize.rows = rows;
         this.selectedTableGridSize.cols = cols;
@@ -29512,10 +29845,10 @@ img.ProseMirror-separator {
       resetTableGridSize() {
         this.menu = false;
         this.withHeaderRow = true;
-        this.tableGridSize.rows = state.TABLE_INIT_GRID_SIZE;
-        this.tableGridSize.cols = state.TABLE_INIT_GRID_SIZE;
-        this.selectedTableGridSize.rows = state.TABLE_DEFAULT_SELECTED_GRID_SIZE;
-        this.selectedTableGridSize.cols = state.TABLE_DEFAULT_SELECTED_GRID_SIZE;
+        this.tableGridSize.rows = this.state.tableInitGridSize;
+        this.tableGridSize.cols = this.state.tableInitGridSize;
+        this.selectedTableGridSize.rows = this.state.tableDefaultSelectedGridSize;
+        this.selectedTableGridSize.cols = this.state.tableDefaultSelectedGridSize;
       }
     }
   };
@@ -29555,17 +29888,17 @@ img.ProseMirror-separator {
             }),
             vue.createVNode(_component_v_card_text, { class: "d-flex flex-column flex-wrap justify-space-between pa-2" }, {
               default: vue.withCtx(() => [
-                (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($data.tableGridSize.rows, (row) => {
+                (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($setup.tableGridSize.rows, (row) => {
                   return vue.openBlock(), vue.createElementBlock("div", {
                     key: "r" + row,
                     class: "d-flex"
                   }, [
-                    (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($data.tableGridSize.cols, (col) => {
+                    (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($setup.tableGridSize.cols, (col) => {
                       return vue.openBlock(), vue.createElementBlock("div", {
                         style: { "cursor": "pointer" },
                         key: "c" + col,
                         class: vue.normalizeClass([{
-                          "table-grid-size-editor__cell--selected": col <= $data.selectedTableGridSize.cols && row <= $data.selectedTableGridSize.rows
+                          "table-grid-size-editor__cell--selected": col <= $setup.selectedTableGridSize.cols && row <= $setup.selectedTableGridSize.rows
                         }, "pa-1"]),
                         onMouseover: ($event) => $options.selectTableGridSize(row, col),
                         onMousedown: ($event) => $options.onMouseDown(row, col)
@@ -29580,7 +29913,7 @@ img.ProseMirror-separator {
             }),
             vue.createVNode(_component_v_card_subtitle, { class: "pt-0 pb-2" }, {
               default: vue.withCtx(() => [
-                vue.createTextVNode(vue.toDisplayString($data.selectedTableGridSize.rows) + " x " + vue.toDisplayString($data.selectedTableGridSize.cols), 1)
+                vue.createTextVNode(vue.toDisplayString($setup.selectedTableGridSize.rows) + " x " + vue.toDisplayString($setup.selectedTableGridSize.cols), 1)
               ]),
               _: 1
             })
@@ -30224,6 +30557,7 @@ img.ProseMirror-separator {
     Color,
     FontFamily,
     FontSize,
+    Fullscreen,
     Heading,
     Highlight,
     History,
@@ -30239,12 +30573,6 @@ img.ProseMirror-separator {
     Underline,
     Video
   }, Symbol.toStringTag, { value: "Module" }));
-  const OlotapPlugin = {
-    install(app, config = {}) {
-      createContext(config);
-    }
-  };
-  exports2.Extensions = index;
   exports2.OlotapEditor = OlotapEditor;
   exports2.OlotapPlugin = OlotapPlugin;
   exports2.defaultBubbleList = defaultBubbleList;

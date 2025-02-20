@@ -20,11 +20,11 @@ export const BaseKit = Extension.create({
   name: 'base-kit',
   addOptions() {
     const { state } = useContext();
-    const { NODE_TYPE_MENU } = state;
+    const { nodeTypeMenu } = state;
     return {
       ...this.parent?.(),
       bubble: {
-        list: NODE_TYPE_MENU,
+        list: nodeTypeMenu,
         defaultBubbleList,
         button: ({ editor, extension }) => {
           const { list = {}, defaultBubbleList } = extension.options?.bubble ?? {};

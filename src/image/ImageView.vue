@@ -52,8 +52,8 @@ export default {
   setup() {
     const { state } = useContext();
     const maxSize = reactive({
-      width: state.IMAGE_MAX_SIZE,
-      height: state.IMAGE_MAX_SIZE,
+      width: state.imageMaxSize,
+      height: state.imageMaxSize,
     });
     return { maxSize };
   },
@@ -134,7 +134,7 @@ export default {
       const { editor } = this;
       const { width } = getComputedStyle(editor.view.dom);
       this.maxSize.width = Number.parseInt(width, 10);
-    }, useContext().state.IMAGE_THROTTLE_WAIT_TIME),
+    }, useContext().state.imageThrottleWaitTime),
     onMouseDown(e, dir) {
       e.preventDefault();
       e.stopPropagation();
@@ -172,7 +172,7 @@ export default {
     },
     onMouseMove: throttle(function (e) {
       const { state } = useContext()
-      const { IMAGE_MIN_SIZE } = state
+      const { imageMinSize } = state
 
       e.preventDefault();
       e.stopPropagation();
@@ -183,14 +183,14 @@ export default {
       const dx = (e.clientX - x) * (/l/.test(dir) ? -1 : 1);
       const dy = (e.clientY - y) * (/t/.test(dir) ? -1 : 1);
 
-      const width = clamp(w + dx, IMAGE_MIN_SIZE, this.maxSize.width);
-      const height = this.lockAspectRatio ? null : Math.max(h + dy, IMAGE_MIN_SIZE);
+      const width = clamp(w + dx, imageMinSize, this.maxSize.width);
+      const height = this.lockAspectRatio ? null : Math.max(h + dy, imageMinSize);
 
       this.updateAttributes({
         width,
         height,
       });
-    }, useContext().state.IMAGE_THROTTLE_WAIT_TIME),
+    }, useContext().state.imageThrottleWaitTime),
     onMouseUp(e) {
       e.preventDefault();
       e.stopPropagation();

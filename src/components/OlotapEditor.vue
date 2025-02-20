@@ -1,13 +1,12 @@
 <template>
-  <div v-if="editor" class="olotap dense">
+  <div v-if="editor" class="olotap">
     
     <BubbleMenu v-if="!hideBubble" :editor="editor" :disabled="disableToolbar" />
 
     <v-input class="pt-0" hide-details="auto" :error-messages="errorMessages">
       <v-card
         :flat="flat"
-        :outlined="outlined"
-        color="grey-lighten-4"
+        :color="bgColor"
         v-bind="$attrs"
         :style="{
           borderColor: $attrs['error-messages'] ? '#ff5252' : undefined,
@@ -17,18 +16,15 @@
         :class="{ 'olotap-editor--fullscreen': isFullscreen }"
       >
         <template v-if="label && !isFullscreen">
-          <v-card-title :class="bg-grey-lighten-3">
-            {{ label }}
-          </v-card-title>
-          <v-divider />
+          <slot name="label"></slot>
+          <!--
+            <v-card-title :class="bg-grey-lighten-3">
+              {{ label }}
+              </v-card-title>
+            <v-divider />
+          -->
         </template>
 
-        <TipTapToolbar
-          v-if="!hideToolbar"
-          class="olotap-editor__toolbar"
-          :editor="editor"
-          :disabled="disableToolbar"
-        />
         <slot
           name="editor"
           v-bind="{ editor, props: { class: 'olotap-editor__content', 'data-testid': 'value' } }"
@@ -51,7 +47,7 @@
           v-show="isBubbleMenuVisible"
           :style="bubbleMenuStyle"
         >
-          <button @click.stop.prevent="clickTableButton"><v-icon>mdi-dots-vertical</v-icon></button>
+          <button @click.stop.prevent="clickTableButton"><v-icon size="small">mdi-dots-vertical</v-icon></button>
         </div>
       </v-card>
     </v-input>
@@ -59,15 +55,14 @@
 </template>
 
 <script>
-import { computed, watch, onUnmounted } from 'vue';
 import { Editor, EditorContent } from '@tiptap/vue-3';
 import { useMarkdownTheme, useProvideOlotapStore } from '../hooks';
-import { throttle, getCssUnitWithDefault, isBoolean, isEqual, differenceBy } from '@/utils';
-import { isMobile, mergeObjects } from '@/utils';
+import { throttle, getCssUnitWithDefault } from '@/utils';
+import { isMobile } from '@/utils';
 import BubbleMenu from '../BubbleMenu.vue';
 import TipTapToolbar from '../TiptapToolbar.vue';
-import '../styles/index.scss'
 import { useContext } from '../hooks/use-context';
+import '../styles/index.scss'
 
 export default {
   name: 'OlotapEditor',
@@ -77,6 +72,10 @@ export default {
     TipTapToolbar,
   },
   props: {
+    bgColor: {
+      type: String,
+      default: "grey-lighten-4"
+    },
     extensions: {
       type: Array,
       default: () => [],
@@ -199,13 +198,13 @@ export default {
         //       return true;
         //     }
         //     return false;
-        //   }, this.state.EDITOR_UPDATE_THROTTLE_WAIT_TIME),
+        //   }, this.state.editorUpdateThrottleWaitTime),
         // },
         onUpdate: throttle(({ editor }) => {
           const output = this.getOutput(editor, this.output);
           this.$emit('update:modelValue', output);
           this.$emit('change', { editor, output });
-        }, this.state.EDITOR_UPDATE_THROTTLE_WAIT_TIME),
+        }, this.state.editorUpdateThrottleWaitTime),
         extensions: this.sortExtensions(this.extensions),
         autofocus: false,
         editable: !this.disabled,
@@ -275,7 +274,7 @@ export default {
   background-color: white;
   border: 1px solid #ddd;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  padding: 5px;
+  padding: 0;
   z-index: 1000;
   flex-direction: column;
 }

@@ -57,27 +57,23 @@ export const Image = TiptapImage.extend({
   },
   addOptions() {
     const { state } = useContext();
-    const { IMAGE_SIZE } = state;
+    const { imageSize } = state;
     return {
       ...this.parent?.(),
       upload: undefined,
-      width: IMAGE_SIZE['size-medium'],
+      width: imageSize['size-medium'],
       display: 'inline',
-      density: 'compact',
-      variant: 'outlined',
       imageTabs: [],
       hiddenTabs: [],
       inline: true,
       dialogComponent: () => ImageDialog,
       button: ({ editor, extension }) => {
-        const { upload, density, variant, imageTabs, hiddenTabs, dialogComponent } = extension.options;
+        const { upload, imageTabs, hiddenTabs, dialogComponent } = extension.options;
 
         return {
           component: ImageActionButton,
           componentProps: {
             editor,
-            density,
-            variant,
             upload,
             imageTabs,
             hiddenTabs,

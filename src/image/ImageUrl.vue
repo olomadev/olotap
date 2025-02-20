@@ -1,8 +1,9 @@
 <template>
   <v-form>
     <v-text-field
-      density="compact"
-      variant="outlined"
+      :class="getClass"
+      :density="getDensity"
+      :variant="getVariant"
       v-model="form.src"
       :label="$t('editor.image.dialog.form.link')"
       autofocus
@@ -11,8 +12,9 @@
     </v-text-field>
 
     <v-text-field 
-      density="compact"
-      variant="outlined"
+      :class="getClass"
+      :density="getDensity"
+      :variant="getVariant"
       v-model="form.alt" 
       :label="$t('editor.image.dialog.form.alt')" 
       prepend-icon="mdi-text"
@@ -20,8 +22,9 @@
     </v-text-field>
 
     <v-checkbox 
-      density="compact"
-      variant="outlined"
+      :class="getClass"
+      :density="getDensity"
+      :variant="getVariant"
       v-model="form.lockAspectRatio" 
       :label="$t('editor.image.dialog.form.aspectRatio')"
     >
@@ -30,6 +33,9 @@
 </template>
 
 <script>
+import { computed } from 'vue';
+import { useContext } from "../hooks/use-context";
+
 export default {
   props: {
     modelValue: {
@@ -38,6 +44,14 @@ export default {
     },
   },
   emits: ['update:modelValue'],
+  setup() {
+    const context = useContext();
+    return {
+      getClass: computed(() => context.state.inputClass),
+      getDensity: computed(() => context.state.inputDensity),
+      getVariant: computed(() => context.state.inputVariant),
+    }
+  },
   computed: {
     form: {
       get() {

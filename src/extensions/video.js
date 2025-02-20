@@ -99,13 +99,13 @@ export const Video = Node.create({
   },
   addOptions() {
     const { state } = useContext();
-    const { VIDEO_SIZE } = state;
+    const { videoSize } = state;
     return {
       divider: false,
       spacer: false,
       allowFullscreen: true,
       frameborder: false,
-      width: VIDEO_SIZE['size-medium'],
+      width: videoSize['size-medium'],
       HTMLAttributes: {
         class: 'iframe-wrapper',
         style: 'display: flex;justify-content: center;',

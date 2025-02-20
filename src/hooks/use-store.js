@@ -4,11 +4,11 @@ import { useContext } from './use-context';
 
 export const [useProvideOlotapStore, useOlotapStore] = createInjectionState(() => {
   const { state: _state } = useContext()
-  const { DEFAULT_LANG_VALUE, DEFAULT_MARKDOWN_THEME_VALUE } = _state;
+  const { defaultLangValue, defaultMarkdownThemeValue } = _state;
 
   const state = reactive({
-    defaultLang: DEFAULT_LANG_VALUE,
-    defaultMarkdownTheme: DEFAULT_MARKDOWN_THEME_VALUE,
+    defaultLang: defaultLangValue,
+    defaultMarkdownTheme: defaultMarkdownThemeValue,
     isFullscreen: false,
     isImageEvent: false,
     color: undefined,

@@ -23,10 +23,10 @@
         <v-text-field
           v-model="inputValue"
           class="mt-2 mx-1"
+          :density="getDensity"
+          :variant="getVariant"
           append-inner-icon="mdi-check"
-          density="compact"
           label="HEX"
-          variant="outlined"
           flat
           hide-details
           single-line
@@ -44,6 +44,7 @@
 
 <script>
 import { useContext } from './hooks/use-context';
+import { computed } from 'vue';
 
 export default {
   props: {
@@ -69,6 +70,14 @@ export default {
       default: true
     }
   },
+  setup() {
+    const context = useContext();
+    return {
+      getDensity: computed(() => context.state.inputDensity),
+      getVariant: computed(() => context.state.inputVariant),
+      getColorList: computed(() => context.state.colorsList),
+    }
+  },
   data() {
     return {
       inputValue: '',
@@ -89,11 +98,6 @@ export default {
 
       // this.editor.
 
-    }
-  },
-  computed: {
-    getColorList() {
-      return useContext().state.COLORS_LIST;
     }
   }
 
