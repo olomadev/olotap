@@ -1,4 +1,4 @@
-import { reactive, watch } from 'vue';
+import { reactive } from 'vue';
 
 const defaultFontFamilyValue = "Hanken Grotesk";
 const defaultMarkdownThemeValue = "github";
@@ -6,10 +6,10 @@ const editorUpdateThrottleWaitTime = 200;
 
 const state = reactive({
   i18n: undefined,
-  defaultLang: undefined,
+  isFullscreen: false,
+  isImageEvent: false,
   defaultMarkdownTheme: "github",
   t: key => key,
-  defaultLangValue: "en",
   editorUpdateThrottleWaitTime,
   editorUpdateWatchThrottleWaitTime: editorUpdateThrottleWaitTime - 80,
   inputDensity: "compact",
@@ -77,13 +77,11 @@ const state = reactive({
 
 export async function createContext(config) {
   return new Promise(resolve => {
-    state.defaultLang = config.defaultLang ?? "en";
     state.defaultMarkdownTheme = config.defaultMarkdownTheme ?? "github"
     if (config.i18n) {
       state.i18n = config.i18n;
       state.t = config.i18n.global.t;
     }
-    state.defaultLangValue = state.defaultLang
     state.editorUpdateThrottleWaitTime = config.editorUpdateThrottleWaitTime ?? state.editorUpdateThrottleWaitTime
     if (config['editorUpdateThrottleWaitTime']) {
       state.editorUpdateWatchThrottleWaitTime = config.editorUpdateThrottleWaitTime - 80  

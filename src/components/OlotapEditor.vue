@@ -20,11 +20,17 @@
           <!--
             <v-card-title :class="bg-grey-lighten-3">
               {{ label }}
-              </v-card-title>
+            </v-card-title>
             <v-divider />
           -->
         </template>
 
+        <TipTapToolbar
+          v-if="!hideToolbar"
+          class="olotap-editor__toolbar"
+          :editor="editor"
+          :disabled="disableToolbar"
+        />
         <slot
           name="editor"
           v-bind="{ editor, props: { class: 'olotap-editor__content', 'data-testid': 'value' } }"

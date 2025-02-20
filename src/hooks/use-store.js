@@ -4,10 +4,9 @@ import { useContext } from './use-context';
 
 export const [useProvideOlotapStore, useOlotapStore] = createInjectionState(() => {
   const { state: _state } = useContext()
-  const { defaultLangValue, defaultMarkdownThemeValue } = _state;
+  const { defaultMarkdownThemeValue } = _state;
 
   const state = reactive({
-    defaultLang: defaultLangValue,
     defaultMarkdownTheme: defaultMarkdownThemeValue,
     isFullscreen: false,
     isImageEvent: false,
@@ -20,14 +19,15 @@ export const [useProvideOlotapStore, useOlotapStore] = createInjectionState(() =
 
   function toggleFullscreen() {
     state.isFullscreen = !state.isFullscreen
+    _state.isFullscreen = state.isFullscreen
   }
 
   function toggleImageEvent() {
     state.isImageEvent = !state.isImageEvent
+    _state.isImageEvent = !state.isImageEvent
   }
 
   watchEffect(() => {
-    state.defaultLang = _state.defaultLang
     state.defaultMarkdownTheme = _state.defaultMarkdownTheme
   })
 

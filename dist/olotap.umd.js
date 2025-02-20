@@ -19760,10 +19760,9 @@ img.ProseMirror-separator {
   const editorUpdateThrottleWaitTime = 200;
   const state$1 = vue.reactive({
     i18n: void 0,
-    defaultLang: void 0,
+    isFullscreen: false,
     defaultMarkdownTheme: "github",
     t: (key) => key,
-    defaultLangValue: "en",
     editorUpdateThrottleWaitTime,
     editorUpdateWatchThrottleWaitTime: editorUpdateThrottleWaitTime - 80,
     inputDensity: "compact",
@@ -19869,13 +19868,11 @@ img.ProseMirror-separator {
   });
   async function createContext(config) {
     return new Promise((resolve) => {
-      state$1.defaultLang = config.defaultLang ?? "en";
       state$1.defaultMarkdownTheme = config.defaultMarkdownTheme ?? "github";
       if (config.i18n) {
         state$1.i18n = config.i18n;
         state$1.t = config.i18n.global.t;
       }
-      state$1.defaultLangValue = state$1.defaultLang;
       state$1.editorUpdateThrottleWaitTime = config.editorUpdateThrottleWaitTime ?? state$1.editorUpdateThrottleWaitTime;
       if (config["editorUpdateThrottleWaitTime"]) {
         state$1.editorUpdateWatchThrottleWaitTime = config.editorUpdateThrottleWaitTime - 80;
@@ -19908,6 +19905,11 @@ img.ProseMirror-separator {
       state: state$1
     };
   }
+  const useContext$1 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+    __proto__: null,
+    createContext,
+    useContext
+  }, Symbol.toStringTag, { value: "Module" }));
   var freeGlobal = typeof global == "object" && global && global.Object === Object && global;
   var freeSelf = typeof self == "object" && self && self.Object === Object && self;
   var root = freeGlobal || freeSelf || Function("return this")();
@@ -20418,9 +20420,8 @@ img.ProseMirror-separator {
   }
   const [useProvideOlotapStore, useOlotapStore] = createInjectionState(() => {
     const { state: _state } = useContext();
-    const { defaultLangValue, defaultMarkdownThemeValue: defaultMarkdownThemeValue2 } = _state;
+    const { defaultMarkdownThemeValue: defaultMarkdownThemeValue2 } = _state;
     const state2 = vue.reactive({
-      defaultLang: defaultLangValue,
       defaultMarkdownTheme: defaultMarkdownThemeValue2,
       isFullscreen: false,
       isImageEvent: false,
@@ -20431,12 +20432,12 @@ img.ProseMirror-separator {
     const isImageEvent = vue.computed(() => state2.isImageEvent);
     function toggleFullscreen() {
       state2.isFullscreen = !state2.isFullscreen;
+      _state.isFullscreen = state2.isFullscreen;
     }
     function toggleImageEvent() {
       state2.isImageEvent = !state2.isImageEvent;
     }
     vue.watchEffect(() => {
-      state2.defaultLang = _state.defaultLang;
       state2.defaultMarkdownTheme = _state.defaultMarkdownTheme;
     });
     return {
@@ -20682,6 +20683,10 @@ img.ProseMirror-separator {
       TipTapToolbar
     },
     props: {
+      bgColor: {
+        type: String,
+        default: "grey-lighten-4"
+      },
       extensions: {
         type: Array,
         default: () => []
@@ -20870,12 +20875,10 @@ img.ProseMirror-separator {
   };
   const _hoisted_1$5 = {
     key: 0,
-    class: "olotap dense"
+    class: "olotap"
   };
   function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_BubbleMenu = vue.resolveComponent("BubbleMenu");
-    const _component_v_card_title = components.VCardTitle;
-    const _component_v_divider = components.VDivider;
     const _component_TipTapToolbar = vue.resolveComponent("TipTapToolbar");
     const _component_editor_content = vue.resolveComponent("editor-content");
     const _component_v_icon = components.VIcon;
@@ -20895,8 +20898,7 @@ img.ProseMirror-separator {
         default: vue.withCtx(() => [
           vue.createVNode(_component_v_card, vue.mergeProps({
             flat: $props.flat,
-            outlined: $props.outlined,
-            color: "grey-lighten-4"
+            color: $props.bgColor
           }, _ctx.$attrs, {
             style: {
               borderColor: _ctx.$attrs["error-messages"] ? "#ff5252" : void 0,
@@ -20905,17 +20907,7 @@ img.ProseMirror-separator {
             class: ["olotap-editor", { "olotap-editor--fullscreen": $setup.isFullscreen }]
           }), {
             default: vue.withCtx(() => [
-              $props.label && !$setup.isFullscreen ? (vue.openBlock(), vue.createElementBlock(vue.Fragment, { key: 0 }, [
-                vue.createVNode(_component_v_card_title, {
-                  class: vue.normalizeClass(_ctx.bg - _ctx.grey - _ctx.lighten - 3)
-                }, {
-                  default: vue.withCtx(() => [
-                    vue.createTextVNode(vue.toDisplayString($props.label), 1)
-                  ]),
-                  _: 1
-                }, 8, ["class"]),
-                vue.createVNode(_component_v_divider)
-              ], 64)) : vue.createCommentVNode("", true),
+              $props.label && !$setup.isFullscreen ? vue.renderSlot(_ctx.$slots, "label", { key: 0 }) : vue.createCommentVNode("", true),
               !$props.hideToolbar ? (vue.openBlock(), vue.createBlock(_component_TipTapToolbar, {
                 key: 1,
                 class: "olotap-editor__toolbar",
@@ -20951,7 +20943,7 @@ img.ProseMirror-separator {
               ]) : vue.createCommentVNode("", true)
             ]),
             _: 3
-          }, 16, ["flat", "outlined", "style", "class"])
+          }, 16, ["flat", "color", "style", "class"])
         ]),
         _: 3
       }, 8, ["error-messages"])
@@ -30573,6 +30565,7 @@ img.ProseMirror-separator {
     Underline,
     Video
   }, Symbol.toStringTag, { value: "Module" }));
+  exports2.Context = useContext$1;
   exports2.OlotapEditor = OlotapEditor;
   exports2.OlotapPlugin = OlotapPlugin;
   exports2.defaultBubbleList = defaultBubbleList;
