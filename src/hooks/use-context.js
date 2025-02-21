@@ -1,14 +1,14 @@
 import { reactive } from 'vue';
 
 const defaultFontFamilyValue = "Hanken Grotesk";
-const defaultMarkdownThemeValue = "github";
+const defaultMarkdownThemeValue = "default";
 const editorUpdateThrottleWaitTime = 200;
 
 const state = reactive({
   i18n: undefined,
   isFullscreen: false,
   isImageEvent: false,
-  defaultMarkdownTheme: "github",
+  defaultMarkdownTheme: defaultMarkdownThemeValue,
   t: key => key,
   editorUpdateThrottleWaitTime,
   editorUpdateWatchThrottleWaitTime: editorUpdateThrottleWaitTime - 80,

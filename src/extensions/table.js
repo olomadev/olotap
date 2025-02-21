@@ -46,32 +46,7 @@ export const Table = TiptapTable.extend({
                 } else {
                   document.body.style.cursor = "";
                 }
-              },
-              click: (view, event) => {
-                const { target } = event;
-
-                if (target.tagName !== "TD" && target.tagName !== "TH") return false;
-
-                const bubbleMenu = document.getElementById("bubble-menu");
-                if (!bubbleMenu) return false;
-
-                // Show menu first
-                bubbleMenu.style.display = "block";
-                //
-                // Then adjust the settings (next render topic) ..
-                // fixes bug where 50px on the right left too much space at "first" launch ..
-                // 
-                setTimeout(() => {
-                  const rect = bubbleMenu.getBoundingClientRect();
-                  const rowRect = target.closest("tr").getBoundingClientRect();
-
-                  bubbleMenu.style.left = `${rowRect.right + window.scrollX - rect.width - 210}px`;
-                  bubbleMenu.style.top = `${rowRect.bottom + window.scrollY - 122}px`;
-                }, 0);
-
-                window.selectedEditor = view;
-                return true;
-              },
+              }
             },
           },
         })

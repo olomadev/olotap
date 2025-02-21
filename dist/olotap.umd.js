@@ -19756,12 +19756,13 @@ img.ProseMirror-separator {
     };
   }
   const defaultFontFamilyValue = "Hanken Grotesk";
-  const defaultMarkdownThemeValue = "github";
+  const defaultMarkdownThemeValue = "default";
   const editorUpdateThrottleWaitTime = 200;
   const state$1 = vue.reactive({
     i18n: void 0,
     isFullscreen: false,
-    defaultMarkdownTheme: "github",
+    isImageEvent: false,
+    defaultMarkdownTheme: defaultMarkdownThemeValue,
     t: (key) => key,
     editorUpdateThrottleWaitTime,
     editorUpdateWatchThrottleWaitTime: editorUpdateThrottleWaitTime - 80,
@@ -20436,6 +20437,7 @@ img.ProseMirror-separator {
     }
     function toggleImageEvent() {
       state2.isImageEvent = !state2.isImageEvent;
+      _state.isImageEvent = !state2.isImageEvent;
     }
     vue.watchEffect(() => {
       state2.defaultMarkdownTheme = _state.defaultMarkdownTheme;
@@ -20455,7 +20457,92 @@ img.ProseMirror-separator {
     }
     return target;
   };
-  const _sfc_main$l = {
+  const _sfc_main$o = {
+    props: {
+      editor: {
+        type: Object,
+        required: true
+      },
+      disabled: {
+        type: Boolean,
+        default: false
+      }
+    },
+    created() {
+    },
+    computed: {
+      items() {
+        const extensions = [...this.editor.extensionManager.extensions];
+        const sortExtensions = extensions.sort((arr, acc) => {
+          const a = arr.options.sort ?? -1;
+          const b = acc.options.sort ?? -1;
+          return a - b;
+        });
+        let menus = [];
+        for (const extension of sortExtensions) {
+          const { button, divider = false, spacer = false, t = null } = extension.options;
+          if (!button || !isFunction(button)) continue;
+          const _button = button({
+            editor: this.editor,
+            extension,
+            t
+          });
+          if (Array.isArray(_button)) {
+            const menu = _button.map((k, i2) => ({
+              button: k,
+              divider: i2 === _button.length - 1 ? divider : false,
+              spacer: i2 === 0 ? spacer : false
+            }));
+            menus = [...menus, ...menu];
+            continue;
+          }
+          menus.push({ button: _button, divider, spacer, t });
+        }
+        return menus;
+      }
+    }
+  };
+  function _sfc_render$o(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_v_spacer = components.VSpacer;
+    const _component_v_divider = components.VDivider;
+    const _component_v_toolbar = components.VToolbar;
+    return vue.openBlock(), vue.createBlock(_component_v_toolbar, vue.mergeProps(_ctx.$attrs, {
+      density: "compact",
+      flat: "",
+      height: "auto",
+      class: "py-1 ps-1"
+    }), {
+      default: vue.withCtx(() => [
+        (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($options.items, (item, key) => {
+          var _a;
+          return vue.openBlock(), vue.createElementBlock(vue.Fragment, { key }, [
+            item.spacer ? (vue.openBlock(), vue.createBlock(_component_v_spacer, { key: 0 })) : vue.createCommentVNode("", true),
+            (vue.openBlock(), vue.createBlock(vue.resolveDynamicComponent(item.button.component), vue.mergeProps({ ref_for: true }, item.button.componentProps, {
+              editor: $props.editor,
+              disabled: $props.disabled || ((_a = item.button.componentProps) == null ? void 0 : _a.disabled)
+            }), vue.createSlots({ _: 2 }, [
+              vue.renderList(item.button.componentSlots, (element, slotName, i2) => {
+                return {
+                  name: `${slotName}`,
+                  fn: vue.withCtx((values) => [
+                    (vue.openBlock(), vue.createBlock(vue.resolveDynamicComponent(element), vue.mergeProps({ ref_for: true }, values == null ? void 0 : values.props), null, 16))
+                  ])
+                };
+              })
+            ]), 1040, ["editor", "disabled"])),
+            item.divider ? (vue.openBlock(), vue.createBlock(_component_v_divider, {
+              key: 1,
+              vertical: "",
+              class: "mx-1 me-2"
+            })) : vue.createCommentVNode("", true)
+          ], 64);
+        }), 128))
+      ]),
+      _: 1
+    }, 16);
+  }
+  const TipTapToolbar = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["render", _sfc_render$o]]);
+  const _sfc_main$n = {
     props: {
       editor: {
         type: Object,
@@ -20527,7 +20614,7 @@ img.ProseMirror-separator {
       }
     }
   };
-  function _sfc_render$l(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$n(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_v_divider = components.VDivider;
     const _component_v_toolbar = components.VToolbar;
     const _component_v_card_text = components.VCardText;
@@ -20589,98 +20676,290 @@ img.ProseMirror-separator {
       [vue.vShow, $options.items.length > 0]
     ]);
   }
-  const BubbleMenu = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["render", _sfc_render$l]]);
-  const _sfc_main$k = {
-    props: {
-      editor: {
-        type: Object,
-        required: true
-      },
-      disabled: {
-        type: Boolean,
-        default: false
-      }
-    },
-    created() {
-    },
-    computed: {
-      items() {
-        const extensions = [...this.editor.extensionManager.extensions];
-        const sortExtensions = extensions.sort((arr, acc) => {
-          const a = arr.options.sort ?? -1;
-          const b = acc.options.sort ?? -1;
-          return a - b;
-        });
-        let menus = [];
-        for (const extension of sortExtensions) {
-          const { button, divider = false, spacer = false, t = null } = extension.options;
-          if (!button || !isFunction(button)) continue;
-          const _button = button({
-            editor: this.editor,
-            extension,
-            t
-          });
-          if (Array.isArray(_button)) {
-            const menu = _button.map((k, i2) => ({
-              button: k,
-              divider: i2 === _button.length - 1 ? divider : false,
-              spacer: i2 === 0 ? spacer : false
-            }));
-            menus = [...menus, ...menu];
-            continue;
-          }
-          menus.push({ button: _button, divider, spacer, t });
+  const BubbleMenu = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["render", _sfc_render$n]]);
+  function tableRowTools(t) {
+    const { state: state2 } = useContext();
+    return [
+      {
+        title: state2.t("editor.table.tools.add_row_before"),
+        name: "addRowBefore",
+        icon: "mdi-table-row-plus-before",
+        command: (editor) => {
+          editor.commands.addRowBefore();
         }
-        return menus;
+      },
+      {
+        title: state2.t("editor.table.tools.add_row_after"),
+        name: "addRowAfter",
+        icon: "mdi-table-row-plus-after",
+        command: (editor) => {
+          editor.commands.addRowAfter();
+        }
+      },
+      {
+        title: state2.t("editor.table.tools.delete_row"),
+        name: "deleteRow",
+        icon: "mdi-table-row-remove",
+        command: (editor) => {
+          editor.commands.deleteRow();
+        }
+      },
+      {
+        title: state2.t("editor.table.tools.delete_table"),
+        name: "deleteTable",
+        icon: "mdi-table-remove",
+        command: (editor) => {
+          editor.commands.deleteTable();
+        }
+      }
+    ];
+  }
+  function tableColumnTools(t) {
+    const { state: state2 } = useContext();
+    return [
+      {
+        title: state2.t("editor.table.tools.add_column_before"),
+        name: "addColumnBefore",
+        icon: "mdi-table-column-plus-before",
+        command: (editor) => {
+          editor.commands.addColumnBefore();
+        }
+      },
+      {
+        title: state2.t("editor.table.tools.add_column_after"),
+        name: "addColumnAfter",
+        icon: "mdi-table-column-plus-after",
+        command: (editor) => {
+          editor.commands.addColumnAfter();
+        }
+      },
+      {
+        title: state2.t("editor.table.tools.delete_column"),
+        name: "deleteColumn",
+        icon: "mdi-table-column-remove",
+        command: (editor) => {
+          editor.commands.deleteColumn();
+        }
+      },
+      {
+        title: state2.t("editor.table.tools.delete_table"),
+        name: "deleteTable",
+        icon: "mdi-table-remove",
+        command: (editor) => {
+          editor.commands.deleteTable();
+        }
+      }
+    ];
+  }
+  const GetTopLevelBlockCoords = function(view) {
+    const $pos = view.state.selection.$from;
+    let from = $pos.before(1);
+    let coords = view.coordsAtPos(from);
+    return new DOMRect(
+      coords.left,
+      coords.top,
+      coords.right - coords.left,
+      coords.bottom - coords.top
+    );
+  };
+  const GetTableRowCoords = function(view) {
+    const pos = view.state.selection.$from;
+    let depth = pos.depth;
+    while (depth > 1) {
+      if (pos.node(depth).type.name == "tableRow") break;
+      depth--;
+    }
+    let from = pos.before(depth);
+    let rect = view.nodeDOM(from).getBoundingClientRect();
+    return new DOMRect(rect.x, rect.y, rect.width, rect.height);
+  };
+  const GetTableColumnCoords = function(view) {
+    const pos = view.state.selection.$from;
+    let depth = pos.depth, cellDepth = 0, tableDepth = 0;
+    while (depth > 0) {
+      if (pos.node(depth).type.name == "tableCell" || pos.node(depth).type.name == "tableHeader") {
+        cellDepth = depth;
+      }
+      if (pos.node(depth).type.name == "table") {
+        tableDepth = depth;
+        break;
+      }
+      depth--;
+    }
+    if (!(tableDepth && cellDepth)) {
+      return false;
+    }
+    let cellRect = view.nodeDOM(pos.before(cellDepth)).getBoundingClientRect();
+    let tableRect = view.nodeDOM(pos.before(tableDepth)).getBoundingClientRect();
+    return new DOMRect(cellRect.x, tableRect.y, cellRect.width, tableRect.height);
+  };
+  const GetTopLevelNode = function(view) {
+    const selectionStart = view.state.selection.$from;
+    if (selectionStart.node(1) == null && view.lastSelectedViewDesc) {
+      return view.lastSelectedViewDesc.node;
+    }
+    return selectionStart.node(1);
+  };
+  const _sfc_main$m = {
+    props: {
+      clickHandler: {
+        type: String,
+        required: false
+      },
+      content: {
+        type: String,
+        required: false
+      },
+      label: {
+        type: String,
+        required: false
+      },
+      activeClass: {
+        type: String,
+        required: false,
+        default: "bg-slate-600 hover:bg-slate-700 text-white"
+      },
+      active: {
+        type: Boolean
       }
     }
   };
-  function _sfc_render$k(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_v_spacer = components.VSpacer;
-    const _component_v_divider = components.VDivider;
-    const _component_v_toolbar = components.VToolbar;
-    return vue.openBlock(), vue.createBlock(_component_v_toolbar, vue.mergeProps(_ctx.$attrs, {
-      density: "compact",
-      flat: "",
-      height: "auto",
-      class: "py-1 ps-1"
-    }), {
-      default: vue.withCtx(() => [
-        (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($options.items, (item, key) => {
-          var _a;
-          return vue.openBlock(), vue.createElementBlock(vue.Fragment, { key }, [
-            item.spacer ? (vue.openBlock(), vue.createBlock(_component_v_spacer, { key: 0 })) : vue.createCommentVNode("", true),
-            (vue.openBlock(), vue.createBlock(vue.resolveDynamicComponent(item.button.component), vue.mergeProps({ ref_for: true }, item.button.componentProps, {
-              editor: $props.editor,
-              disabled: $props.disabled || ((_a = item.button.componentProps) == null ? void 0 : _a.disabled)
-            }), vue.createSlots({ _: 2 }, [
-              vue.renderList(item.button.componentSlots, (element, slotName, i2) => {
-                return {
-                  name: `${slotName}`,
-                  fn: vue.withCtx((values) => [
-                    (vue.openBlock(), vue.createBlock(vue.resolveDynamicComponent(element), vue.mergeProps({ ref_for: true }, values == null ? void 0 : values.props), null, 16))
-                  ])
-                };
-              })
-            ]), 1040, ["editor", "disabled"])),
-            item.divider ? (vue.openBlock(), vue.createBlock(_component_v_divider, {
-              key: 1,
-              vertical: "",
-              class: "mx-1 me-2"
-            })) : vue.createCommentVNode("", true)
-          ], 64);
-        }), 128))
-      ]),
-      _: 1
-    }, 16);
+  const _hoisted_1$8 = ["aria-label", "data-tooltip", "title", "innerHTML"];
+  function _sfc_render$m(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock("button", {
+      class: vue.normalizeClass(["w-full flex p-1 flex-row items-center text-slate-600 rounded gap-2 hover:bg-slate-100", $props.active ? $props.activeClass : ""]),
+      "aria-label": $props.label,
+      "data-tooltip": $props.label,
+      title: $props.label,
+      innerHTML: $props.content,
+      onClick: _cache[0] || (_cache[0] = vue.withModifiers(() => {
+      }, ["stop"]))
+    }, null, 10, _hoisted_1$8);
   }
-  const TipTapToolbar = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["render", _sfc_render$k]]);
+  const MenuButton = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["render", _sfc_render$m]]);
+  const _sfc_main$l = {
+    computed: {
+      getClass() {
+        let classStr = "bg-white shadow py-2 group-focus-within:block hidden overflow-hidden whitespace-nowrap absolute bottom-full mt-4 border border-slate-400";
+        classStr += this.align == "left" ? "left-0" : "right-0";
+        if (this.rec.top < 420) {
+          classStr += " sm:bottom-auto sm:top-full";
+        }
+        return classStr;
+      },
+      hasDropdown() {
+        return !!this.$slots.dropdown;
+      }
+    },
+    watch: {
+      coords(val) {
+        this.rec.top = val.top;
+      }
+    },
+    data() {
+      return {
+        rec: {
+          top: null
+        }
+      };
+    },
+    props: {
+      coords: {
+        type: Object,
+        default: null
+      },
+      align: {
+        type: String,
+        default: "left"
+      },
+      iconName: {
+        type: String,
+        required: false
+      },
+      iconSvg: {
+        type: String,
+        required: false
+      },
+      label: {
+        type: String,
+        required: false
+      },
+      activeClass: {
+        type: String,
+        required: false,
+        default: "bg-slate-600 hover:bg-slate-700 text-white rounded"
+      },
+      active: {
+        type: Boolean
+      }
+    }
+  };
+  const _hoisted_1$7 = { class: "group text-sm relative" };
+  function _sfc_render$l(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock("div", _hoisted_1$7, [
+      vue.renderSlot(_ctx.$slots, "default"),
+      $options.hasDropdown ? (vue.openBlock(), vue.createElementBlock("div", {
+        key: 0,
+        class: vue.normalizeClass($options.getClass)
+      }, [
+        vue.renderSlot(_ctx.$slots, "dropdown")
+      ], 2)) : vue.createCommentVNode("", true)
+    ]);
+  }
+  const MenuItem = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["render", _sfc_render$l]]);
+  const _sfc_main$k = {
+    props: {
+      icon: {
+        type: String
+      },
+      clickHandler: {
+        type: String,
+        required: false
+      },
+      label: {
+        type: String,
+        required: false
+      },
+      activeClass: {
+        type: String,
+        required: false,
+        default: "bg-slate-600 hover:bg-slate-700 text-white"
+      },
+      active: {
+        type: Boolean
+      }
+    }
+  };
+  const _hoisted_1$6 = ["aria-label", "title"];
+  function _sfc_render$k(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_v_icon = components.VIcon;
+    return vue.openBlock(), vue.createElementBlock("button", {
+      class: vue.normalizeClass(["w-full flex py-1 pl-2 pr-6 flex-row items-center text-slate-600 gap-2 hover:bg-slate-100", $props.active ? $props.activeClass : ""]),
+      "aria-label": $props.label,
+      title: $props.label,
+      onClick: _cache[0] || (_cache[0] = vue.withModifiers(() => {
+      }, ["stop"]))
+    }, [
+      vue.createVNode(_component_v_icon, null, {
+        default: vue.withCtx(() => [
+          vue.createTextVNode(vue.toDisplayString($props.icon), 1)
+        ]),
+        _: 1
+      }),
+      vue.createTextVNode(vue.toDisplayString($props.label), 1)
+    ], 10, _hoisted_1$6);
+  }
+  const MenuDropdownButton = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["render", _sfc_render$k]]);
   const _sfc_main$j = {
     name: "OlotapEditor",
     components: {
       EditorContent,
       BubbleMenu,
-      TipTapToolbar
+      BubbleMenuTable: BubbleMenu$1,
+      TipTapToolbar,
+      MenuButton,
+      MenuItem,
+      MenuDropdownButton
     },
     props: {
       bgColor: {
@@ -20763,16 +21042,17 @@ img.ProseMirror-separator {
       return {
         state: state2,
         isFullscreen,
-        isMobileDevice: isMobile()
+        isMobileDevice: isMobile(),
+        moreIconRound: '<svg class="w-5 h-5 md:w-6 md:h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>'
       };
     },
     data() {
       return {
         editor: null,
         updateHandler: null,
-        bubbleMenuStyle: null,
-        isBubbleMenuVisible: false,
-        markdownThemeStyle: null
+        markdownThemeStyle: null,
+        tableRowTools: null,
+        tableColumnTools: null
       };
     },
     watch: {
@@ -20785,6 +21065,10 @@ img.ProseMirror-separator {
           }
         }
       }
+    },
+    mounted() {
+      this.tableRowTools = tableRowTools();
+      this.tableColumnTools = tableColumnTools();
     },
     created() {
       try {
@@ -20824,6 +21108,15 @@ img.ProseMirror-separator {
       }
     },
     computed: {
+      getTableRowKey() {
+        return "tableRowMenu_" + this.state.i18n.global.locale;
+      },
+      getTableColumnKey() {
+        return "tableColumnMenu_" + this.state.i18n.global.locale;
+      },
+      getMenuCoords() {
+        return GetTopLevelBlockCoords(this.editor.view);
+      },
       contentDynamicClasses() {
         return [
           {
@@ -20852,9 +21145,18 @@ img.ProseMirror-separator {
       }
     },
     methods: {
-      clickTableButton(event) {
-        event.stopImmediatePropagation();
-        document.getElementById("table-insert-button").click();
+      tableIsActive() {
+        return this.getTopLevelNodeType() == "table";
+      },
+      getTableRowMenuCoords() {
+        return GetTableRowCoords(this.editor.view);
+      },
+      getTableColumnMenuCoords() {
+        return GetTableColumnCoords(this.editor.view);
+      },
+      getTopLevelNodeType() {
+        var _a;
+        return (_a = GetTopLevelNode(this.editor.view)) == null ? void 0 : _a.type.name;
       },
       getOutput(editor, output) {
         if (this.removeDefaultWrapper) {
@@ -20879,9 +21181,12 @@ img.ProseMirror-separator {
   };
   function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_BubbleMenu = vue.resolveComponent("BubbleMenu");
+    const _component_menu_button = vue.resolveComponent("menu-button");
+    const _component_menu_dropdown_button = vue.resolveComponent("menu-dropdown-button");
+    const _component_menu_item = vue.resolveComponent("menu-item");
+    const _component_bubble_menu_table = vue.resolveComponent("bubble-menu-table");
     const _component_TipTapToolbar = vue.resolveComponent("TipTapToolbar");
     const _component_editor_content = vue.resolveComponent("editor-content");
-    const _component_v_icon = components.VIcon;
     const _component_v_card = components.VCard;
     const _component_v_input = components.VInput;
     return $data.editor ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_1$5, [
@@ -20890,6 +21195,74 @@ img.ProseMirror-separator {
         editor: $data.editor,
         disabled: $props.disableToolbar
       }, null, 8, ["editor", "disabled"])) : vue.createCommentVNode("", true),
+      $data.editor && $data.tableRowTools ? (vue.openBlock(), vue.createBlock(_component_bubble_menu_table, {
+        key: 1,
+        editor: $data.editor,
+        pluginKey: $options.getTableRowKey,
+        "should-show": $options.tableIsActive,
+        "tippy-options": {
+          placement: "left",
+          getReferenceClientRect: $options.getTableRowMenuCoords
+        }
+      }, {
+        default: vue.withCtx(() => [
+          vue.createVNode(_component_menu_item, { coords: $options.getMenuCoords }, {
+            dropdown: vue.withCtx(() => [
+              (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($data.tableRowTools, (tool) => {
+                return vue.openBlock(), vue.createBlock(_component_menu_dropdown_button, {
+                  title: tool.title,
+                  icon: tool.icon,
+                  key: tool.title,
+                  label: tool.title,
+                  onClick: vue.withModifiers(($event) => tool.command($data.editor), ["prevent", "stop"])
+                }, null, 8, ["title", "icon", "label", "onClick"]);
+              }), 128))
+            ]),
+            default: vue.withCtx(() => [
+              vue.createVNode(_component_menu_button, {
+                class: "rounded-full text-slate-400 hover:text-slate-800",
+                content: $setup.moreIconRound
+              }, null, 8, ["content"])
+            ]),
+            _: 1
+          }, 8, ["coords"])
+        ]),
+        _: 1
+      }, 8, ["editor", "pluginKey", "should-show", "tippy-options"])) : vue.createCommentVNode("", true),
+      $data.editor && $data.tableColumnTools ? (vue.openBlock(), vue.createBlock(_component_bubble_menu_table, {
+        key: 2,
+        editor: $data.editor,
+        pluginKey: $options.getTableColumnKey,
+        "should-show": $options.tableIsActive,
+        "tippy-options": {
+          placement: "bottom",
+          getReferenceClientRect: $options.getTableColumnMenuCoords
+        }
+      }, {
+        default: vue.withCtx(() => [
+          vue.createVNode(_component_menu_item, { coords: $options.getMenuCoords }, {
+            dropdown: vue.withCtx(() => [
+              (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($data.tableColumnTools, (tool) => {
+                return vue.openBlock(), vue.createBlock(_component_menu_dropdown_button, {
+                  title: tool.title,
+                  icon: tool.icon,
+                  key: tool.title,
+                  label: tool.title,
+                  onClick: vue.withModifiers(($event) => tool.command($data.editor), ["prevent"])
+                }, null, 8, ["title", "icon", "label", "onClick"]);
+              }), 128))
+            ]),
+            default: vue.withCtx(() => [
+              vue.createVNode(_component_menu_button, {
+                content: $setup.moreIconRound,
+                class: "rounded-full text-slate-400 hover:text-slate-800"
+              }, null, 8, ["content"])
+            ]),
+            _: 1
+          }, 8, ["coords"])
+        ]),
+        _: 1
+      }, 8, ["editor", "pluginKey", "should-show", "tippy-options"])) : vue.createCommentVNode("", true),
       vue.createVNode(_component_v_input, {
         class: "pt-0",
         "hide-details": "auto",
@@ -20921,26 +21294,7 @@ img.ProseMirror-separator {
                   editor: $data.editor,
                   "data-testid": "value"
                 }, null, 8, ["class", "style", "editor"])
-              ]),
-              !$setup.isMobileDevice ? vue.withDirectives((vue.openBlock(), vue.createElementBlock("div", {
-                key: 2,
-                id: "bubble-menu",
-                ref: "bubbleMenuRef",
-                style: vue.normalizeStyle($data.bubbleMenuStyle)
-              }, [
-                vue.createElementVNode("button", {
-                  onClick: _cache[0] || (_cache[0] = vue.withModifiers((...args) => $options.clickTableButton && $options.clickTableButton(...args), ["stop", "prevent"]))
-                }, [
-                  vue.createVNode(_component_v_icon, { size: "small" }, {
-                    default: vue.withCtx(() => _cache[1] || (_cache[1] = [
-                      vue.createTextVNode("mdi-dots-vertical")
-                    ])),
-                    _: 1
-                  })
-                ])
-              ], 4)), [
-                [vue.vShow, $data.isBubbleMenuVisible]
-              ]) : vue.createCommentVNode("", true)
+              ])
             ]),
             _: 3
           }, 16, ["flat", "color", "style", "class"])
@@ -30144,21 +30498,6 @@ img.ProseMirror-separator {
                   } else {
                     document.body.style.cursor = "";
                   }
-                },
-                click: (view, event) => {
-                  const { target } = event;
-                  if (target.tagName !== "TD" && target.tagName !== "TH") return false;
-                  const bubbleMenu = document.getElementById("bubble-menu");
-                  if (!bubbleMenu) return false;
-                  bubbleMenu.style.display = "block";
-                  setTimeout(() => {
-                    const rect = bubbleMenu.getBoundingClientRect();
-                    const rowRect = target.closest("tr").getBoundingClientRect();
-                    bubbleMenu.style.left = `${rowRect.right + window.scrollX - rect.width - 210}px`;
-                    bubbleMenu.style.top = `${rowRect.bottom + window.scrollY - 122}px`;
-                  }, 0);
-                  window.selectedEditor = view;
-                  return true;
                 }
               }
             }

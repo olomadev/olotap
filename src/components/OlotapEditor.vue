@@ -3,6 +3,62 @@
     
     <BubbleMenu v-if="!hideBubble" :editor="editor" :disabled="disableToolbar" />
 
+    <bubble-menu-table
+      v-if="editor && tableRowTools"
+      :editor="editor"
+      :pluginKey="getTableRowKey"
+      :should-show="tableIsActive"
+      :tippy-options="{
+        placement: 'left',
+        getReferenceClientRect: getTableRowMenuCoords,
+      }"
+    >
+      <menu-item :coords="getMenuCoords">
+        <menu-button
+          class="rounded-full text-slate-400 hover:text-slate-800"
+          :content="moreIconRound"
+        />
+        <template #dropdown>
+          <menu-dropdown-button
+            v-for="tool in tableRowTools"
+            :title="tool.title"
+            :icon="tool.icon"
+            :key="tool.title"
+            :label="tool.title"
+            @click.prevent.stop="tool.command(editor)"
+          />
+        </template>
+      </menu-item>
+    </bubble-menu-table>
+
+    <bubble-menu-table
+      v-if="editor && tableColumnTools"
+      :editor="editor"
+      :pluginKey="getTableColumnKey"
+      :should-show="tableIsActive"
+      :tippy-options="{
+        placement: 'bottom',
+        getReferenceClientRect: getTableColumnMenuCoords,
+      }"
+    >
+      <menu-item :coords="getMenuCoords">
+        <menu-button
+          :content="moreIconRound"
+          class="rounded-full text-slate-400 hover:text-slate-800"
+        />
+        <template #dropdown>
+          <menu-dropdown-button
+            v-for="tool in tableColumnTools"
+            :title="tool.title"
+            :icon="tool.icon"
+            :key="tool.title"
+            :label="tool.title"
+            @click.prevent="tool.command(editor)"
+          />
+        </template>
+      </menu-item>
+    </bubble-menu-table>
+
     <v-input class="pt-0" hide-details="auto" :error-messages="errorMessages">
       <v-card
         :flat="flat"
@@ -44,17 +100,6 @@
             >
           </editor-content>
         </slot>
-
-        <!-- custom bubble menu for table extension -->
-        <div
-          v-if="!isMobileDevice"
-          id="bubble-menu"
-          ref="bubbleMenuRef"
-          v-show="isBubbleMenuVisible"
-          :style="bubbleMenuStyle"
-        >
-          <button @click.stop.prevent="clickTableButton"><v-icon size="small">mdi-dots-vertical</v-icon></button>
-        </div>
       </v-card>
     </v-input>
   </div>
@@ -62,12 +107,22 @@
 
 <script>
 import { Editor, EditorContent } from '@tiptap/vue-3';
-import { useMarkdownTheme, useProvideOlotapStore } from '../hooks';
+import { useContext, useMarkdownTheme, useProvideOlotapStore } from '../hooks';
 import { throttle, getCssUnitWithDefault } from '@/utils';
 import { isMobile } from '@/utils';
-import BubbleMenu from '../BubbleMenu.vue';
 import TipTapToolbar from '../TiptapToolbar.vue';
-import { useContext } from '../hooks/use-context';
+import BubbleMenu from '../BubbleMenu.vue';
+import BubbleMenuTable from '../table/bubbleMenuForTable.js';
+import { tableRowTools, tableColumnTools } from "../table/tools";
+import {
+  GetTopLevelBlockCoords,
+  GetTableColumnCoords,
+  GetTableRowCoords,
+  GetTopLevelNode,
+} from "../utils/pm-utils.js";
+import MenuButton from "../table/MenuButton.vue"
+import MenuItem from "../table/MenuItem.vue"
+import MenuDropdownButton from "../table/MenuDropdownButton.vue"
 import '../styles/index.scss'
 
 export default {
@@ -75,7 +130,11 @@ export default {
   components: {
     EditorContent,
     BubbleMenu,
+    BubbleMenuTable,
     TipTapToolbar,
+    MenuButton,
+    MenuItem,
+    MenuDropdownButton,
   },
   props: {
     bgColor: {
@@ -158,16 +217,18 @@ export default {
     return {
       state,
       isFullscreen,
-      isMobileDevice: isMobile()
-    }
+      isMobileDevice: isMobile(),
+      moreIconRound:
+        '<svg class="w-5 h-5 md:w-6 md:h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>',
+    };
   },
   data() {
     return {
       editor: null,
       updateHandler: null,
-      bubbleMenuStyle: null,
-      isBubbleMenuVisible: false,
       markdownThemeStyle: null,
+      tableRowTools: null,
+      tableColumnTools: null,
     }
   },
   watch: {
@@ -179,6 +240,10 @@ export default {
         }
       },
     },
+  },
+  mounted() {
+    this.tableRowTools = tableRowTools();
+    this.tableColumnTools = tableColumnTools();
   },
   created() {
     try {
@@ -221,6 +286,15 @@ export default {
     }
   },
   computed: {
+    getTableRowKey() {
+      return "tableRowMenu_" + this.state.i18n.global.locale;
+    },
+    getTableColumnKey() {
+      return "tableColumnMenu_" + this.state.i18n.global.locale;
+    },
+    getMenuCoords() {
+      return GetTopLevelBlockCoords(this.editor.view)
+    },
     contentDynamicClasses() {
       return [
         {
@@ -249,9 +323,17 @@ export default {
     },
   },
   methods: {
-    clickTableButton(event) {
-      event.stopImmediatePropagation();
-      document.getElementById('table-insert-button').click()
+    tableIsActive() {
+      return this.getTopLevelNodeType() == "table";
+    },
+    getTableRowMenuCoords() {
+      return GetTableRowCoords(this.editor.view);
+    },
+    getTableColumnMenuCoords() {
+      return GetTableColumnCoords(this.editor.view);
+    },
+    getTopLevelNodeType() {
+      return GetTopLevelNode(this.editor.view)?.type.name;
     },
     getOutput(editor, output) {
       if (this.removeDefaultWrapper) {
@@ -271,29 +353,3 @@ export default {
   },
 };
 </script>
-
-<style>
-/* Bubble Menu and Buton CSS */
-#bubble-menu {
-  display: none; /* hidden at start */
-  position: absolute;
-  background-color: white;
-  border: 1px solid #ddd;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  padding: 0;
-  z-index: 1000;
-  flex-direction: column;
-}
-
-#bubble-menu button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 5px 10px;
-  font-size: 16px;
-}
-
-#bubble-menu button:hover {
-  background-color: #f0f0f0;
-}
-</style>

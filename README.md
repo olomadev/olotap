@@ -1,4 +1,4 @@
 
-# Olotap Tiptap Editor for Vue
+# Olotap - Tiptap Editor for Vue
 
-Tiptap editor for Vue.js
+Integration ready <a href="https://tiptap.dev/" target="_blank">Tiptap</a> editor for Vue 3.
