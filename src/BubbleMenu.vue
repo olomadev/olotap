@@ -49,7 +49,7 @@ export default {
   },
   setup() {
     const { state } = useContext();
-    return { i18n: state.i18n }
+    return { state, i18n: state.i18n }
   },
   data() {
     return {
@@ -65,16 +65,13 @@ export default {
       const selection = this.editor.state.selection
       const isLink = this.isLinkSelection()
 
-      const isImage = selection.node?.type.name === 'image'
-      const isVideo = selection.node?.type.name === 'video'
-      const isTable = selection.node?.type.name === 'table'
+      const nodeTypeName = selection.node?.type.name;
       const isText = selection instanceof TextSelection
 
-      if (isLink) return 'link'
-      if (isImage) return 'image'
-      if (isVideo) return 'video'
       if (isText) return 'text'
-      if (isTable) return 'table'
+      if (nodeTypeName && Object.keys(this.state.nodeTypeMenu).includes(nodeTypeName)) {
+        return nodeTypeName;
+      }
       return undefined
     },
     nodeMenus() {

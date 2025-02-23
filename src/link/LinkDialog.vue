@@ -130,9 +130,3 @@ export default {
   }
 };
 </script>
-
-<style>
-.v-selection-control__input {
-  justify-content: left;
-}
-</style>

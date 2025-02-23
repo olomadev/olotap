@@ -1,6 +1,6 @@
 import { useContext } from '../hooks/use-context';
 
-export function tableRowTools(t) {
+export function tableRowTools() {
   const { state } = useContext();
   return [
     {
@@ -37,7 +37,7 @@ export function tableRowTools(t) {
     },
   ];
 }
-export function tableColumnTools(t) {
+export function tableColumnTools() {
   const { state } = useContext();
   return [
     {

@@ -3,6 +3,17 @@ $border-color: #dcdfe6;
 $primary-color: #409eff;
 $extra-light-primary-color: #ecf5ff;
 
+/* Create table popover settings */
+.table-grid-size-editor__cell__inner {
+  box-sizing:border-box;width:16px;height:16px;padding:4px;border:1px solid #dcdfe6;border-radius:2px;
+}
+.table-grid-size-editor__cell--selected .table-grid-size-editor__cell__inner {
+  background-color:#ecf5ff;border-color:#409eff;
+}
+.table-menu .v-list-item:hover {
+  cursor: pointer;
+}
+
 .olotap {
   overflow-wrap: anywhere;
 
@@ -114,6 +125,30 @@ $extra-light-primary-color: #ecf5ff;
           outline: 4px solid $primary-color;
           transition: outline 0.15s ease-in;
         }
+      }
+    }
+
+    .hr-wrapper {
+      &:hover {
+        outline-color: #ffc83d;
+      }
+      &--focused:hover,  
+      &.focus,
+      &.ProseMirror-selectednode {
+        outline: 4px solid #409eff;
+        transition: outline 0.15s ease-in;
+      }
+    }
+
+    .code-block-wrapper {
+      &:hover {
+        outline-color: #ffc83d;
+      }
+      &--focused:hover,  
+      &.focus,
+      &.ProseMirror-selectednode {
+        outline: 4px solid #409eff;
+        transition: outline 0.15s ease-in;
       }
     }
 
@@ -261,14 +296,6 @@ $extra-light-primary-color: #ecf5ff;
       padding: 0;
       line-height: 1.2rem;
     }
-  }
-
-  /* Create table popover settings */
-  .table-grid-size-editor__cell__inner {
-    box-sizing:border-box;width:16px;height:16px;padding:4px;border:1px solid #dcdfe6;border-radius:2px;
-  }
-  .table-grid-size-editor__cell--selected .table-grid-size-editor__cell__inner {
-    background-color:#ecf5ff;border-color:#409eff;
   }
 
   /* Tailwind independent classes */

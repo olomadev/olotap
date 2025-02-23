@@ -72,6 +72,8 @@ const state = reactive({
       "divider", "link", "unlink", "link-open",
     ],
     video: ["video-size-small", "video-size-medium", "video-size-large", "divider", "video", "remove"],
+    codeBlock: ['paste-code', 'change-language', 'copy-code', 'remove'],
+    horizontalRule: ['remove'],
   },
 });
 

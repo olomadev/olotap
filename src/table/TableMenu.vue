@@ -1,5 +1,5 @@
 <template>
-  <v-menu v-model="menu" activator="parent">
+  <v-menu v-model="menu" activator="parent" class="table-menu">
     <v-list density="compact">
       <template v-for="(item, index) in items">
         <v-list-item v-if="item.key === 'insert-table'" :key="index" :disabled="item.disabled">
@@ -83,9 +83,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.v-list-item:hover {
-  cursor: pointer;
-}
-</style>

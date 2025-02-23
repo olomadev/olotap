@@ -1,12 +1,31 @@
-import { CodeBlock as TiptapCodeBlock } from '@tiptap/extension-code-block';
+import { all, createLowlight } from 'lowlight'
+const lowlight = createLowlight(all)
+import { CodeBlockLowlight } from '@tiptap/extension-code-block-lowlight';
+import { VueNodeViewRenderer } from "@tiptap/vue-3";
 import ActionButton from '../ActionButton.vue';
+import CodeBlockComponent from '../CodeBlock.vue';
 import { useContext } from "../hooks/use-context";
 
-export const CodeBlock = TiptapCodeBlock.extend({
+export const CodeBlock = CodeBlockLowlight.extend({
+  name: 'codeBlock',
+  draggable: true,
+  addAttributes() {
+    return {
+      ...this.parent?.(),
+      language: {
+        default: 'plaintext',
+        parseHTML: element => element.getAttribute('data-language') || 'plaintext',
+        renderHTML: attributes => ({
+          'data-language': attributes.language,
+        }),
+      }
+    };
+  },
   addOptions() {
     const { state } = useContext();
     return {
       ...this.parent?.(),
+      lowlight,
       button: ({ editor }) => ({
         component: ActionButton,
         componentProps: {
@@ -18,6 +37,9 @@ export const CodeBlock = TiptapCodeBlock.extend({
         }
       })
     };
-  }
+  }, 
+  addNodeView() {
+    return VueNodeViewRenderer(CodeBlockComponent);
+  },
 });
 export default CodeBlock;

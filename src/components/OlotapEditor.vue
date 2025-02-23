@@ -123,7 +123,7 @@ import {
 import MenuButton from "../table/MenuButton.vue"
 import MenuItem from "../table/MenuItem.vue"
 import MenuDropdownButton from "../table/MenuDropdownButton.vue"
-import '../styles/index.scss'
+import '../styles/classic-editor/index.scss'
 
 export default {
   name: 'OlotapEditor',
@@ -261,7 +261,11 @@ export default {
       // create editor
       // 
       this.editor = new Editor({
-        content: this.modelValue,
+        content: this.modelValue
+          ? (typeof this.modelValue === "string" || this.output === "html"
+              ? this.modelValue // HTML 
+              : this.modelValue) // JSON
+          : { type: "doc", content: [] }, // JSON
         // editorProps: {
         //   handleKeyDown: throttle((view, event) => {
         //     if (event.key === 'Enter' && !event.shiftKey) {

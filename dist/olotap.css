@@ -1,4 +1,23 @@
 @charset "UTF-8";
+/* Create table popover settings */
+.table-grid-size-editor__cell__inner {
+  box-sizing: border-box;
+  width: 16px;
+  height: 16px;
+  padding: 4px;
+  border: 1px solid #dcdfe6;
+  border-radius: 2px;
+}
+
+.table-grid-size-editor__cell--selected .table-grid-size-editor__cell__inner {
+  background-color: #ecf5ff;
+  border-color: #409eff;
+}
+
+.table-menu .v-list-item:hover {
+  cursor: pointer;
+}
+
 .olotap {
   overflow-wrap: anywhere;
   /* Tailwind independent classes */
@@ -83,6 +102,20 @@
   content: attr(data-placeholder);
 }
 .olotap .ProseMirror .iframe-wrapper.focus > div, .olotap .ProseMirror .iframe-wrapper.ProseMirror-selectednode > div {
+  outline: 4px solid #409eff;
+  transition: outline 0.15s ease-in;
+}
+.olotap .ProseMirror .hr-wrapper:hover {
+  outline-color: #ffc83d;
+}
+.olotap .ProseMirror .hr-wrapper--focused:hover, .olotap .ProseMirror .hr-wrapper.focus, .olotap .ProseMirror .hr-wrapper.ProseMirror-selectednode {
+  outline: 4px solid #409eff;
+  transition: outline 0.15s ease-in;
+}
+.olotap .ProseMirror .code-block-wrapper:hover {
+  outline-color: #ffc83d;
+}
+.olotap .ProseMirror .code-block-wrapper--focused:hover, .olotap .ProseMirror .code-block-wrapper.focus, .olotap .ProseMirror .code-block-wrapper.ProseMirror-selectednode {
   outline: 4px solid #409eff;
   transition: outline 0.15s ease-in;
 }
@@ -401,9 +434,10 @@
   --color-accent-emphasis: #0969da;
   --color-attention-subtle: #fff8c5;
   --color-danger-fg: #cf222e;
+  --color-bg-table-th: #f4f4f4;
   margin: 0;
   font-family: "Hanken Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.5;
   color: var(--color-fg-default);
   word-wrap: break-word;
@@ -415,6 +449,9 @@
     background-color: var(--color-canvas-subtle);
   }
   */
+  /* Code block */
+  /* Code styling */
+  /* Code styling end*/
 }
 .olotap-editor__content.markdown-theme-default.__dark {
   --color-prettylights-syntax-comment: #8b949e;
@@ -822,7 +859,7 @@
   font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
   font-size: 12px;
 }
-.olotap-editor__content.markdown-theme-default pre {
+.olotap-editor__content.markdown-theme-default .code-block-content {
   background: #000;
   border-radius: 0.5rem;
   color: #fff;
@@ -832,57 +869,56 @@
   font-size: 12px;
   word-wrap: normal;
   padding: 0.75rem 1rem;
-  /* Code styling */
+}
+.olotap-editor__content.markdown-theme-default .hljs-comment,
+.olotap-editor__content.markdown-theme-default .hljs-quote {
+  color: #616161;
+}
+.olotap-editor__content.markdown-theme-default .hljs-variable,
+.olotap-editor__content.markdown-theme-default .hljs-template-variable,
+.olotap-editor__content.markdown-theme-default .hljs-attribute,
+.olotap-editor__content.markdown-theme-default .hljs-tag,
+.olotap-editor__content.markdown-theme-default .hljs-name,
+.olotap-editor__content.markdown-theme-default .hljs-regexp,
+.olotap-editor__content.markdown-theme-default .hljs-link,
+.olotap-editor__content.markdown-theme-default .hljs-name,
+.olotap-editor__content.markdown-theme-default .hljs-selector-id,
+.olotap-editor__content.markdown-theme-default .hljs-selector-class {
+  color: #f98181;
+}
+.olotap-editor__content.markdown-theme-default .hljs-number,
+.olotap-editor__content.markdown-theme-default .hljs-meta,
+.olotap-editor__content.markdown-theme-default .hljs-built_in,
+.olotap-editor__content.markdown-theme-default .hljs-builtin-name,
+.olotap-editor__content.markdown-theme-default .hljs-literal,
+.olotap-editor__content.markdown-theme-default .hljs-type,
+.olotap-editor__content.markdown-theme-default .hljs-params {
+  color: #fbbc88;
+}
+.olotap-editor__content.markdown-theme-default .hljs-string,
+.olotap-editor__content.markdown-theme-default .hljs-symbol,
+.olotap-editor__content.markdown-theme-default .hljs-bullet {
+  color: #b9f18d;
+}
+.olotap-editor__content.markdown-theme-default .hljs-title,
+.olotap-editor__content.markdown-theme-default .hljs-section {
+  color: #faf594;
+}
+.olotap-editor__content.markdown-theme-default .hljs-keyword,
+.olotap-editor__content.markdown-theme-default .hljs-selector-tag {
+  color: #70cff8;
+}
+.olotap-editor__content.markdown-theme-default .hljs-emphasis {
+  font-style: italic;
+}
+.olotap-editor__content.markdown-theme-default .hljs-strong {
+  font-weight: 700;
 }
 .olotap-editor__content.markdown-theme-default pre code {
   background: none;
   color: inherit;
   font-size: 0.8rem;
   padding: 0;
-}
-.olotap-editor__content.markdown-theme-default pre .hljs-comment,
-.olotap-editor__content.markdown-theme-default pre .hljs-quote {
-  color: #616161;
-}
-.olotap-editor__content.markdown-theme-default pre .hljs-variable,
-.olotap-editor__content.markdown-theme-default pre .hljs-template-variable,
-.olotap-editor__content.markdown-theme-default pre .hljs-attribute,
-.olotap-editor__content.markdown-theme-default pre .hljs-tag,
-.olotap-editor__content.markdown-theme-default pre .hljs-name,
-.olotap-editor__content.markdown-theme-default pre .hljs-regexp,
-.olotap-editor__content.markdown-theme-default pre .hljs-link,
-.olotap-editor__content.markdown-theme-default pre .hljs-name,
-.olotap-editor__content.markdown-theme-default pre .hljs-selector-id,
-.olotap-editor__content.markdown-theme-default pre .hljs-selector-class {
-  color: #f98181;
-}
-.olotap-editor__content.markdown-theme-default pre .hljs-number,
-.olotap-editor__content.markdown-theme-default pre .hljs-meta,
-.olotap-editor__content.markdown-theme-default pre .hljs-built_in,
-.olotap-editor__content.markdown-theme-default pre .hljs-builtin-name,
-.olotap-editor__content.markdown-theme-default pre .hljs-literal,
-.olotap-editor__content.markdown-theme-default pre .hljs-type,
-.olotap-editor__content.markdown-theme-default pre .hljs-params {
-  color: #fbbc88;
-}
-.olotap-editor__content.markdown-theme-default pre .hljs-string,
-.olotap-editor__content.markdown-theme-default pre .hljs-symbol,
-.olotap-editor__content.markdown-theme-default pre .hljs-bullet {
-  color: #b9f18d;
-}
-.olotap-editor__content.markdown-theme-default pre .hljs-title,
-.olotap-editor__content.markdown-theme-default pre .hljs-section {
-  color: #faf594;
-}
-.olotap-editor__content.markdown-theme-default pre .hljs-keyword,
-.olotap-editor__content.markdown-theme-default pre .hljs-selector-tag {
-  color: #70cff8;
-}
-.olotap-editor__content.markdown-theme-default pre .hljs-emphasis {
-  font-style: italic;
-}
-.olotap-editor__content.markdown-theme-default pre .hljs-strong {
-  font-weight: 700;
 }
 .olotap-editor__content.markdown-theme-default .octicon {
   display: inline-block;
@@ -1394,11 +1430,4 @@
 }
 .olotap-editor__content.markdown-theme-default::-webkit-calendar-picker-indicator {
   filter: invert(50%);
-}
-.v-selection-control__input {
-  justify-content: left;
-}
-
-.v-list-item[data-v-c4a084c9]:hover {
-  cursor: pointer;
 }
