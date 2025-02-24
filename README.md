@@ -9,6 +9,10 @@ Integration ready <a href="https://tiptap.dev/" target="_blank">Tiptap</a> edito
 npm install olotap
 ```
 
+## Website
+
+<a href="https://oloma.dev/olotap" target="_blank">https://oloma.dev/olotap</a>
+
 ## Documentation
 
 <a href="https://olotap.oloma.dev/" target="_blank">https://olotap.oloma.dev/</a>
