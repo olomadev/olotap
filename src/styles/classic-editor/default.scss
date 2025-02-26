@@ -110,7 +110,7 @@
     --color-accent-emphasis: #1f6feb;
     --color-attention-subtle: rgb(187 128 9 / 15%);
     --color-danger-fg: #f85149;
-    --color-table-th-color: #212121;
+    --color-table-th-color: #4f4f4f;
     --color-blockquote-bg: #24292f;
     --color-blockquote-border: #57606a;
     --color-blockquote-text: #ced4da;
@@ -333,6 +333,7 @@
   }
 
   table th {
+    background-color: var(--color-table-th-color);
     font-weight: var(--base-text-weight-semibold, 600);
   }
 

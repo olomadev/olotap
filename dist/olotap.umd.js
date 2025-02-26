@@ -21307,7 +21307,7 @@ img.ProseMirror-separator {
         default: vue.withCtx(() => [
           vue.createVNode(_component_v_card, vue.mergeProps({
             flat: $props.flat,
-            color: _ctx.bgColor
+            color: $options.isDark ? "grey-darken-4" : "grey-lighten-4"
           }, _ctx.$attrs, {
             style: {
               borderColor: _ctx.$attrs["error-messages"] ? "#ff5252" : void 0,
