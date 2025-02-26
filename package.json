@@ -1,8 +1,16 @@
 {
   "name": "olotap",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Tiptap based html text editor for Vue 3 and Vuetify.",
-  "keywords": ["tiptap", "vue", "vuetify", "editor", "wysiwyg", "html", "javascript"],
+  "keywords": [
+    "tiptap",
+    "vue",
+    "vuetify",
+    "editor",
+    "wysiwyg",
+    "html",
+    "javascript"
+  ],
   "main": "./dist/olotap.umd.js",
   "module": "./dist/olotap.es.js",
   "files": [
