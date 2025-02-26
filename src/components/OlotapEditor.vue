@@ -71,9 +71,9 @@
         class="olotap-editor"
         :class="{ 'olotap-editor--fullscreen': isFullscreen }"
       >
-        <template v-if="!isFullscreen"> 
+        <template v-if="label && !isFullscreen"> 
           <slot name="label" :isDark="isDark">
-            <v-card-title :class="isDark ? 'bg-grey-darken-3' : 'bg-grey-lighten-3'" v-if="label"> 
+            <v-card-title :class="isDark ? 'bg-grey-darken-3' : 'bg-grey-lighten-3'"> 
               {{ label }}
             </v-card-title>
             <v-divider />
