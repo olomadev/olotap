@@ -1,7 +1,7 @@
 
 # Olotap - Tiptap Editor for Vue 🐧
 
-Integration ready <a href="https://tiptap.dev/" target="_blank">Tiptap</a> editor for Vue 3.
+Integration-ready Tiptap HTML editor for Vue 3 / Vuetify.
 
 ## Installation
 
@@ -18,7 +18,7 @@ npm install olotap
 <a href="https://olotap.oloma.dev/" target="_blank">https://olotap.oloma.dev/</a>
 
 <p align="center">
-  <img src="olotap.png" border="0" />
+  <img src="https://github.com/olomadev/olotap/blob/main/olotap.png" border="0" />
 </p>
 
 ## License
