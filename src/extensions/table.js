@@ -3,8 +3,6 @@ import { TableCell } from '@tiptap/extension-table-cell';
 import { TableHeader } from '@tiptap/extension-table-header';
 import { TableRow } from '@tiptap/extension-table-row';
 import TableActionButton from '../TableActionButton.vue';
-import { Plugin, PluginKey } from "prosemirror-state";
-import { BubbleMenu } from "@tiptap/extension-bubble-menu";
 import { useContext } from "../hooks/use-context";
 
 export const Table = TiptapTable.extend({
@@ -28,31 +26,6 @@ export const Table = TiptapTable.extend({
         }
       })
     };
-  },
-  addProseMirrorPlugins() {
-    const plugins = this.parent?.() || [];
-
-    // custom bubble menu plugin for table extension
-    if (this.options.bubbleMenuPlugin) {
-      plugins.push(
-        new Plugin({
-          key: new PluginKey("bubbleMenu"),
-          props: {
-            handleDOMEvents: {
-              mousemove: (view, event) => {
-                const target = event.target;
-                if (target.classList.contains("resize-handle")) {
-                  document.body.style.cursor = "col-resize";
-                } else {
-                  document.body.style.cursor = "";
-                }
-              }
-            },
-          },
-        })
-      );
-    }
-    return plugins;
   },
   addExtensions() {
     return [

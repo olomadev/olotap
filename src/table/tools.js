@@ -57,6 +57,18 @@ export function tableColumnTools() {
       },
     },
     {
+      title: state.t("editor.table.tools.merge_or_split_cells"),
+      name: "mergeOrSplitCells",
+      icon: 'mdi-table-merge-cells',
+      command: (editor) => {
+        if (editor.can().mergeCells()) {
+          editor.commands.mergeCells();
+        } else {
+          editor.commands.splitCell();
+        }
+      },
+    },
+    {
       title: state.t("editor.table.tools.delete_column"),
       name: "deleteColumn",
       icon: 'mdi-table-column-remove',

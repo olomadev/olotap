@@ -14,7 +14,7 @@
 export default {
   computed: {
     getClass() {
-      let classStr = "bg-white shadow py-2 group-focus-within:block hidden overflow-hidden whitespace-nowrap absolute bottom-full mt-4 border border-slate-400";
+      let classStr = "bg-white shadow py-2 group-focus-within:block hidden overflow-hidden whitespace-nowrap absolute bottom-full mt-4 border border-slate-400 ";
       classStr += this.align == 'left' ? 'left-0' : 'right-0';
       if (this.rec.top < 420) {
         classStr += " sm:bottom-auto sm:top-full"; // show dropdown menu at the top position

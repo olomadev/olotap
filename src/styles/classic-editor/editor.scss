@@ -3,19 +3,16 @@ $border-color: #dcdfe6;
 $primary-color: #409eff;
 $extra-light-primary-color: #ecf5ff;
 
-/* Create table popover settings */
-.table-grid-size-editor__cell__inner {
-  box-sizing:border-box;width:16px;height:16px;padding:4px;border:1px solid #dcdfe6;border-radius:2px;
-}
-.table-grid-size-editor__cell--selected .table-grid-size-editor__cell__inner {
-  background-color:#ecf5ff;border-color:#409eff;
-}
-.table-menu .v-list-item:hover {
-  cursor: pointer;
-}
-
 .olotap {
   overflow-wrap: anywhere;
+
+  --color-table-bubble-bg-color: #FFFFFF;
+  --color-table-bubble-hover-bg-color: #f4f4f4;
+
+  &.__dark {
+    --color-table-bubble-bg-color: #5c5c5c;
+    --color-table-bubble-hover-bg-color: #686868;
+  }
 
   &-editor {
     display: flex;
@@ -128,7 +125,7 @@ $extra-light-primary-color: #ecf5ff;
       }
     }
 
-    .hr-wrapper {
+    .hr-wrapper, .blockquote-wrapper, .code-block-wrapper {
       &:hover {
         outline-color: #ffc83d;
       }
@@ -140,22 +137,51 @@ $extra-light-primary-color: #ecf5ff;
       }
     }
 
-    .code-block-wrapper {
-      &:hover {
-        outline-color: #ffc83d;
+    .table-wrapper {
+      td,
+      th {
+        position: relative;
+        cursor: default;
+        /* right side */
+        &:hover {
+          cursor: ew-resize; 
+        }
+        /* left side */
+        &:hover {
+          cursor: ew-resize;
+        }
       }
-      &--focused:hover,  
-      &.focus,
-      &.ProseMirror-selectednode {
-        outline: 4px solid #409eff;
-        transition: outline 0.15s ease-in;
-      }
-    }
-
-    table.table-wrapper {
       .selectedCell {
         position: relative;
+        cursor: grab;
+        &::after {
+          position: absolute;
+          inset: 0;
+          z-index: 2;
+          pointer-events: none;
+          content: '';
+          background: rgb(200 200 255 / 40%);
+        }
+      }
+    }
 
+    .tableWrapper {
+      td,
+      th {
+        position: relative;
+        cursor: default;
+        /* right side */
+        &:hover {
+          cursor: ew-resize; 
+        }
+        /* left side */
+        &:hover {
+          cursor: ew-resize;
+        }
+      }
+      .selectedCell {
+        position: relative;
+        cursor: grabbing;
         &::after {
           position: absolute;
           inset: 0;
@@ -298,7 +324,7 @@ $extra-light-primary-color: #ecf5ff;
     }
   }
 
-  /* Tailwind independent classes */
+  /* Begin tailwind independent classes */
   .rounded-full {
     border-radius: 9999px;
   }
@@ -323,7 +349,8 @@ $extra-light-primary-color: #ecf5ff;
     padding-bottom: 0.5rem;
   }
   .bg-white {
-    background-color: white;
+    color: var(--color-fg-default) !important;
+    background-color: var(--color-table-bubble-bg-color) !important;
   }
   .shadow {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
@@ -380,10 +407,10 @@ $extra-light-primary-color: #ecf5ff;
     align-items: center;
   }
   .text-slate-400 {
-    color: #dcddde;
+    color: var(--color-fg-default);
   }
   .text-slate-600 {
-    color: rgb(71 85 105);
+    color: var(--color-fg-default);
   }
   .rounded {
     border-radius: 0.25rem;
@@ -401,7 +428,7 @@ $extra-light-primary-color: #ecf5ff;
     transition: background-color 150ms ease-in-out;
   }
   .hover\:bg-slate-100:hover {
-    background-color: #f4f4f4;
+    background-color: var(--color-table-bubble-hover-bg-color);
   }
   .bg-slate-600 {
     background-color: #475569 !important;
@@ -414,10 +441,10 @@ $extra-light-primary-color: #ecf5ff;
     background-color: #a0a1a3;
   }
   .hover\:text-slate-800:hover {
-    color: #57595c;
+
   }
   .text-white {
-    color: white;
+    color: var(--color-fg-default);
   }
 
   @media (min-width: 640px) {
@@ -451,4 +478,32 @@ $extra-light-primary-color: #ecf5ff;
   .h-6 {
     height: 1.5rem;
   }
+  /* End tailwind independent classes */
+  
+}
+
+.table-grid-size-editor {
+  $root: &;
+
+  &__cell {
+    &__inner {
+      box-sizing: border-box;
+      width: 16px;
+      height: 16px;
+      padding: 4px;
+      border: 1px solid $border-color;
+      border-radius: 2px;
+    }
+
+    &--selected {
+      #{$root}__cell__inner {
+        background-color: $extra-light-primary-color;
+        border-color: $primary-color;
+      }
+    }
+  }
+}
+
+.table-menu .v-list-item:hover {
+  cursor: pointer;
 }

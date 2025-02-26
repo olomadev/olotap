@@ -1,6 +1,6 @@
 (function(global2, factory) {
-  typeof exports === "object" && typeof module !== "undefined" ? factory(exports, require("vuetify/components"), require("vue")) : typeof define === "function" && define.amd ? define(["exports", "vuetify/components", "vue"], factory) : (global2 = typeof globalThis !== "undefined" ? globalThis : global2 || self, factory(global2.Olotap = {}, global2.VuetifyComp, global2.Vue));
-})(this, function(exports2, components, vue) {
+  typeof exports === "object" && typeof module !== "undefined" ? factory(exports, require("vuetify/components"), require("vue"), require("vuetify")) : typeof define === "function" && define.amd ? define(["exports", "vuetify/components", "vue", "vuetify"], factory) : (global2 = typeof globalThis !== "undefined" ? globalThis : global2 || self, factory(global2.Olotap = {}, global2.VuetifyComp, global2.Vue, global2.Vuetify));
+})(this, function(exports2, components, vue, vuetify) {
   "use strict";
   function OrderedMap(content) {
     this.content = content;
@@ -20471,7 +20471,7 @@ img.ProseMirror-separator {
     }
     return target;
   };
-  const _sfc_main$p = {
+  const _sfc_main$q = {
     props: {
       editor: {
         type: Object,
@@ -20516,7 +20516,7 @@ img.ProseMirror-separator {
       }
     }
   };
-  function _sfc_render$p(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$q(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_v_spacer = components.VSpacer;
     const _component_v_divider = components.VDivider;
     const _component_v_toolbar = components.VToolbar;
@@ -20555,8 +20555,8 @@ img.ProseMirror-separator {
       _: 1
     }, 16);
   }
-  const TipTapToolbar = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["render", _sfc_render$p]]);
-  const _sfc_main$o = {
+  const TipTapToolbar = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["render", _sfc_render$q]]);
+  const _sfc_main$p = {
     props: {
       editor: {
         type: Object,
@@ -20625,7 +20625,7 @@ img.ProseMirror-separator {
       }
     }
   };
-  function _sfc_render$o(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$p(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_v_divider = components.VDivider;
     const _component_v_toolbar = components.VToolbar;
     const _component_v_card_text = components.VCardText;
@@ -20687,7 +20687,7 @@ img.ProseMirror-separator {
       [vue.vShow, $options.items.length > 0]
     ]);
   }
-  const BubbleMenu = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["render", _sfc_render$o]]);
+  const BubbleMenu = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["render", _sfc_render$p]]);
   function tableRowTools() {
     const { state: state2 } = useContext();
     return [
@@ -20742,6 +20742,18 @@ img.ProseMirror-separator {
         icon: "mdi-table-column-plus-after",
         command: (editor) => {
           editor.commands.addColumnAfter();
+        }
+      },
+      {
+        title: state2.t("editor.table.tools.merge_or_split_cells"),
+        name: "mergeOrSplitCells",
+        icon: "mdi-table-merge-cells",
+        command: (editor) => {
+          if (editor.can().mergeCells()) {
+            editor.commands.mergeCells();
+          } else {
+            editor.commands.splitCell();
+          }
         }
       },
       {
@@ -20811,7 +20823,7 @@ img.ProseMirror-separator {
     }
     return selectionStart.node(1);
   };
-  const _sfc_main$n = {
+  const _sfc_main$o = {
     props: {
       clickHandler: {
         type: String,
@@ -20836,7 +20848,7 @@ img.ProseMirror-separator {
     }
   };
   const _hoisted_1$9 = ["aria-label", "data-tooltip", "title", "innerHTML"];
-  function _sfc_render$n(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$o(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("button", {
       class: vue.normalizeClass(["w-full flex p-1 flex-row items-center text-slate-600 rounded gap-2 hover:bg-slate-100", $props.active ? $props.activeClass : ""]),
       "aria-label": $props.label,
@@ -20847,11 +20859,11 @@ img.ProseMirror-separator {
       }, ["stop"]))
     }, null, 10, _hoisted_1$9);
   }
-  const MenuButton = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["render", _sfc_render$n]]);
-  const _sfc_main$m = {
+  const MenuButton = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["render", _sfc_render$o]]);
+  const _sfc_main$n = {
     computed: {
       getClass() {
-        let classStr = "bg-white shadow py-2 group-focus-within:block hidden overflow-hidden whitespace-nowrap absolute bottom-full mt-4 border border-slate-400";
+        let classStr = "bg-white shadow py-2 group-focus-within:block hidden overflow-hidden whitespace-nowrap absolute bottom-full mt-4 border border-slate-400 ";
         classStr += this.align == "left" ? "left-0" : "right-0";
         if (this.rec.top < 420) {
           classStr += " sm:bottom-auto sm:top-full";
@@ -20906,7 +20918,7 @@ img.ProseMirror-separator {
     }
   };
   const _hoisted_1$8 = { class: "group text-sm relative" };
-  function _sfc_render$m(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$n(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("div", _hoisted_1$8, [
       vue.renderSlot(_ctx.$slots, "default"),
       $options.hasDropdown ? (vue.openBlock(), vue.createElementBlock("div", {
@@ -20917,8 +20929,8 @@ img.ProseMirror-separator {
       ], 2)) : vue.createCommentVNode("", true)
     ]);
   }
-  const MenuItem = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["render", _sfc_render$m]]);
-  const _sfc_main$l = {
+  const MenuItem = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["render", _sfc_render$n]]);
+  const _sfc_main$m = {
     props: {
       icon: {
         type: String
@@ -20942,7 +20954,7 @@ img.ProseMirror-separator {
     }
   };
   const _hoisted_1$7 = ["aria-label", "title"];
-  function _sfc_render$l(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$m(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_v_icon = components.VIcon;
     return vue.openBlock(), vue.createElementBlock("button", {
       class: vue.normalizeClass(["w-full flex py-1 pl-2 pr-6 flex-row items-center text-slate-600 gap-2 hover:bg-slate-100", $props.active ? $props.activeClass : ""]),
@@ -20960,8 +20972,8 @@ img.ProseMirror-separator {
       vue.createTextVNode(vue.toDisplayString($props.label), 1)
     ], 10, _hoisted_1$7);
   }
-  const MenuDropdownButton = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["render", _sfc_render$l]]);
-  const _sfc_main$k = {
+  const MenuDropdownButton = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["render", _sfc_render$m]]);
+  const _sfc_main$l = {
     name: "OlotapEditor",
     components: {
       EditorContent,
@@ -20973,10 +20985,6 @@ img.ProseMirror-separator {
       MenuDropdownButton
     },
     props: {
-      bgColor: {
-        type: String,
-        default: "grey-lighten-4"
-      },
       extensions: {
         type: Array,
         default: () => []
@@ -20993,13 +21001,13 @@ img.ProseMirror-separator {
         type: String,
         default: "html"
       },
-      outlined: {
-        type: Boolean,
-        default: true
-      },
       flat: {
         type: Boolean,
         default: true
+      },
+      autofocus: {
+        type: Boolean,
+        default: false
       },
       disabled: {
         type: Boolean,
@@ -21048,9 +21056,11 @@ img.ProseMirror-separator {
     },
     emits: ["enter", "change", "update:modelValue", "update:markdownTheme"],
     setup(props) {
+      const theme = vuetify.useTheme();
       const { isFullscreen } = useProvideOlotapStore();
       const { state: state2 } = useContext();
       return {
+        theme,
         state: state2,
         isFullscreen,
         isMobileDevice: isMobile(),
@@ -21111,7 +21121,7 @@ img.ProseMirror-separator {
             this.$emit("change", { editor, output });
           }, this.state.editorUpdateThrottleWaitTime),
           extensions: this.sortExtensions(this.extensions),
-          autofocus: false,
+          autofocus: this.autofocus,
           editable: !this.disabled,
           injectCSS: true
         });
@@ -21129,9 +21139,20 @@ img.ProseMirror-separator {
       getMenuCoords() {
         return GetTopLevelBlockCoords(this.editor.view);
       },
+      isDark() {
+        return this.theme.global.name.value == "dark" ? true : false;
+      },
+      editorDynamicClasses() {
+        return [
+          {
+            __dark: this.theme.global.name.value == "dark" ? true : false
+          }
+        ];
+      },
       contentDynamicClasses() {
         return [
           {
+            __dark: this.theme.global.name.value == "dark" ? true : false,
             ...this.markdownThemeStyle
           },
           this.editorClass
@@ -21143,9 +21164,11 @@ img.ProseMirror-separator {
           maxWidth,
           width: !maxWidth ? void 0 : "100%",
           margin: !maxWidth ? void 0 : "0 auto",
-          backgroundColor: "#FFFFFF"
+          backgroundColor: this.isDark ? "#1E1E1E" : "#FFFFFF"
         };
-        if (this.isFullscreen) return { height: "100%", overflowY: "auto", ...maxHeightStyle };
+        if (this.isFullscreen) {
+          return { height: "100%", overflowY: "auto", ...maxHeightStyle };
+        }
         const minHeight = getCssUnitWithDefault(this.minHeight);
         const maxHeight = getCssUnitWithDefault(this.maxHeight);
         return {
@@ -21187,21 +21210,22 @@ img.ProseMirror-separator {
       }
     }
   };
-  const _hoisted_1$6 = {
-    key: 0,
-    class: "olotap"
-  };
-  function _sfc_render$k(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$l(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_BubbleMenu = vue.resolveComponent("BubbleMenu");
     const _component_menu_button = vue.resolveComponent("menu-button");
     const _component_menu_dropdown_button = vue.resolveComponent("menu-dropdown-button");
     const _component_menu_item = vue.resolveComponent("menu-item");
     const _component_bubble_menu_table = vue.resolveComponent("bubble-menu-table");
+    const _component_v_card_title = components.VCardTitle;
+    const _component_v_divider = components.VDivider;
     const _component_TipTapToolbar = vue.resolveComponent("TipTapToolbar");
     const _component_editor_content = vue.resolveComponent("editor-content");
     const _component_v_card = components.VCard;
     const _component_v_input = components.VInput;
-    return $data.editor ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_1$6, [
+    return $data.editor ? (vue.openBlock(), vue.createElementBlock("div", {
+      key: 0,
+      class: vue.normalizeClass(["olotap", $options.editorDynamicClasses])
+    }, [
       !$props.hideBubble ? (vue.openBlock(), vue.createBlock(_component_BubbleMenu, {
         key: 0,
         editor: $data.editor,
@@ -21283,7 +21307,7 @@ img.ProseMirror-separator {
         default: vue.withCtx(() => [
           vue.createVNode(_component_v_card, vue.mergeProps({
             flat: $props.flat,
-            color: $props.bgColor
+            color: _ctx.bgColor
           }, _ctx.$attrs, {
             style: {
               borderColor: _ctx.$attrs["error-messages"] ? "#ff5252" : void 0,
@@ -21292,7 +21316,21 @@ img.ProseMirror-separator {
             class: ["olotap-editor", { "olotap-editor--fullscreen": $setup.isFullscreen }]
           }), {
             default: vue.withCtx(() => [
-              $props.label && !$setup.isFullscreen ? vue.renderSlot(_ctx.$slots, "label", { key: 0 }) : vue.createCommentVNode("", true),
+              !$setup.isFullscreen ? vue.renderSlot(_ctx.$slots, "label", {
+                key: 0,
+                isDark: $options.isDark
+              }, () => [
+                $props.label ? (vue.openBlock(), vue.createBlock(_component_v_card_title, {
+                  key: 0,
+                  class: vue.normalizeClass($options.isDark ? "bg-grey-darken-3" : "bg-grey-lighten-3")
+                }, {
+                  default: vue.withCtx(() => [
+                    vue.createTextVNode(vue.toDisplayString($props.label), 1)
+                  ]),
+                  _: 1
+                }, 8, ["class"])) : vue.createCommentVNode("", true),
+                vue.createVNode(_component_v_divider)
+              ]) : vue.createCommentVNode("", true),
               !$props.hideToolbar ? (vue.openBlock(), vue.createBlock(_component_TipTapToolbar, {
                 key: 1,
                 class: "olotap-editor__toolbar",
@@ -21313,10 +21351,10 @@ img.ProseMirror-separator {
         ]),
         _: 3
       }, 8, ["error-messages"])
-    ])) : vue.createCommentVNode("", true);
+    ], 2)) : vue.createCommentVNode("", true);
   }
-  const OlotapEditor = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["render", _sfc_render$k]]);
-  const _sfc_main$j = {
+  const OlotapEditor = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["render", _sfc_render$l]]);
+  const _sfc_main$k = {
     props: {
       icon: {
         type: String,
@@ -21344,7 +21382,7 @@ img.ProseMirror-separator {
       }
     }
   };
-  function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$k(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_v_icon = components.VIcon;
     const _component_v_tooltip = components.VTooltip;
     const _component_v_btn = components.VBtn;
@@ -21372,7 +21410,7 @@ img.ProseMirror-separator {
       _: 3
     }, 8, ["disabled", "color", "class", "onClick"]);
   }
-  const ActionButton = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["render", _sfc_render$j]]);
+  const ActionButton = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["render", _sfc_render$k]]);
   const supportedCodes = [
     "plaintext",
     "1c",
@@ -21651,7 +21689,6 @@ img.ProseMirror-separator {
             const codeContent = state2.doc.textBetween(from, to, "\n");
             const text = codeContent;
             if (!navigator.clipboard) {
-              console.warn("Clipboard API not supported. Using fallback.");
               const textarea = document.createElement("textarea");
               textarea.value = text;
               textarea.style.position = "fixed";
@@ -23621,7 +23658,7 @@ img.ProseMirror-separator {
       });
     }
   });
-  const _sfc_main$i = {
+  const _sfc_main$j = {
     components: {
       ActionButton
     },
@@ -23665,7 +23702,7 @@ img.ProseMirror-separator {
       }
     }
   };
-  function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_v_icon = components.VIcon;
     const _component_v_list_item_title = components.VListItemTitle;
     const _component_v_list_item = components.VListItem;
@@ -23730,7 +23767,7 @@ img.ProseMirror-separator {
       _: 1
     }, 8, ["icon", "tooltip", "disabled", "color", "is-active"]);
   }
-  const ActionMenuButton = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["render", _sfc_render$i]]);
+  const ActionMenuButton = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["render", _sfc_render$j]]);
   const Heading = Heading$1.extend({
     addOptions() {
       var _a;
@@ -23908,7 +23945,7 @@ img.ProseMirror-separator {
       };
     }
   });
-  const _sfc_main$h = {
+  const _sfc_main$i = {
     components: {
       ActionButton
     },
@@ -23953,7 +23990,7 @@ img.ProseMirror-separator {
       }
     }
   };
-  function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_v_icon = components.VIcon;
     const _component_v_list_item_title = components.VListItemTitle;
     const _component_v_list_item = components.VListItem;
@@ -24020,7 +24057,7 @@ img.ProseMirror-separator {
       _: 1
     }, 8, ["tooltip", "disabled", "color", "is-active"]);
   }
-  const FontFamilySelectButton = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["render", _sfc_render$h]]);
+  const FontFamilySelectButton = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["render", _sfc_render$i]]);
   const FontFamily = FontFamily$1.extend({
     addOptions() {
       var _a;
@@ -24151,7 +24188,7 @@ img.ProseMirror-separator {
       };
     }
   });
-  const _sfc_main$g = {
+  const _sfc_main$h = {
     props: {
       disabled: {
         type: Boolean,
@@ -24199,7 +24236,7 @@ img.ProseMirror-separator {
       };
     }
   };
-  function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
     var _a;
     const _component_v_icon = components.VIcon;
     const _component_v_tooltip = components.VTooltip;
@@ -24228,7 +24265,7 @@ img.ProseMirror-separator {
       _: 3
     }, 8, ["disabled", "color", "class"]);
   }
-  const FullscreenActionButton = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["render", _sfc_render$g]]);
+  const FullscreenActionButton = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["render", _sfc_render$h]]);
   const Fullscreen = Extension.create({
     name: "fullscreen",
     addOptions() {
@@ -24287,7 +24324,7 @@ img.ProseMirror-separator {
       };
     }
   });
-  const _sfc_main$f = {
+  const _sfc_main$g = {
     props: {
       editor: { type: Object, required: true },
       modelValue: {
@@ -24339,7 +24376,7 @@ img.ProseMirror-separator {
       }
     }
   };
-  function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_v_icon = components.VIcon;
     const _component_v_btn = components.VBtn;
     const _component_v_text_field = components.VTextField;
@@ -24434,9 +24471,9 @@ img.ProseMirror-separator {
       _: 1
     }, 8, ["modelValue", "nudge-left", "nudge-top", "origin"]);
   }
-  const ColorPicker = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["render", _sfc_render$f]]);
+  const ColorPicker = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["render", _sfc_render$g]]);
   const { state } = useContext();
-  const _sfc_main$e = {
+  const _sfc_main$f = {
     components: {
       ActionButton,
       ColorPicker
@@ -24489,7 +24526,7 @@ img.ProseMirror-separator {
       }
     }
   };
-  function _sfc_render$e(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_color_picker = vue.resolveComponent("color-picker");
     const _component_action_button = vue.resolveComponent("action-button");
     return vue.openBlock(), vue.createBlock(_component_action_button, {
@@ -24514,7 +24551,7 @@ img.ProseMirror-separator {
       _: 1
     }, 8, ["icon", "tooltip", "disabled", "color", "is-active"]);
   }
-  const ColorActionButton = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["render", _sfc_render$e]]);
+  const ColorActionButton = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["render", _sfc_render$f]]);
   const Color = Color$1.extend({
     addOptions() {
       var _a;
@@ -24616,7 +24653,7 @@ img.ProseMirror-separator {
       ];
     }
   });
-  const _sfc_main$d = {
+  const _sfc_main$e = {
     components: {
       ActionButton,
       ColorPicker
@@ -24650,7 +24687,7 @@ img.ProseMirror-separator {
       }
     }
   };
-  function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$e(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_color_picker = vue.resolveComponent("color-picker");
     const _component_action_button = vue.resolveComponent("action-button");
     return vue.openBlock(), vue.createBlock(_component_action_button, {
@@ -24675,7 +24712,7 @@ img.ProseMirror-separator {
       _: 1
     }, 8, ["icon", "tooltip", "disabled", "color", "is-active"]);
   }
-  const HighlightActionButton = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["render", _sfc_render$d]]);
+  const HighlightActionButton = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["render", _sfc_render$e]]);
   const Highlight = Highlight$1.extend({
     addOptions() {
       var _a;
@@ -26431,7 +26468,7 @@ img.ProseMirror-separator {
       return plugins;
     }
   });
-  const _sfc_main$c = {
+  const _sfc_main$d = {
     props: {
       value: {
         type: String,
@@ -26506,8 +26543,8 @@ img.ProseMirror-separator {
       }
     }
   };
-  const _hoisted_1$5 = { class: "headline" };
-  function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
+  const _hoisted_1$6 = { class: "headline" };
+  function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_v_spacer = components.VSpacer;
     const _component_v_icon = components.VIcon;
     const _component_v_btn = components.VBtn;
@@ -26533,7 +26570,7 @@ img.ProseMirror-separator {
               density: "compact"
             }, {
               default: vue.withCtx(() => [
-                vue.createElementVNode("span", _hoisted_1$5, vue.toDisplayString(_ctx.$t("editor.link.dialog.title")), 1),
+                vue.createElementVNode("span", _hoisted_1$6, vue.toDisplayString(_ctx.$t("editor.link.dialog.title")), 1),
                 vue.createVNode(_component_v_spacer),
                 vue.createVNode(_component_v_btn, {
                   class: "mx-0",
@@ -26601,8 +26638,8 @@ img.ProseMirror-separator {
       _: 1
     }, 8, ["modelValue", "onClick:outside"]);
   }
-  const LinkDialog = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["render", _sfc_render$c]]);
-  const _sfc_main$b = {
+  const LinkDialog = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["render", _sfc_render$d]]);
+  const _sfc_main$c = {
     components: {
       ActionButton
     },
@@ -26656,7 +26693,7 @@ img.ProseMirror-separator {
       }
     }
   };
-  function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_action_button = vue.resolveComponent("action-button");
     return vue.openBlock(), vue.createBlock(_component_action_button, {
       icon: $props.icon,
@@ -26674,7 +26711,7 @@ img.ProseMirror-separator {
       _: 3
     }, 8, ["icon", "tooltip", "disabled", "color", "is-active", "action"]);
   }
-  const LinkActionButton = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$b]]);
+  const LinkActionButton = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["render", _sfc_render$c]]);
   const Link = Link$1.extend({
     // Add options to override default link behavior
     addOptions() {
@@ -26773,7 +26810,7 @@ img.ProseMirror-separator {
       ];
     }
   });
-  const _sfc_main$a = {
+  const _sfc_main$b = {
     props: {
       modelValue: {
         type: Object,
@@ -26834,7 +26871,7 @@ img.ProseMirror-separator {
       }
     }
   };
-  function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_v_file_input = components.VFileInput;
     const _component_v_text_field = components.VTextField;
     const _component_v_checkbox = components.VCheckbox;
@@ -26887,8 +26924,8 @@ img.ProseMirror-separator {
       _: 1
     }, 8, ["disabled"]);
   }
-  const ImageUpload = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["render", _sfc_render$a]]);
-  const _sfc_main$9 = {
+  const ImageUpload = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$b]]);
+  const _sfc_main$a = {
     props: {
       modelValue: {
         type: Object,
@@ -26915,7 +26952,7 @@ img.ProseMirror-separator {
       }
     }
   };
-  function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_v_text_field = components.VTextField;
     const _component_v_checkbox = components.VCheckbox;
     const _component_v_form = components.VForm;
@@ -26952,8 +26989,8 @@ img.ProseMirror-separator {
       _: 1
     });
   }
-  const ImageUrl = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["render", _sfc_render$9]]);
-  const _sfc_main$8 = {
+  const ImageUrl = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["render", _sfc_render$a]]);
+  const _sfc_main$9 = {
     components: {
       ImageUpload,
       ImageUrl
@@ -27057,8 +27094,8 @@ img.ProseMirror-separator {
       }
     }
   };
-  const _hoisted_1$4 = { class: "headline" };
-  function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
+  const _hoisted_1$5 = { class: "headline" };
+  function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_v_spacer = components.VSpacer;
     const _component_v_icon = components.VIcon;
     const _component_v_btn = components.VBtn;
@@ -27086,7 +27123,7 @@ img.ProseMirror-separator {
               density: "compact"
             }, {
               default: vue.withCtx(() => [
-                vue.createElementVNode("span", _hoisted_1$4, vue.toDisplayString(_ctx.$t("editor.image.dialog.title")), 1),
+                vue.createElementVNode("span", _hoisted_1$5, vue.toDisplayString(_ctx.$t("editor.image.dialog.title")), 1),
                 vue.createVNode(_component_v_spacer),
                 vue.createVNode(_component_v_btn, {
                   class: "mx-0",
@@ -27170,8 +27207,8 @@ img.ProseMirror-separator {
       _: 1
     }, 8, ["modelValue", "onClick:outside"]);
   }
-  const ImageDialog = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["render", _sfc_render$8]]);
-  const _sfc_main$7 = {
+  const ImageDialog = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["render", _sfc_render$9]]);
+  const _sfc_main$8 = {
     props: {
       ...nodeViewProps,
       selected: {
@@ -27342,13 +27379,13 @@ img.ProseMirror-separator {
       this.resizeOb.disconnect();
     }
   };
-  const _hoisted_1$3 = ["src", "alt"];
+  const _hoisted_1$4 = ["src", "alt"];
   const _hoisted_2 = {
     key: 0,
     class: "image-resizer"
   };
   const _hoisted_3 = ["onMousedown"];
-  function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_NodeViewWrapper = vue.resolveComponent("NodeViewWrapper");
     return vue.openBlock(), vue.createBlock(_component_NodeViewWrapper, {
       as: "span",
@@ -27372,7 +27409,7 @@ img.ProseMirror-separator {
             class: "image-view__body__image",
             onLoad: _cache[0] || (_cache[0] = (...args) => $options.onImageLoad && $options.onImageLoad(...args)),
             onClick: _cache[1] || (_cache[1] = (...args) => $options.selectImage && $options.selectImage(...args))
-          }, null, 44, _hoisted_1$3),
+          }, null, 44, _hoisted_1$4),
           _ctx.editor.view.editable ? vue.withDirectives((vue.openBlock(), vue.createElementBlock("div", _hoisted_2, [
             (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($data.resizeDirections, (direction) => {
               return vue.openBlock(), vue.createElementBlock("span", {
@@ -27389,8 +27426,8 @@ img.ProseMirror-separator {
       _: 1
     }, 8, ["class", "style"]);
   }
-  const ImageView = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$7]]);
-  const _sfc_main$6 = {
+  const ImageView = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["render", _sfc_render$8]]);
+  const _sfc_main$7 = {
     components: {
       ActionButton
     },
@@ -27464,7 +27501,7 @@ img.ProseMirror-separator {
       }
     }
   };
-  function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_action_button = vue.resolveComponent("action-button");
     return vue.openBlock(), vue.createBlock(_component_action_button, {
       icon: $props.icon,
@@ -27482,7 +27519,7 @@ img.ProseMirror-separator {
       _: 3
     }, 8, ["icon", "tooltip", "disabled", "color", "is-active", "action"]);
   }
-  const ImageActionButton = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$6]]);
+  const ImageActionButton = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$7]]);
   const Image = Image$1.extend({
     addAttributes() {
       var _a;
@@ -27567,7 +27604,7 @@ img.ProseMirror-separator {
       };
     }
   });
-  const _sfc_main$5 = {
+  const _sfc_main$6 = {
     props: {
       value: {
         type: String,
@@ -27623,8 +27660,8 @@ img.ProseMirror-separator {
       }
     }
   };
-  const _hoisted_1$2 = { class: "headline" };
-  function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
+  const _hoisted_1$3 = { class: "headline" };
+  function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_v_spacer = components.VSpacer;
     const _component_v_icon = components.VIcon;
     const _component_v_btn = components.VBtn;
@@ -27649,7 +27686,7 @@ img.ProseMirror-separator {
               density: "compact"
             }, {
               default: vue.withCtx(() => [
-                vue.createElementVNode("span", _hoisted_1$2, vue.toDisplayString(_ctx.$t("editor.video.dialog.title")), 1),
+                vue.createElementVNode("span", _hoisted_1$3, vue.toDisplayString(_ctx.$t("editor.video.dialog.title")), 1),
                 vue.createVNode(_component_v_spacer),
                 vue.createVNode(_component_v_btn, {
                   class: "mx-0",
@@ -27699,8 +27736,8 @@ img.ProseMirror-separator {
       _: 1
     }, 8, ["modelValue", "onClick:outside"]);
   }
-  const VideoDialog = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$5]]);
-  const _sfc_main$4 = {
+  const VideoDialog = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$6]]);
+  const _sfc_main$5 = {
     components: {
       ActionButton
     },
@@ -27746,7 +27783,7 @@ img.ProseMirror-separator {
       }
     }
   };
-  function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_action_button = vue.resolveComponent("action-button");
     return vue.openBlock(), vue.createBlock(_component_action_button, {
       icon: $props.icon,
@@ -27764,7 +27801,7 @@ img.ProseMirror-separator {
       _: 3
     }, 8, ["icon", "tooltip", "disabled", "color", "is-active", "action"]);
   }
-  const VideoActionButton = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$4]]);
+  const VideoActionButton = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$5]]);
   function linkConvert(src) {
     src = src.replace("https://youtu.be/", "https://www.youtube.com/watch?v=").replace("watch?v=", "embed/");
     src = src.replace("https://vimeo.com/", "https://player.vimeo.com/video/");
@@ -30427,7 +30464,7 @@ img.ProseMirror-separator {
       return ["tr", mergeAttributes(this.options.HTMLAttributes, HTMLAttributes), 0];
     }
   });
-  const _sfc_main$3 = {
+  const _sfc_main$4 = {
     setup() {
       const { state: state2 } = useContext();
       const tableGridSize = vue.reactive({
@@ -30472,8 +30509,8 @@ img.ProseMirror-separator {
       }
     }
   };
-  const _hoisted_1$1 = ["onMouseover", "onMousedown"];
-  function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
+  const _hoisted_1$2 = ["onMouseover", "onMousedown"];
+  function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_v_checkbox = components.VCheckbox;
     const _component_v_card_text = components.VCardText;
     const _component_v_card_subtitle = components.VCardSubtitle;
@@ -30524,7 +30561,7 @@ img.ProseMirror-separator {
                         onMousedown: ($event) => $options.onMouseDown(row, col)
                       }, _cache[2] || (_cache[2] = [
                         vue.createElementVNode("div", { class: "table-grid-size-editor__cell__inner" }, null, -1)
-                      ]), 42, _hoisted_1$1);
+                      ]), 42, _hoisted_1$2);
                     }), 128))
                   ]);
                 }), 128))
@@ -30544,8 +30581,8 @@ img.ProseMirror-separator {
       _: 1
     }, 8, ["modelValue"]);
   }
-  const CreateTablePopover = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["render", _sfc_render$3]]);
-  const _sfc_main$2 = {
+  const CreateTablePopover = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$4]]);
+  const _sfc_main$3 = {
     components: {
       CreateTablePopover
     },
@@ -30604,7 +30641,7 @@ img.ProseMirror-separator {
       }
     }
   };
-  function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_v_icon = components.VIcon;
     const _component_v_list_item_title = components.VListItemTitle;
     const _component_create_table_popover = vue.resolveComponent("create-table-popover");
@@ -30676,8 +30713,8 @@ img.ProseMirror-separator {
       _: 1
     }, 8, ["modelValue"]);
   }
-  const TableMenu = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$2]]);
-  const _sfc_main$1 = {
+  const TableMenu = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["render", _sfc_render$3]]);
+  const _sfc_main$2 = {
     components: {
       ActionButton,
       TableMenu
@@ -30713,7 +30750,7 @@ img.ProseMirror-separator {
       }
     }
   };
-  function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_table_menu = vue.resolveComponent("table-menu");
     const _component_action_button = vue.resolveComponent("action-button");
     return vue.openBlock(), vue.createBlock(_component_action_button, {
@@ -30733,7 +30770,7 @@ img.ProseMirror-separator {
       _: 1
     }, 8, ["icon", "tooltip", "disabled", "color", "action", "is-active"]);
   }
-  const TableActionButton = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1]]);
+  const TableActionButton = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$2]]);
   const Table = Table$1.extend({
     addOptions() {
       var _a;
@@ -30756,30 +30793,6 @@ img.ProseMirror-separator {
           }
         })
       };
-    },
-    addProseMirrorPlugins() {
-      var _a;
-      const plugins = ((_a = this.parent) == null ? void 0 : _a.call(this)) || [];
-      if (this.options.bubbleMenuPlugin) {
-        plugins.push(
-          new Plugin({
-            key: new PluginKey("bubbleMenu"),
-            props: {
-              handleDOMEvents: {
-                mousemove: (view, event) => {
-                  const target = event.target;
-                  if (target.classList.contains("resize-handle")) {
-                    document.body.style.cursor = "col-resize";
-                  } else {
-                    document.body.style.cursor = "";
-                  }
-                }
-              }
-            }
-          })
-        );
-      }
-      return plugins;
     },
     addExtensions() {
       return [
@@ -30835,15 +30848,48 @@ img.ProseMirror-separator {
       ];
     }
   });
+  const _sfc_main$1 = {
+    props: nodeViewProps,
+    components: {
+      NodeViewWrapper
+    },
+    methods: {
+      selectBlockquote() {
+        const { editor, getPos } = this;
+        editor.commands.setNodeSelection(getPos());
+      }
+    }
+  };
+  const _hoisted_1$1 = {
+    ref: "blockquote",
+    "data-node-view-content": ""
+  };
+  function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_NodeViewWrapper = vue.resolveComponent("NodeViewWrapper");
+    return vue.openBlock(), vue.createBlock(_component_NodeViewWrapper, {
+      as: "div",
+      class: "blockquote-wrapper"
+    }, {
+      default: vue.withCtx(() => [
+        vue.createElementVNode("div", {
+          class: "blockquote-inner-wrapper",
+          onClick: _cache[0] || (_cache[0] = (...args) => $options.selectBlockquote && $options.selectBlockquote(...args))
+        }, [
+          vue.createElementVNode("blockquote", _hoisted_1$1, null, 512)
+        ])
+      ]),
+      _: 1
+    });
+  }
+  const BlockquoteWrapper = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1]]);
   const Blockquote = Blockquote$1.extend({
+    name: "blockquote",
+    draggable: true,
     addOptions() {
       var _a;
       const { state: state2 } = useContext();
       return {
         ...(_a = this.parent) == null ? void 0 : _a.call(this),
-        HTMLAttributes: {
-          class: "blockquote"
-        },
         button: ({ editor }) => ({
           component: ActionButton,
           componentProps: {
@@ -30855,6 +30901,9 @@ img.ProseMirror-separator {
           }
         })
       };
+    },
+    addNodeView() {
+      return VueNodeViewRenderer(BlockquoteWrapper);
     }
   });
   const HorizontalRule$1 = Node.create({

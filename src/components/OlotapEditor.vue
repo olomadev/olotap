@@ -1,5 +1,5 @@
 <template>
-  <div v-if="editor" class="olotap">
+  <div v-if="editor" class="olotap" :class="editorDynamicClasses">
     
     <BubbleMenu v-if="!hideBubble" :editor="editor" :disabled="disableToolbar" />
 
@@ -62,7 +62,7 @@
     <v-input class="pt-0" hide-details="auto" :error-messages="errorMessages">
       <v-card
         :flat="flat"
-        :color="bgColor"
+        :color="isDark ? 'grey-darken-4' : 'grey-lighten-4'"
         v-bind="$attrs"
         :style="{
           borderColor: $attrs['error-messages'] ? '#ff5252' : undefined,
@@ -71,14 +71,13 @@
         class="olotap-editor"
         :class="{ 'olotap-editor--fullscreen': isFullscreen }"
       >
-        <template v-if="label && !isFullscreen">
-          <slot name="label"></slot>
-          <!--
-            <v-card-title :class="bg-grey-lighten-3">
+        <template v-if="!isFullscreen"> 
+          <slot name="label" :isDark="isDark">
+            <v-card-title :class="isDark ? 'bg-grey-darken-3' : 'bg-grey-lighten-3'" v-if="label"> 
               {{ label }}
             </v-card-title>
             <v-divider />
-          -->
+          </slot>
         </template>
 
         <TipTapToolbar
@@ -124,6 +123,7 @@ import MenuButton from "../table/MenuButton.vue"
 import MenuItem from "../table/MenuItem.vue"
 import MenuDropdownButton from "../table/MenuDropdownButton.vue"
 import '../styles/classic-editor/index.scss'
+import { useTheme } from 'vuetify'
 
 export default {
   name: 'OlotapEditor',
@@ -137,10 +137,6 @@ export default {
     MenuDropdownButton,
   },
   props: {
-    bgColor: {
-      type: String,
-      default: "grey-lighten-4"
-    },
     extensions: {
       type: Array,
       default: () => [],
@@ -157,13 +153,13 @@ export default {
       type: String,
       default: 'html',
     },
-    outlined: {
-      type: Boolean,
-      default: true,
-    },
     flat: {
       type: Boolean,
       default: true,
+    },
+    autofocus: {
+      type: Boolean,
+      default: false,
     },
     disabled: {
       type: Boolean,
@@ -212,9 +208,11 @@ export default {
   },
   emits: ['enter', 'change', 'update:modelValue', 'update:markdownTheme'],
   setup(props) {
+    const theme = useTheme();
     const { isFullscreen } = useProvideOlotapStore();
     const { state } = useContext();
     return {
+      theme,
       state,
       isFullscreen,
       isMobileDevice: isMobile(),
@@ -281,7 +279,7 @@ export default {
           this.$emit('change', { editor, output });
         }, this.state.editorUpdateThrottleWaitTime),
         extensions: this.sortExtensions(this.extensions),
-        autofocus: false,
+        autofocus: this.autofocus,
         editable: !this.disabled,
         injectCSS: true,
       });
@@ -299,12 +297,23 @@ export default {
     getMenuCoords() {
       return GetTopLevelBlockCoords(this.editor.view)
     },
+    isDark() {
+      return this.theme.global.name.value == 'dark' ? true : false;
+    },
+    editorDynamicClasses() {
+      return [
+        {
+          __dark: this.theme.global.name.value == 'dark' ? true : false,
+        }
+      ];
+    },
     contentDynamicClasses() {
       return [
         {
-          ...this.markdownThemeStyle,
+          __dark: this.theme.global.name.value == 'dark' ? true : false,
+          ...this.markdownThemeStyle
         },
-        this.editorClass,
+        this.editorClass
       ];
     },
     contentDynamicStyles() {
@@ -313,18 +322,20 @@ export default {
         maxWidth: maxWidth,
         width: !maxWidth ? undefined : '100%',
         margin: !maxWidth ? undefined : '0 auto',
-        backgroundColor: '#FFFFFF',
+        backgroundColor: this.isDark ? '#1E1E1E' : '#FFFFFF'
       };
-      if (this.isFullscreen) return { height: '100%', overflowY: 'auto', ...maxHeightStyle };
+      if (this.isFullscreen) {
+        return { height: '100%', overflowY: 'auto', ...maxHeightStyle };
+      }
       const minHeight = getCssUnitWithDefault(this.minHeight);
       const maxHeight = getCssUnitWithDefault(this.maxHeight);
       return {
         minHeight,
         maxHeight,
         overflowY: 'auto',
-        ...maxHeightStyle,
+        ...maxHeightStyle
       };
-    },
+    }
   },
   methods: {
     tableIsActive() {

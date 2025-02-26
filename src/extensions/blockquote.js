@@ -1,15 +1,16 @@
 import { Blockquote as TiptapBlockquote } from '@tiptap/extension-blockquote';
 import ActionButton from '../ActionButton.vue';
+import { VueNodeViewRenderer } from '@tiptap/vue-3';
+import BlockquoteWrapper from '../Blockquote.vue';
 import { useContext } from "../hooks/use-context";
 
 export const Blockquote = TiptapBlockquote.extend({
+  name: 'blockquote',
+  draggable: true,
   addOptions() {
     const { state } = useContext();
     return {
       ...this.parent?.(),
-      HTMLAttributes: {
-        class: 'blockquote',
-      },
       button: ({ editor }) => ({
         component: ActionButton,
         componentProps: {
@@ -21,6 +22,9 @@ export const Blockquote = TiptapBlockquote.extend({
         },
       }),
     };
+  },
+  addNodeView() {
+    return VueNodeViewRenderer(BlockquoteWrapper);
   },
 });
 export default Blockquote;

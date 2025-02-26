@@ -1,6 +1,7 @@
 .DS_Store
 lib
 dist
+dist/
 /node_modules/
 
 # Log files

@@ -1,26 +1,14 @@
 @charset "UTF-8";
-/* Create table popover settings */
-.table-grid-size-editor__cell__inner {
-  box-sizing: border-box;
-  width: 16px;
-  height: 16px;
-  padding: 4px;
-  border: 1px solid #dcdfe6;
-  border-radius: 2px;
-}
-
-.table-grid-size-editor__cell--selected .table-grid-size-editor__cell__inner {
-  background-color: #ecf5ff;
-  border-color: #409eff;
-}
-
-.table-menu .v-list-item:hover {
-  cursor: pointer;
-}
-
 .olotap {
   overflow-wrap: anywhere;
-  /* Tailwind independent classes */
+  --color-table-bubble-bg-color: #FFFFFF;
+  --color-table-bubble-hover-bg-color: #f4f4f4;
+  /* Begin tailwind independent classes */
+  /* End tailwind independent classes */
+}
+.olotap.__dark {
+  --color-table-bubble-bg-color: #5c5c5c;
+  --color-table-bubble-hover-bg-color: #686868;
 }
 .olotap-editor {
   display: flex;
@@ -105,24 +93,60 @@
   outline: 4px solid #409eff;
   transition: outline 0.15s ease-in;
 }
-.olotap .ProseMirror .hr-wrapper:hover {
+.olotap .ProseMirror .hr-wrapper:hover, .olotap .ProseMirror .blockquote-wrapper:hover, .olotap .ProseMirror .code-block-wrapper:hover {
   outline-color: #ffc83d;
 }
-.olotap .ProseMirror .hr-wrapper--focused:hover, .olotap .ProseMirror .hr-wrapper.focus, .olotap .ProseMirror .hr-wrapper.ProseMirror-selectednode {
+.olotap .ProseMirror .hr-wrapper--focused:hover, .olotap .ProseMirror .hr-wrapper.focus, .olotap .ProseMirror .hr-wrapper.ProseMirror-selectednode, .olotap .ProseMirror .blockquote-wrapper--focused:hover, .olotap .ProseMirror .blockquote-wrapper.focus, .olotap .ProseMirror .blockquote-wrapper.ProseMirror-selectednode, .olotap .ProseMirror .code-block-wrapper--focused:hover, .olotap .ProseMirror .code-block-wrapper.focus, .olotap .ProseMirror .code-block-wrapper.ProseMirror-selectednode {
   outline: 4px solid #409eff;
   transition: outline 0.15s ease-in;
 }
-.olotap .ProseMirror .code-block-wrapper:hover {
-  outline-color: #ffc83d;
-}
-.olotap .ProseMirror .code-block-wrapper--focused:hover, .olotap .ProseMirror .code-block-wrapper.focus, .olotap .ProseMirror .code-block-wrapper.ProseMirror-selectednode {
-  outline: 4px solid #409eff;
-  transition: outline 0.15s ease-in;
-}
-.olotap .ProseMirror table.table-wrapper .selectedCell {
+.olotap .ProseMirror .table-wrapper td,
+.olotap .ProseMirror .table-wrapper th {
   position: relative;
+  cursor: default;
+  /* right side */
+  /* left side */
 }
-.olotap .ProseMirror table.table-wrapper .selectedCell::after {
+.olotap .ProseMirror .table-wrapper td:hover,
+.olotap .ProseMirror .table-wrapper th:hover {
+  cursor: ew-resize;
+}
+.olotap .ProseMirror .table-wrapper td:hover,
+.olotap .ProseMirror .table-wrapper th:hover {
+  cursor: ew-resize;
+}
+.olotap .ProseMirror .table-wrapper .selectedCell {
+  position: relative;
+  cursor: grab;
+}
+.olotap .ProseMirror .table-wrapper .selectedCell::after {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  content: "";
+  background: rgba(200, 200, 255, 0.4);
+}
+.olotap .ProseMirror .tableWrapper td,
+.olotap .ProseMirror .tableWrapper th {
+  position: relative;
+  cursor: default;
+  /* right side */
+  /* left side */
+}
+.olotap .ProseMirror .tableWrapper td:hover,
+.olotap .ProseMirror .tableWrapper th:hover {
+  cursor: ew-resize;
+}
+.olotap .ProseMirror .tableWrapper td:hover,
+.olotap .ProseMirror .tableWrapper th:hover {
+  cursor: ew-resize;
+}
+.olotap .ProseMirror .tableWrapper .selectedCell {
+  position: relative;
+  cursor: grabbing;
+}
+.olotap .ProseMirror .tableWrapper .selectedCell::after {
   position: absolute;
   inset: 0;
   z-index: 2;
@@ -257,7 +281,8 @@
   padding-bottom: 0.5rem;
 }
 .olotap .bg-white {
-  background-color: white;
+  color: var(--color-fg-default) !important;
+  background-color: var(--color-table-bubble-bg-color) !important;
 }
 .olotap .shadow {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
@@ -314,10 +339,10 @@
   align-items: center;
 }
 .olotap .text-slate-400 {
-  color: #dcddde;
+  color: var(--color-fg-default);
 }
 .olotap .text-slate-600 {
-  color: rgb(71, 85, 105);
+  color: var(--color-fg-default);
 }
 .olotap .rounded {
   border-radius: 0.25rem;
@@ -335,7 +360,7 @@
   transition: background-color 150ms ease-in-out;
 }
 .olotap .hover\:bg-slate-100:hover {
-  background-color: #f4f4f4;
+  background-color: var(--color-table-bubble-hover-bg-color);
 }
 .olotap .bg-slate-600 {
   background-color: #475569 !important;
@@ -347,11 +372,8 @@
 .olotap .hover\:bg-slate-700:hover {
   background-color: #a0a1a3;
 }
-.olotap .hover\:text-slate-800:hover {
-  color: #57595c;
-}
 .olotap .text-white {
-  color: white;
+  color: var(--color-fg-default);
 }
 @media (min-width: 640px) {
   .olotap .sm\:bottom-auto {
@@ -380,6 +402,23 @@
 }
 .olotap .h-6 {
   height: 1.5rem;
+}
+
+.table-grid-size-editor__cell__inner {
+  box-sizing: border-box;
+  width: 16px;
+  height: 16px;
+  padding: 4px;
+  border: 1px solid #dcdfe6;
+  border-radius: 2px;
+}
+.table-grid-size-editor__cell--selected .table-grid-size-editor__cell__inner {
+  background-color: #ecf5ff;
+  border-color: #409eff;
+}
+
+.table-menu .v-list-item:hover {
+  cursor: pointer;
 }
 
 /*
@@ -434,7 +473,11 @@
   --color-accent-emphasis: #0969da;
   --color-attention-subtle: #fff8c5;
   --color-danger-fg: #cf222e;
-  --color-bg-table-th: #f4f4f4;
+  --color-table-th-color: #f4f4f4;
+  --color-blockquote-bg: #f9f9f9;
+  --color-blockquote-border: #ccc;
+  --color-blockquote-text: #24292f;
+  --color-blockquote-quote: #ccc;
   margin: 0;
   font-family: "Hanken Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
   font-size: 14px;
@@ -484,7 +527,7 @@
   --color-prettylights-syntax-brackethighlighter-angle: #8b949e;
   --color-prettylights-syntax-sublimelinter-gutter-mark: #484f58;
   --color-prettylights-syntax-constant-other-reference-link: #a5d6ff;
-  --color-fg-default: #c9d1d9;
+  --color-fg-default: #ced4da;
   --color-fg-muted: #8b949e;
   --color-fg-subtle: #6e7681;
   --color-canvas-default: #212121;
@@ -496,7 +539,11 @@
   --color-accent-emphasis: #1f6feb;
   --color-attention-subtle: rgb(187 128 9 / 15%);
   --color-danger-fg: #f85149;
-  --color-bg-table-th: #f4f4f4;
+  --color-table-th-color: #212121;
+  --color-blockquote-bg: #24292f;
+  --color-blockquote-border: #57606a;
+  --color-blockquote-text: #ced4da;
+  --color-blockquote-quote: #8b949e;
 }
 .olotap-editor__content.markdown-theme-default::before {
   display: table;
@@ -678,7 +725,6 @@
   padding: 0;
 }
 .olotap-editor__content.markdown-theme-default table th {
-  background-color: var(--color-bg-table-th);
   font-weight: var(--base-text-weight-semibold, 600);
 }
 .olotap-editor__content.markdown-theme-default table th,
@@ -809,14 +855,15 @@
 }
 .olotap-editor__content.markdown-theme-default blockquote {
   font-size: 14px;
-  background: #f9f9f9;
-  border-left: 10px solid #ccc;
+  background: var(--color-blockquote-bg);
+  border-left: 10px solid var(--color-blockquote-border);
   margin: 1.5em 10px;
   padding: 0.5em 10px;
   quotes: "“" "”" "‘" "’";
+  color: var(--color-blockquote-text);
 }
 .olotap-editor__content.markdown-theme-default blockquote:before {
-  color: #ccc;
+  color: var(--color-blockquote-quote);
   content: open-quote;
   font-size: 3em;
   line-height: 0.1em;
@@ -824,7 +871,7 @@
   vertical-align: -0.4em;
 }
 .olotap-editor__content.markdown-theme-default blockquote:after {
-  color: #ccc;
+  color: var(--color-blockquote-quote);
   content: close-quote;
   font-size: 3em;
   line-height: 0.1em;

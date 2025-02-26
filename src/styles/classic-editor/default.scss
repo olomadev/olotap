@@ -50,7 +50,11 @@
   --color-accent-emphasis: #0969da;
   --color-attention-subtle: #fff8c5;
   --color-danger-fg: #cf222e;
-  --color-bg-table-th: #f4f4f4;
+  --color-table-th-color: #f4f4f4;
+  --color-blockquote-bg: #f9f9f9;
+  --color-blockquote-border: #ccc;
+  --color-blockquote-text: #24292f;
+  --color-blockquote-quote: #ccc;
 
   margin: 0;
   font-family: 'Hanken Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif,
@@ -94,7 +98,7 @@
     --color-prettylights-syntax-brackethighlighter-angle: #8b949e;
     --color-prettylights-syntax-sublimelinter-gutter-mark: #484f58;
     --color-prettylights-syntax-constant-other-reference-link: #a5d6ff;
-    --color-fg-default: #c9d1d9;
+    --color-fg-default: #ced4da;
     --color-fg-muted: #8b949e;
     --color-fg-subtle: #6e7681;
     --color-canvas-default: #212121;
@@ -106,7 +110,11 @@
     --color-accent-emphasis: #1f6feb;
     --color-attention-subtle: rgb(187 128 9 / 15%);
     --color-danger-fg: #f85149;
-    --color-bg-table-th: #f4f4f4;
+    --color-table-th-color: #212121;
+    --color-blockquote-bg: #24292f;
+    --color-blockquote-border: #57606a;
+    --color-blockquote-text: #ced4da;
+    --color-blockquote-quote: #8b949e;
   }
 
   &::before {
@@ -325,7 +333,6 @@
   }
 
   table th {
-    background-color: var(--color-bg-table-th);
     font-weight: var(--base-text-weight-semibold, 600);
   }
 
@@ -489,30 +496,34 @@
   }
   blockquote {
     font-size: 14px;
-    background:   #f9f9f9;
-    border-left:  10px solid #ccc;
-    margin:     1.5em 10px;
-    padding:    .5em 10px;
-    quotes:     "\201C""\201D""\2018""\2019";
+    background: var(--color-blockquote-bg);
+    border-left: 10px solid var(--color-blockquote-border);
+    margin: 1.5em 10px;
+    padding: .5em 10px;
+    quotes: "\201C""\201D""\2018""\2019";
+    color: var(--color-blockquote-text);
   }
+
   blockquote:before {
-    color:      #ccc;
-    content:    open-quote;
-    font-size:    3em;
-    line-height:  .1em;
+    color: var(--color-blockquote-quote);
+    content: open-quote;
+    font-size: 3em;
+    line-height: .1em;
     margin-right: .15em;
     vertical-align: -.4em;
   }
+
   blockquote:after {
-    color:      #ccc;
-    content:    close-quote;
-    font-size:    3em;
-    line-height:  .1em;
+    color: var(--color-blockquote-quote);
+    content: close-quote;
+    font-size: 3em;
+    line-height: .1em;
     margin-left: .15em;
     vertical-align: -.4em;
   }
+
   blockquote p {
-    display:    inline;
+    display: inline;
   }
 
   ul,
