@@ -21410,6 +21410,116 @@ img.ProseMirror-separator {
     }, 8, ["disabled", "color", "class", "onClick"]);
   }
   const ActionButton = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["render", _sfc_render$k]]);
+  const _sfc_main$j = {
+    components: {
+      ActionButton
+    },
+    props: {
+      editor: Object,
+      disabled: {
+        type: Boolean,
+        default: false
+      },
+      color: String,
+      maxHeight: [String, Number],
+      icon: String,
+      tooltip: {
+        type: String,
+        default: ""
+      },
+      items: {
+        type: Array,
+        default: () => []
+      }
+    },
+    data() {
+      return {
+        menu: false
+      };
+    },
+    computed: {
+      active() {
+        const find2 = this.items.find((k) => k.isActive());
+        if (find2 && !find2.default) {
+          return {
+            ...find2,
+            icon: find2.icon ? find2.icon : this.icon
+          };
+        }
+        return {
+          title: this.tooltip,
+          icon: this.icon,
+          isActive: () => false
+        };
+      }
+    }
+  };
+  function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_v_icon = components.VIcon;
+    const _component_v_list_item_title = components.VListItemTitle;
+    const _component_v_list_item = components.VListItem;
+    const _component_v_divider = components.VDivider;
+    const _component_v_list = components.VList;
+    const _component_v_menu = components.VMenu;
+    const _component_action_button = vue.resolveComponent("action-button");
+    return vue.openBlock(), vue.createBlock(_component_action_button, {
+      icon: $options.active.icon,
+      tooltip: $options.active.title,
+      disabled: $props.disabled,
+      color: $props.color,
+      "is-active": $options.active.isActive
+    }, {
+      default: vue.withCtx(() => [
+        vue.createVNode(_component_v_menu, {
+          modelValue: $data.menu,
+          "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $data.menu = $event),
+          activator: "parent"
+        }, {
+          default: vue.withCtx(() => [
+            vue.createVNode(_component_v_list, {
+              density: "compact",
+              "max-height": $props.maxHeight
+            }, {
+              default: vue.withCtx(() => [
+                (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($props.items, (item, i2) => {
+                  return vue.openBlock(), vue.createElementBlock(vue.Fragment, { key: i2 }, [
+                    vue.createVNode(_component_v_list_item, {
+                      active: item.isActive(),
+                      disabled: item.disabled,
+                      onClick: item.action
+                    }, {
+                      prepend: vue.withCtx(() => [
+                        item.icon ? (vue.openBlock(), vue.createBlock(_component_v_icon, {
+                          key: 0,
+                          icon: item.icon
+                        }, null, 8, ["icon"])) : vue.createCommentVNode("", true)
+                      ]),
+                      default: vue.withCtx(() => [
+                        vue.createVNode(_component_v_list_item_title, {
+                          style: vue.normalizeStyle(item.style)
+                        }, {
+                          default: vue.withCtx(() => [
+                            vue.createTextVNode(vue.toDisplayString(item.title), 1)
+                          ]),
+                          _: 2
+                        }, 1032, ["style"])
+                      ]),
+                      _: 2
+                    }, 1032, ["active", "disabled", "onClick"]),
+                    item.divider ? (vue.openBlock(), vue.createBlock(_component_v_divider, { key: 0 })) : vue.createCommentVNode("", true)
+                  ], 64);
+                }), 128))
+              ]),
+              _: 1
+            }, 8, ["max-height"])
+          ]),
+          _: 1
+        }, 8, ["modelValue"])
+      ]),
+      _: 1
+    }, 8, ["icon", "tooltip", "disabled", "color", "is-active"]);
+  }
+  const ActionMenuButton = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["render", _sfc_render$j]]);
   const supportedCodes = [
     "plaintext",
     "1c",
@@ -23657,116 +23767,6 @@ img.ProseMirror-separator {
       });
     }
   });
-  const _sfc_main$j = {
-    components: {
-      ActionButton
-    },
-    props: {
-      editor: Object,
-      disabled: {
-        type: Boolean,
-        default: false
-      },
-      color: String,
-      maxHeight: [String, Number],
-      icon: String,
-      tooltip: {
-        type: String,
-        default: ""
-      },
-      items: {
-        type: Array,
-        default: () => []
-      }
-    },
-    data() {
-      return {
-        menu: false
-      };
-    },
-    computed: {
-      active() {
-        const find2 = this.items.find((k) => k.isActive());
-        if (find2 && !find2.default) {
-          return {
-            ...find2,
-            icon: find2.icon ? find2.icon : this.icon
-          };
-        }
-        return {
-          title: this.tooltip,
-          icon: this.icon,
-          isActive: () => false
-        };
-      }
-    }
-  };
-  function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_v_icon = components.VIcon;
-    const _component_v_list_item_title = components.VListItemTitle;
-    const _component_v_list_item = components.VListItem;
-    const _component_v_divider = components.VDivider;
-    const _component_v_list = components.VList;
-    const _component_v_menu = components.VMenu;
-    const _component_action_button = vue.resolveComponent("action-button");
-    return vue.openBlock(), vue.createBlock(_component_action_button, {
-      icon: $options.active.icon,
-      tooltip: $options.active.title,
-      disabled: $props.disabled,
-      color: $props.color,
-      "is-active": $options.active.isActive
-    }, {
-      default: vue.withCtx(() => [
-        vue.createVNode(_component_v_menu, {
-          modelValue: $data.menu,
-          "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $data.menu = $event),
-          activator: "parent"
-        }, {
-          default: vue.withCtx(() => [
-            vue.createVNode(_component_v_list, {
-              density: "compact",
-              "max-height": $props.maxHeight
-            }, {
-              default: vue.withCtx(() => [
-                (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($props.items, (item, i2) => {
-                  return vue.openBlock(), vue.createElementBlock(vue.Fragment, { key: i2 }, [
-                    vue.createVNode(_component_v_list_item, {
-                      active: item.isActive(),
-                      disabled: item.disabled,
-                      onClick: item.action
-                    }, {
-                      prepend: vue.withCtx(() => [
-                        item.icon ? (vue.openBlock(), vue.createBlock(_component_v_icon, {
-                          key: 0,
-                          icon: item.icon
-                        }, null, 8, ["icon"])) : vue.createCommentVNode("", true)
-                      ]),
-                      default: vue.withCtx(() => [
-                        vue.createVNode(_component_v_list_item_title, {
-                          style: vue.normalizeStyle(item.style)
-                        }, {
-                          default: vue.withCtx(() => [
-                            vue.createTextVNode(vue.toDisplayString(item.title), 1)
-                          ]),
-                          _: 2
-                        }, 1032, ["style"])
-                      ]),
-                      _: 2
-                    }, 1032, ["active", "disabled", "onClick"]),
-                    item.divider ? (vue.openBlock(), vue.createBlock(_component_v_divider, { key: 0 })) : vue.createCommentVNode("", true)
-                  ], 64);
-                }), 128))
-              ]),
-              _: 1
-            }, 8, ["max-height"])
-          ]),
-          _: 1
-        }, 8, ["modelValue"])
-      ]),
-      _: 1
-    }, 8, ["icon", "tooltip", "disabled", "color", "is-active"]);
-  }
-  const ActionMenuButton = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["render", _sfc_render$j]]);
   const Heading = Heading$1.extend({
     addOptions() {
       var _a;
@@ -83626,6 +83626,8 @@ img.ProseMirror-separator {
     Underline,
     Video
   }, Symbol.toStringTag, { value: "Module" }));
+  exports2.ActionButton = ActionButton;
+  exports2.ActionMenuButton = ActionMenuButton;
   exports2.Context = useContext$1;
   exports2.OlotapEditor = OlotapEditor;
   exports2.OlotapPlugin = OlotapPlugin;
