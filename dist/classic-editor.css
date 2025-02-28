@@ -1,0 +1,1483 @@
+@charset "UTF-8";
+.olotap {
+  overflow-wrap: anywhere;
+  --color-table-bubble-bg-color: #FFFFFF;
+  --color-table-bubble-hover-bg-color: #f4f4f4;
+  /* Begin tailwind independent classes */
+  /* End tailwind independent classes */
+}
+.olotap.__dark {
+  --color-table-bubble-bg-color: #5c5c5c;
+  --color-table-bubble-hover-bg-color: #686868;
+}
+.olotap-editor {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-height: 100%;
+}
+.olotap-editor--fullscreen {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 200;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+}
+.olotap-editor__menu-bubble .v-toolbar__content {
+  padding: 0;
+}
+.olotap-editor__toolbar .v-toolbar__content {
+  flex-wrap: wrap;
+  row-gap: 4px;
+  padding: 4px 12px;
+}
+.olotap-editor__toolbar .v-toolbar__content .v-divider--vertical {
+  height: inherit;
+}
+.olotap-editor__content :focus-visible {
+  outline: -webkit-focus-ring-color auto 0;
+}
+.olotap-editor__content img {
+  display: inline-block;
+  float: none;
+}
+.olotap-editor__content img[data-display=inline] {
+  padding-right: 12px;
+  padding-left: 12px;
+}
+.olotap-editor__content img[data-display=block] {
+  display: block;
+}
+.olotap-editor__content img[data-display=left] {
+  float: left;
+  padding-right: 12px;
+  padding-left: 0;
+}
+.olotap-editor__content img[data-display=right] {
+  float: right;
+  padding-right: 0;
+  padding-left: 12px;
+}
+.olotap-editor__content .task-list {
+  padding-left: 0;
+  list-style: none;
+}
+.olotap-editor__content .task-list .task-list-item {
+  display: flex;
+  list-style: none;
+}
+.olotap-editor__content .task-list .task-list-item > label {
+  flex: 0 0 auto;
+  padding-right: 8px;
+  padding-left: 8px;
+  user-select: none;
+}
+.olotap-editor__content .task-list .task-list-item > div {
+  flex: 1 1 auto;
+}
+.olotap .ProseMirror {
+  min-height: 180px;
+  padding: 8px 18px;
+  overflow-wrap: anywhere;
+}
+.olotap .ProseMirror p.is-editor-empty:first-child::before {
+  float: left;
+  height: 0;
+  color: #adb5bd;
+  pointer-events: none;
+  content: attr(data-placeholder);
+}
+.olotap .ProseMirror .iframe-wrapper.focus > div, .olotap .ProseMirror .iframe-wrapper.ProseMirror-selectednode > div {
+  outline: 4px solid #409eff;
+  transition: outline 0.15s ease-in;
+}
+.olotap .ProseMirror .hr-wrapper:hover, .olotap .ProseMirror .blockquote-wrapper:hover, .olotap .ProseMirror .code-block-wrapper:hover {
+  outline-color: #ffc83d;
+}
+.olotap .ProseMirror .hr-wrapper--focused:hover, .olotap .ProseMirror .hr-wrapper.focus, .olotap .ProseMirror .hr-wrapper.ProseMirror-selectednode, .olotap .ProseMirror .blockquote-wrapper--focused:hover, .olotap .ProseMirror .blockquote-wrapper.focus, .olotap .ProseMirror .blockquote-wrapper.ProseMirror-selectednode, .olotap .ProseMirror .code-block-wrapper--focused:hover, .olotap .ProseMirror .code-block-wrapper.focus, .olotap .ProseMirror .code-block-wrapper.ProseMirror-selectednode {
+  outline: 4px solid #409eff;
+  transition: outline 0.15s ease-in;
+}
+.olotap .ProseMirror .table-wrapper td,
+.olotap .ProseMirror .table-wrapper th {
+  position: relative;
+  cursor: default;
+  /* right side */
+  /* left side */
+}
+.olotap .ProseMirror .table-wrapper td:hover,
+.olotap .ProseMirror .table-wrapper th:hover {
+  cursor: ew-resize;
+}
+.olotap .ProseMirror .table-wrapper td:hover,
+.olotap .ProseMirror .table-wrapper th:hover {
+  cursor: ew-resize;
+}
+.olotap .ProseMirror .table-wrapper .selectedCell {
+  position: relative;
+  cursor: grab;
+}
+.olotap .ProseMirror .table-wrapper .selectedCell::after {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  content: "";
+  background: rgba(200, 200, 255, 0.4);
+}
+.olotap .ProseMirror .tableWrapper td,
+.olotap .ProseMirror .tableWrapper th {
+  position: relative;
+  cursor: default;
+  /* right side */
+  /* left side */
+}
+.olotap .ProseMirror .tableWrapper td:hover,
+.olotap .ProseMirror .tableWrapper th:hover {
+  cursor: ew-resize;
+}
+.olotap .ProseMirror .tableWrapper td:hover,
+.olotap .ProseMirror .tableWrapper th:hover {
+  cursor: ew-resize;
+}
+.olotap .ProseMirror .tableWrapper .selectedCell {
+  position: relative;
+  cursor: grabbing;
+}
+.olotap .ProseMirror .tableWrapper .selectedCell::after {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  content: "";
+  background: rgba(200, 200, 255, 0.4);
+}
+.olotap .ProseMirror .image-view {
+  display: inline-block;
+  float: none;
+  max-width: 100%;
+  line-height: 0;
+  vertical-align: baseline;
+  user-select: none;
+}
+.olotap .ProseMirror .image-view--inline {
+  margin-right: 0;
+  margin-left: 0;
+}
+.olotap .ProseMirror .image-view--block {
+  display: block;
+}
+.olotap .ProseMirror .image-view--left {
+  float: left;
+  margin-right: 12px;
+  margin-left: 0;
+}
+.olotap .ProseMirror .image-view--right {
+  float: right;
+  margin-right: 0;
+  margin-left: 12px;
+}
+.olotap .ProseMirror .image-view__body {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+  clear: both;
+  outline: transparent solid 2px;
+  transition: all 0.2s ease-in;
+}
+.olotap .ProseMirror .image-view__body:hover {
+  outline-color: #ffc83d;
+}
+.olotap .ProseMirror .image-view__body--focused:hover, .olotap .ProseMirror .image-view__body--resizing:hover {
+  outline-color: transparent;
+}
+.olotap .ProseMirror .image-view__body__placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+}
+.olotap .ProseMirror .image-view__body__image {
+  margin: 0;
+  cursor: pointer !important;
+}
+.olotap .ProseMirror .image-view.focus img, .olotap .ProseMirror .image-view.ProseMirror-selectednode img {
+  outline: 2px solid #409eff;
+  transition: outline 0.15s ease-in;
+}
+.olotap .ProseMirror .image-resizer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  border: 1px solid #409eff;
+}
+.olotap .ProseMirror .image-resizer__handler {
+  position: absolute;
+  z-index: 2;
+  box-sizing: border-box;
+  display: block;
+  width: 12px;
+  height: 12px;
+  background-color: #409eff;
+  border: 1px solid #fff;
+  border-radius: 2px;
+}
+.olotap .ProseMirror .image-resizer__handler--tl {
+  top: -6px;
+  left: -6px;
+  cursor: nw-resize;
+}
+.olotap .ProseMirror .image-resizer__handler--tr {
+  top: -6px;
+  right: -6px;
+  cursor: ne-resize;
+}
+.olotap .ProseMirror .image-resizer__handler--bl {
+  bottom: -6px;
+  left: -6px;
+  cursor: sw-resize;
+}
+.olotap .ProseMirror .image-resizer__handler--br {
+  right: -6px;
+  bottom: -6px;
+  cursor: se-resize;
+}
+.olotap.dense .ProseMirror {
+  min-height: 32px;
+  padding: 6px 12px;
+}
+.olotap.dense p {
+  padding: 0;
+  line-height: 1.2rem;
+}
+.olotap .rounded-full {
+  border-radius: 9999px;
+}
+.olotap .w-full {
+  width: 100%;
+}
+.olotap .p-1 {
+  padding: 0.25rem;
+}
+.olotap .py-1 {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+.olotap .pl-2 {
+  padding-left: 0.5rem;
+}
+.olotap .pr-6 {
+  padding-right: 1.5rem;
+}
+.olotap .py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+.olotap .bg-white {
+  color: var(--color-fg-default) !important;
+  background-color: var(--color-table-bubble-bg-color) !important;
+}
+.olotap .shadow {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+.olotap .group-focus-within\:block {
+  display: none;
+}
+.olotap .group:focus-within .group-focus-within\:block {
+  display: block;
+}
+.olotap .hidden {
+  display: none;
+}
+.olotap .overflow-hidden {
+  overflow: hidden;
+}
+.olotap .whitespace-nowrap {
+  white-space: nowrap;
+}
+.olotap .absolute {
+  position: absolute;
+}
+.olotap .bottom-full {
+  bottom: 100%;
+}
+.olotap .mt-4 {
+  margin-top: 1rem;
+}
+.olotap .border {
+  border-width: 1px;
+}
+.olotap .border-slate-400 {
+  border-color: #dcddde;
+}
+.olotap .flex {
+  display: flex;
+}
+.olotap .flex-row {
+  flex-direction: row;
+}
+.olotap .flex-column {
+  flex-direction: column;
+}
+.olotap .group {
+  display: inline-block;
+}
+.olotap .text-sm {
+  font-size: 0.875rem;
+}
+.olotap .relative {
+  position: relative;
+}
+.olotap .items-center {
+  align-items: center;
+}
+.olotap .text-slate-400 {
+  color: var(--color-fg-default);
+}
+.olotap .text-slate-600 {
+  color: var(--color-fg-default);
+}
+.olotap .rounded {
+  border-radius: 0.25rem;
+}
+.olotap .left-0 {
+  left: 0;
+}
+.olotap .right-0 {
+  right: 0;
+}
+.olotap .gap-2 {
+  gap: 0.5rem;
+}
+.olotap .hover\:bg-slate-100 {
+  transition: background-color 150ms ease-in-out;
+}
+.olotap .hover\:bg-slate-100:hover {
+  background-color: var(--color-table-bubble-hover-bg-color);
+}
+.olotap .bg-slate-600 {
+  background-color: #475569 !important;
+}
+.olotap .hover\:bg-slate-700 {
+  background-color: white;
+  transition: background-color 150ms ease-in-out;
+}
+.olotap .hover\:bg-slate-700:hover {
+  background-color: #a0a1a3;
+}
+.olotap .text-white {
+  color: var(--color-fg-default);
+}
+@media (min-width: 640px) {
+  .olotap .sm\:bottom-auto {
+    bottom: auto;
+  }
+  .olotap .sm\:top-full {
+    top: 100%;
+  }
+}
+.olotap .w-5 {
+  width: 1.25rem;
+}
+.olotap .h-5 {
+  height: 1.25rem;
+}
+@media (min-width: 768px) {
+  .olotap .md\:w-6 {
+    width: 1.5rem;
+  }
+  .olotap .md\:h-6 {
+    height: 1.5rem;
+  }
+}
+.olotap .w-6 {
+  width: 1.5rem;
+}
+.olotap .h-6 {
+  height: 1.5rem;
+}
+
+.table-grid-size-editor__cell__inner {
+  box-sizing: border-box;
+  width: 16px;
+  height: 16px;
+  padding: 4px;
+  border: 1px solid #dcdfe6;
+  border-radius: 2px;
+}
+.table-grid-size-editor__cell--selected .table-grid-size-editor__cell__inner {
+  background-color: #ecf5ff;
+  border-color: #409eff;
+}
+
+.table-menu .v-list-item:hover {
+  cursor: pointer;
+}
+
+/*
+ * @See https://github.com/sindresorhus/github-markdown-css/blob/main/github-markdown.css
+ * @Author: sindresorhus
+ * @Date: 2023-06-12 22:11:14
+ * @Last Modified by: yky
+ * @Last Modified by: oloma.dev
+ * @Last Modified time: 2025-02-21 18:16:00
+ */
+/* stylelint-disable */
+.olotap-editor__content.markdown-theme-default {
+  --color-prettylights-syntax-comment: #6e7781;
+  --color-prettylights-syntax-constant: #0550ae;
+  --color-prettylights-syntax-entity: #8250df;
+  --color-prettylights-syntax-storage-modifier-import: #24292f;
+  --color-prettylights-syntax-entity-tag: #116329;
+  --color-prettylights-syntax-keyword: #cf222e;
+  --color-prettylights-syntax-string: #0a3069;
+  --color-prettylights-syntax-variable: #953800;
+  --color-prettylights-syntax-brackethighlighter-unmatched: #82071e;
+  --color-prettylights-syntax-invalid-illegal-text: #f6f8fa;
+  --color-prettylights-syntax-invalid-illegal-bg: #82071e;
+  --color-prettylights-syntax-carriage-return-text: #f6f8fa;
+  --color-prettylights-syntax-carriage-return-bg: #cf222e;
+  --color-prettylights-syntax-string-regexp: #116329;
+  --color-prettylights-syntax-markup-list: #3b2300;
+  --color-prettylights-syntax-markup-heading: #0550ae;
+  --color-prettylights-syntax-markup-italic: #24292f;
+  --color-prettylights-syntax-markup-bold: #24292f;
+  --color-prettylights-syntax-markup-deleted-text: #82071e;
+  --color-prettylights-syntax-markup-deleted-bg: #ffebe9;
+  --color-prettylights-syntax-markup-inserted-text: #116329;
+  --color-prettylights-syntax-markup-inserted-bg: #dafbe1;
+  --color-prettylights-syntax-markup-changed-text: #953800;
+  --color-prettylights-syntax-markup-changed-bg: #ffd8b5;
+  --color-prettylights-syntax-markup-ignored-text: #eaeef2;
+  --color-prettylights-syntax-markup-ignored-bg: #0550ae;
+  --color-prettylights-syntax-meta-diff-range: #8250df;
+  --color-prettylights-syntax-brackethighlighter-angle: #57606a;
+  --color-prettylights-syntax-sublimelinter-gutter-mark: #8c959f;
+  --color-prettylights-syntax-constant-other-reference-link: #0a3069;
+  --color-fg-default: #24292f;
+  --color-fg-muted: #57606a;
+  --color-fg-subtle: #6e7781;
+  --color-canvas-default: #fff;
+  --color-canvas-subtle: #f6f8fa;
+  --color-border-default: #d0d7de;
+  --color-border-muted: hsl(210deg 18% 87% / 100%);
+  --color-neutral-muted: rgb(175 184 193 / 20%);
+  --color-accent-fg: #0969da;
+  --color-accent-emphasis: #0969da;
+  --color-attention-subtle: #fff8c5;
+  --color-danger-fg: #cf222e;
+  --color-table-th-color: #f4f4f4;
+  --color-blockquote-bg: #f9f9f9;
+  --color-blockquote-border: #ccc;
+  --color-blockquote-text: #24292f;
+  --color-blockquote-quote: #ccc;
+  margin: 0;
+  font-family: "Hanken Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-fg-default);
+  word-wrap: break-word;
+  background-color: var(--color-canvas-default);
+  text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  /*
+  table tr:nth-child(2n) {
+    background-color: var(--color-canvas-subtle);
+  }
+  */
+  /* Code block */
+  /* Code styling */
+  /* Code styling end*/
+}
+.olotap-editor__content.markdown-theme-default.__dark {
+  --color-prettylights-syntax-comment: #8b949e;
+  --color-prettylights-syntax-constant: #79c0ff;
+  --color-prettylights-syntax-entity: #d2a8ff;
+  --color-prettylights-syntax-storage-modifier-import: #c9d1d9;
+  --color-prettylights-syntax-entity-tag: #7ee787;
+  --color-prettylights-syntax-keyword: #ff7b72;
+  --color-prettylights-syntax-string: #a5d6ff;
+  --color-prettylights-syntax-variable: #ffa657;
+  --color-prettylights-syntax-brackethighlighter-unmatched: #f85149;
+  --color-prettylights-syntax-invalid-illegal-text: #f0f6fc;
+  --color-prettylights-syntax-invalid-illegal-bg: #8e1519;
+  --color-prettylights-syntax-carriage-return-text: #f0f6fc;
+  --color-prettylights-syntax-carriage-return-bg: #b62324;
+  --color-prettylights-syntax-string-regexp: #7ee787;
+  --color-prettylights-syntax-markup-list: #f2cc60;
+  --color-prettylights-syntax-markup-heading: #1f6feb;
+  --color-prettylights-syntax-markup-italic: #c9d1d9;
+  --color-prettylights-syntax-markup-bold: #c9d1d9;
+  --color-prettylights-syntax-markup-deleted-text: #ffdcd7;
+  --color-prettylights-syntax-markup-deleted-bg: #67060c;
+  --color-prettylights-syntax-markup-inserted-text: #aff5b4;
+  --color-prettylights-syntax-markup-inserted-bg: #033a16;
+  --color-prettylights-syntax-markup-changed-text: #ffdfb6;
+  --color-prettylights-syntax-markup-changed-bg: #5a1e02;
+  --color-prettylights-syntax-markup-ignored-text: #c9d1d9;
+  --color-prettylights-syntax-markup-ignored-bg: #1158c7;
+  --color-prettylights-syntax-meta-diff-range: #d2a8ff;
+  --color-prettylights-syntax-brackethighlighter-angle: #8b949e;
+  --color-prettylights-syntax-sublimelinter-gutter-mark: #484f58;
+  --color-prettylights-syntax-constant-other-reference-link: #a5d6ff;
+  --color-fg-default: #ced4da;
+  --color-fg-muted: #8b949e;
+  --color-fg-subtle: #6e7681;
+  --color-canvas-default: #212121;
+  --color-canvas-subtle: #161b22;
+  --color-border-default: #ced4da;
+  --color-border-muted: #21262d;
+  --color-neutral-muted: rgb(110 118 129 / 40%);
+  --color-accent-fg: #58a6ff;
+  --color-accent-emphasis: #1f6feb;
+  --color-attention-subtle: rgb(187 128 9 / 15%);
+  --color-danger-fg: #f85149;
+  --color-table-th-color: #4f4f4f;
+  --color-blockquote-bg: #24292f;
+  --color-blockquote-border: #57606a;
+  --color-blockquote-text: #ced4da;
+  --color-blockquote-quote: #8b949e;
+}
+.olotap-editor__content.markdown-theme-default::before {
+  display: table;
+  content: "";
+}
+.olotap-editor__content.markdown-theme-default::after {
+  display: table;
+  clear: both;
+  content: "";
+}
+.olotap-editor__content.markdown-theme-default .octicon {
+  display: inline-block;
+  vertical-align: text-bottom;
+  fill: currentcolor;
+}
+.olotap-editor__content.markdown-theme-default h1:hover .anchor .octicon-link::before,
+.olotap-editor__content.markdown-theme-default h2:hover .anchor .octicon-link::before,
+.olotap-editor__content.markdown-theme-default h3:hover .anchor .octicon-link::before,
+.olotap-editor__content.markdown-theme-default h4:hover .anchor .octicon-link::before,
+.olotap-editor__content.markdown-theme-default h5:hover .anchor .octicon-link::before,
+.olotap-editor__content.markdown-theme-default h6:hover .anchor .octicon-link::before {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  content: " ";
+  background-color: currentcolor;
+  mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' version='1.1' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg>");
+  mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' version='1.1' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg>");
+}
+.olotap-editor__content.markdown-theme-default details,
+.olotap-editor__content.markdown-theme-default figcaption,
+.olotap-editor__content.markdown-theme-default figure {
+  display: block;
+}
+.olotap-editor__content.markdown-theme-default summary {
+  display: list-item;
+}
+.olotap-editor__content.markdown-theme-default [hidden] {
+  display: none !important;
+}
+.olotap-editor__content.markdown-theme-default a {
+  color: var(--color-accent-fg);
+  text-decoration: none;
+  background-color: transparent;
+}
+.olotap-editor__content.markdown-theme-default abbr[title] {
+  text-decoration: underline dotted;
+  border-bottom: none;
+}
+.olotap-editor__content.markdown-theme-default b,
+.olotap-editor__content.markdown-theme-default strong {
+  font-weight: var(--base-text-weight-semibold, 600);
+}
+.olotap-editor__content.markdown-theme-default dfn {
+  font-style: italic;
+}
+.olotap-editor__content.markdown-theme-default mark {
+  color: var(--color-fg-default);
+  background-color: var(--color-attention-subtle);
+}
+.olotap-editor__content.markdown-theme-default small {
+  font-size: 90%;
+}
+.olotap-editor__content.markdown-theme-default sub,
+.olotap-editor__content.markdown-theme-default sup {
+  position: relative;
+  font-size: 75%;
+  line-height: 0;
+  vertical-align: baseline;
+}
+.olotap-editor__content.markdown-theme-default sub {
+  bottom: -0.25em;
+}
+.olotap-editor__content.markdown-theme-default sup {
+  top: -0.5em;
+}
+.olotap-editor__content.markdown-theme-default img {
+  box-sizing: content-box;
+  max-width: 100%;
+  background-color: var(--color-canvas-default);
+  border-style: none;
+  display: inline-block;
+  float: none;
+}
+.olotap-editor__content.markdown-theme-default img[data-display=inline] {
+  padding-right: 12px;
+  padding-left: 12px;
+}
+.olotap-editor__content.markdown-theme-default img[data-display=block] {
+  display: block;
+}
+.olotap-editor__content.markdown-theme-default img[data-display=left] {
+  float: left;
+  padding-right: 12px;
+  padding-left: 0;
+}
+.olotap-editor__content.markdown-theme-default img[data-display=right] {
+  float: right;
+  padding-right: 0;
+  padding-left: 12px;
+}
+.olotap-editor__content.markdown-theme-default code,
+.olotap-editor__content.markdown-theme-default kbd,
+.olotap-editor__content.markdown-theme-default pre,
+.olotap-editor__content.markdown-theme-default samp {
+  font-family: monospace;
+  font-size: 1em;
+}
+.olotap-editor__content.markdown-theme-default hr {
+  box-sizing: content-box;
+  height: 0.25em;
+  padding: 0;
+  margin: 24px 0;
+  overflow: hidden;
+  background: transparent;
+  background-color: var(--color-border-default);
+  border: 0;
+  border-bottom: 1px solid var(--color-border-muted);
+}
+.olotap-editor__content.markdown-theme-default input {
+  margin: 0;
+  overflow: visible;
+  font: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+.olotap-editor__content.markdown-theme-default [type=button],
+.olotap-editor__content.markdown-theme-default [type=reset],
+.olotap-editor__content.markdown-theme-default [type=submit] {
+  appearance: button;
+}
+.olotap-editor__content.markdown-theme-default [type=checkbox],
+.olotap-editor__content.markdown-theme-default [type=radio] {
+  box-sizing: border-box;
+  padding: 0;
+}
+.olotap-editor__content.markdown-theme-default [type=number]::-webkit-inner-spin-button,
+.olotap-editor__content.markdown-theme-default [type=number]::-webkit-outer-spin-button {
+  height: auto;
+}
+.olotap-editor__content.markdown-theme-default [type=search]::-webkit-search-cancel-button,
+.olotap-editor__content.markdown-theme-default [type=search]::-webkit-search-decoration {
+  appearance: none;
+}
+.olotap-editor__content.markdown-theme-default ::input-placeholder {
+  color: inherit;
+  opacity: 0.54;
+}
+.olotap-editor__content.markdown-theme-default ::-webkit-file-upload-button {
+  font: inherit;
+  appearance: button;
+}
+.olotap-editor__content.markdown-theme-default a:hover {
+  text-decoration: underline;
+}
+.olotap-editor__content.markdown-theme-default ::placeholder {
+  color: var(--color-fg-subtle);
+  opacity: 1;
+}
+.olotap-editor__content.markdown-theme-default hr::before {
+  display: table;
+  content: "";
+}
+.olotap-editor__content.markdown-theme-default hr::after {
+  display: table;
+  clear: both;
+  content: "";
+}
+.olotap-editor__content.markdown-theme-default table {
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+.olotap-editor__content.markdown-theme-default td,
+.olotap-editor__content.markdown-theme-default th {
+  padding: 0;
+}
+.olotap-editor__content.markdown-theme-default table th {
+  background-color: var(--color-table-th-color);
+  font-weight: var(--base-text-weight-semibold, 600);
+}
+.olotap-editor__content.markdown-theme-default table th,
+.olotap-editor__content.markdown-theme-default table td {
+  padding: 0.2rem 0.5rem;
+  border: 1px solid var(--color-border-default);
+}
+.olotap-editor__content.markdown-theme-default table tr {
+  background-color: var(--color-canvas-default);
+  border-top: 1px solid var(--color-border-muted);
+}
+.olotap-editor__content.markdown-theme-default table img {
+  background-color: transparent;
+}
+.olotap-editor__content.markdown-theme-default details summary {
+  cursor: pointer;
+}
+.olotap-editor__content.markdown-theme-default details:not([open]) > *:not(summary) {
+  display: none !important;
+}
+.olotap-editor__content.markdown-theme-default a:focus,
+.olotap-editor__content.markdown-theme-default [role=button]:focus,
+.olotap-editor__content.markdown-theme-default input[type=radio]:focus,
+.olotap-editor__content.markdown-theme-default input[type=checkbox]:focus {
+  outline: 2px solid var(--color-accent-fg);
+  outline-offset: -2px;
+  box-shadow: none;
+}
+.olotap-editor__content.markdown-theme-default a:focus:not(:focus-visible),
+.olotap-editor__content.markdown-theme-default [role=button]:focus:not(:focus-visible),
+.olotap-editor__content.markdown-theme-default input[type=radio]:focus:not(:focus-visible),
+.olotap-editor__content.markdown-theme-default input[type=checkbox]:focus:not(:focus-visible) {
+  outline: solid 1px transparent;
+}
+.olotap-editor__content.markdown-theme-default a:focus-visible,
+.olotap-editor__content.markdown-theme-default [role=button]:focus-visible,
+.olotap-editor__content.markdown-theme-default input[type=radio]:focus-visible,
+.olotap-editor__content.markdown-theme-default input[type=checkbox]:focus-visible {
+  outline: 2px solid var(--color-accent-fg);
+  outline-offset: -2px;
+  box-shadow: none;
+}
+.olotap-editor__content.markdown-theme-default a:not([class]):focus,
+.olotap-editor__content.markdown-theme-default a:not([class]):focus-visible,
+.olotap-editor__content.markdown-theme-default input[type=radio]:focus,
+.olotap-editor__content.markdown-theme-default input[type=radio]:focus-visible,
+.olotap-editor__content.markdown-theme-default input[type=checkbox]:focus,
+.olotap-editor__content.markdown-theme-default input[type=checkbox]:focus-visible {
+  outline-offset: 0;
+}
+.olotap-editor__content.markdown-theme-default kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font: 11px ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  line-height: 10px;
+  color: var(--color-fg-default);
+  vertical-align: middle;
+  background-color: var(--color-canvas-subtle);
+  border: solid 1px var(--color-neutral-muted);
+  border-bottom-color: var(--color-neutral-muted);
+  border-radius: 6px;
+  box-shadow: inset 0 -1px 0 var(--color-neutral-muted);
+}
+.olotap-editor__content.markdown-theme-default h1,
+.olotap-editor__content.markdown-theme-default h2,
+.olotap-editor__content.markdown-theme-default h3,
+.olotap-editor__content.markdown-theme-default h4,
+.olotap-editor__content.markdown-theme-default h5,
+.olotap-editor__content.markdown-theme-default h6 {
+  margin-top: 24px;
+  margin-bottom: 16px;
+  line-height: 1.25;
+}
+.olotap-editor__content.markdown-theme-default h1 {
+  font-size: 34px;
+}
+.olotap-editor__content.markdown-theme-default h2 {
+  font-size: 2.5em;
+}
+.olotap-editor__content.markdown-theme-default h3 {
+  font-size: 2em;
+}
+.olotap-editor__content.markdown-theme-default h4 {
+  font-size: 1.8em;
+}
+.olotap-editor__content.markdown-theme-default h5 {
+  font-size: 1.6em;
+}
+.olotap-editor__content.markdown-theme-default h6 {
+  font-size: 1.5em;
+  color: var(--color-fg-muted);
+}
+.olotap-editor__content.markdown-theme-default p {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+.olotap-editor__content.markdown-theme-default p:empty::after {
+  content: " ";
+}
+.olotap-editor__content.markdown-theme-default figure {
+  align-items: start;
+  /*border: 1px solid #d6d7da;
+  border-radius: 0.5rem;*/
+  display: flex;
+  flex-direction: column;
+  /*  gap: 0.5rem;
+    margin: 1rem 0;
+    padding: 0.5rem;*/
+  width: fit-content;
+}
+.olotap-editor__content.markdown-theme-default figure > *:not(figcaption) {
+  margin: 0;
+  max-width: 100%;
+}
+.olotap-editor__content.markdown-theme-default figure:has(figcaption:active) {
+  border-color: purple;
+}
+.olotap-editor__content.markdown-theme-default figure figcaption {
+  font-size: 12px;
+  border-radius: 0.5rem;
+  color: gray;
+  padding: 0.1rem;
+  text-align: center;
+  width: 100%;
+}
+.olotap-editor__content.markdown-theme-default blockquote .ProseMirror-trailingBreak {
+  display: none;
+}
+.olotap-editor__content.markdown-theme-default blockquote {
+  font-size: 14px;
+  background: var(--color-blockquote-bg);
+  border-left: 10px solid var(--color-blockquote-border);
+  margin: 1.5em 10px;
+  padding: 0.5em 10px;
+  quotes: "“" "”" "‘" "’";
+  color: var(--color-blockquote-text);
+}
+.olotap-editor__content.markdown-theme-default blockquote:before {
+  color: var(--color-blockquote-quote);
+  content: open-quote;
+  font-size: 3em;
+  line-height: 0.1em;
+  margin-right: 0.15em;
+  vertical-align: -0.4em;
+}
+.olotap-editor__content.markdown-theme-default blockquote:after {
+  color: var(--color-blockquote-quote);
+  content: close-quote;
+  font-size: 3em;
+  line-height: 0.1em;
+  margin-left: 0.15em;
+  vertical-align: -0.4em;
+}
+.olotap-editor__content.markdown-theme-default blockquote p {
+  display: inline;
+}
+.olotap-editor__content.markdown-theme-default ul,
+.olotap-editor__content.markdown-theme-default ol {
+  padding-left: 2em;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.olotap-editor__content.markdown-theme-default ol ol,
+.olotap-editor__content.markdown-theme-default ul ol {
+  list-style-type: lower-roman;
+}
+.olotap-editor__content.markdown-theme-default ul ul ol,
+.olotap-editor__content.markdown-theme-default ul ol ol,
+.olotap-editor__content.markdown-theme-default ol ul ol,
+.olotap-editor__content.markdown-theme-default ol ol ol {
+  list-style-type: lower-alpha;
+}
+.olotap-editor__content.markdown-theme-default dd {
+  margin-left: 0;
+}
+.olotap-editor__content.markdown-theme-default tt,
+.olotap-editor__content.markdown-theme-default code,
+.olotap-editor__content.markdown-theme-default samp {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: 12px;
+}
+.olotap-editor__content.markdown-theme-default .code-block-content {
+  background: #000;
+  border-radius: 0.5rem;
+  color: #fff;
+  font-family: "JetBrainsMono", monospace, ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono";
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 12px;
+  word-wrap: normal;
+  padding: 0.75rem 1rem;
+}
+.olotap-editor__content.markdown-theme-default .hljs-comment,
+.olotap-editor__content.markdown-theme-default .hljs-quote {
+  color: #616161;
+}
+.olotap-editor__content.markdown-theme-default .hljs-variable,
+.olotap-editor__content.markdown-theme-default .hljs-template-variable,
+.olotap-editor__content.markdown-theme-default .hljs-attribute,
+.olotap-editor__content.markdown-theme-default .hljs-tag,
+.olotap-editor__content.markdown-theme-default .hljs-name,
+.olotap-editor__content.markdown-theme-default .hljs-regexp,
+.olotap-editor__content.markdown-theme-default .hljs-link,
+.olotap-editor__content.markdown-theme-default .hljs-name,
+.olotap-editor__content.markdown-theme-default .hljs-selector-id,
+.olotap-editor__content.markdown-theme-default .hljs-selector-class {
+  color: #f98181;
+}
+.olotap-editor__content.markdown-theme-default .hljs-number,
+.olotap-editor__content.markdown-theme-default .hljs-meta,
+.olotap-editor__content.markdown-theme-default .hljs-built_in,
+.olotap-editor__content.markdown-theme-default .hljs-builtin-name,
+.olotap-editor__content.markdown-theme-default .hljs-literal,
+.olotap-editor__content.markdown-theme-default .hljs-type,
+.olotap-editor__content.markdown-theme-default .hljs-params {
+  color: #fbbc88;
+}
+.olotap-editor__content.markdown-theme-default .hljs-string,
+.olotap-editor__content.markdown-theme-default .hljs-symbol,
+.olotap-editor__content.markdown-theme-default .hljs-bullet {
+  color: #b9f18d;
+}
+.olotap-editor__content.markdown-theme-default .hljs-title,
+.olotap-editor__content.markdown-theme-default .hljs-section {
+  color: #faf594;
+}
+.olotap-editor__content.markdown-theme-default .hljs-keyword,
+.olotap-editor__content.markdown-theme-default .hljs-selector-tag {
+  color: #70cff8;
+}
+.olotap-editor__content.markdown-theme-default .hljs-emphasis {
+  font-style: italic;
+}
+.olotap-editor__content.markdown-theme-default .hljs-strong {
+  font-weight: 700;
+}
+.olotap-editor__content.markdown-theme-default pre code {
+  background: none;
+  color: inherit;
+  font-size: 0.8rem;
+  padding: 0;
+}
+.olotap-editor__content.markdown-theme-default .octicon {
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentcolor;
+}
+.olotap-editor__content.markdown-theme-default input::-webkit-outer-spin-button,
+.olotap-editor__content.markdown-theme-default input::-webkit-inner-spin-button {
+  margin: 0;
+  appearance: none;
+  appearance: none;
+}
+.olotap-editor__content.markdown-theme-default > *:first-child {
+  margin-top: 0 !important;
+}
+.olotap-editor__content.markdown-theme-default > *:last-child {
+  margin-bottom: 0 !important;
+}
+.olotap-editor__content.markdown-theme-default a:not([href]) {
+  color: inherit;
+  text-decoration: none;
+}
+.olotap-editor__content.markdown-theme-default .absent {
+  color: var(--color-danger-fg);
+}
+.olotap-editor__content.markdown-theme-default .anchor {
+  float: left;
+  padding-right: 4px;
+  margin-left: -20px;
+  line-height: 1;
+}
+.olotap-editor__content.markdown-theme-default .anchor:focus {
+  outline: none;
+}
+.olotap-editor__content.markdown-theme-default p,
+.olotap-editor__content.markdown-theme-default blockquote,
+.olotap-editor__content.markdown-theme-default ul,
+.olotap-editor__content.markdown-theme-default ol,
+.olotap-editor__content.markdown-theme-default dl,
+.olotap-editor__content.markdown-theme-default table,
+.olotap-editor__content.markdown-theme-default pre,
+.olotap-editor__content.markdown-theme-default details {
+  margin-top: 0;
+  margin-bottom: 0px;
+}
+.olotap-editor__content.markdown-theme-default blockquote > :first-child {
+  margin-top: 0;
+}
+.olotap-editor__content.markdown-theme-default blockquote > :last-child {
+  margin-bottom: 0;
+}
+.olotap-editor__content.markdown-theme-default h1 .octicon-link,
+.olotap-editor__content.markdown-theme-default h2 .octicon-link,
+.olotap-editor__content.markdown-theme-default h3 .octicon-link,
+.olotap-editor__content.markdown-theme-default h4 .octicon-link,
+.olotap-editor__content.markdown-theme-default h5 .octicon-link,
+.olotap-editor__content.markdown-theme-default h6 .octicon-link {
+  color: var(--color-fg-default);
+  vertical-align: middle;
+  visibility: hidden;
+}
+.olotap-editor__content.markdown-theme-default h1:hover .anchor,
+.olotap-editor__content.markdown-theme-default h2:hover .anchor,
+.olotap-editor__content.markdown-theme-default h3:hover .anchor,
+.olotap-editor__content.markdown-theme-default h4:hover .anchor,
+.olotap-editor__content.markdown-theme-default h5:hover .anchor,
+.olotap-editor__content.markdown-theme-default h6:hover .anchor {
+  text-decoration: none;
+}
+.olotap-editor__content.markdown-theme-default h1:hover .anchor .octicon-link,
+.olotap-editor__content.markdown-theme-default h2:hover .anchor .octicon-link,
+.olotap-editor__content.markdown-theme-default h3:hover .anchor .octicon-link,
+.olotap-editor__content.markdown-theme-default h4:hover .anchor .octicon-link,
+.olotap-editor__content.markdown-theme-default h5:hover .anchor .octicon-link,
+.olotap-editor__content.markdown-theme-default h6:hover .anchor .octicon-link {
+  visibility: visible;
+}
+.olotap-editor__content.markdown-theme-default h1 tt,
+.olotap-editor__content.markdown-theme-default h1 code,
+.olotap-editor__content.markdown-theme-default h2 tt,
+.olotap-editor__content.markdown-theme-default h2 code,
+.olotap-editor__content.markdown-theme-default h3 tt,
+.olotap-editor__content.markdown-theme-default h3 code,
+.olotap-editor__content.markdown-theme-default h4 tt,
+.olotap-editor__content.markdown-theme-default h4 code,
+.olotap-editor__content.markdown-theme-default h5 tt,
+.olotap-editor__content.markdown-theme-default h5 code,
+.olotap-editor__content.markdown-theme-default h6 tt,
+.olotap-editor__content.markdown-theme-default h6 code {
+  padding: 0 0.2em;
+  font-size: inherit;
+}
+.olotap-editor__content.markdown-theme-default summary h1,
+.olotap-editor__content.markdown-theme-default summary h2,
+.olotap-editor__content.markdown-theme-default summary h3,
+.olotap-editor__content.markdown-theme-default summary h4,
+.olotap-editor__content.markdown-theme-default summary h5,
+.olotap-editor__content.markdown-theme-default summary h6 {
+  display: inline-block;
+}
+.olotap-editor__content.markdown-theme-default summary h1 .anchor,
+.olotap-editor__content.markdown-theme-default summary h2 .anchor,
+.olotap-editor__content.markdown-theme-default summary h3 .anchor,
+.olotap-editor__content.markdown-theme-default summary h4 .anchor,
+.olotap-editor__content.markdown-theme-default summary h5 .anchor,
+.olotap-editor__content.markdown-theme-default summary h6 .anchor {
+  margin-left: -40px;
+}
+.olotap-editor__content.markdown-theme-default summary h1,
+.olotap-editor__content.markdown-theme-default summary h2 {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+.olotap-editor__content.markdown-theme-default ul.no-list,
+.olotap-editor__content.markdown-theme-default ol.no-list {
+  padding: 0;
+  list-style-type: none;
+}
+.olotap-editor__content.markdown-theme-default ol[type=a] {
+  list-style-type: lower-alpha;
+}
+.olotap-editor__content.markdown-theme-default ol[type=A] {
+  list-style-type: upper-alpha;
+}
+.olotap-editor__content.markdown-theme-default ol[type=i] {
+  list-style-type: lower-roman;
+}
+.olotap-editor__content.markdown-theme-default ol[type=I] {
+  list-style-type: upper-roman;
+}
+.olotap-editor__content.markdown-theme-default ol[type="1"] {
+  list-style-type: decimal;
+}
+.olotap-editor__content.markdown-theme-default div > ol:not([type]) {
+  list-style-type: decimal;
+}
+.olotap-editor__content.markdown-theme-default ul ul,
+.olotap-editor__content.markdown-theme-default ul ol,
+.olotap-editor__content.markdown-theme-default ol ol,
+.olotap-editor__content.markdown-theme-default ol ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.olotap-editor__content.markdown-theme-default li > p {
+  margin-top: 16px;
+}
+.olotap-editor__content.markdown-theme-default li + li {
+  margin-top: 0.25em;
+}
+.olotap-editor__content.markdown-theme-default dl {
+  padding: 0;
+}
+.olotap-editor__content.markdown-theme-default dl dt {
+  padding: 0;
+  margin-top: 16px;
+  font-size: 1em;
+  font-style: italic;
+  font-weight: var(--base-text-weight-semibold, 600);
+}
+.olotap-editor__content.markdown-theme-default dl dd {
+  padding: 0 16px;
+  margin-bottom: 16px;
+}
+.olotap-editor__content.markdown-theme-default img[align=right] {
+  padding-left: 20px;
+}
+.olotap-editor__content.markdown-theme-default img[align=left] {
+  padding-right: 20px;
+}
+.olotap-editor__content.markdown-theme-default .emoji {
+  max-width: none;
+  vertical-align: text-top;
+  background-color: transparent;
+}
+.olotap-editor__content.markdown-theme-default span.frame {
+  display: block;
+  overflow: hidden;
+}
+.olotap-editor__content.markdown-theme-default span.frame > span {
+  display: block;
+  float: left;
+  width: auto;
+  padding: 7px;
+  margin: 13px 0 0;
+  overflow: hidden;
+  border: 1px solid var(--color-border-default);
+}
+.olotap-editor__content.markdown-theme-default span.frame span img {
+  display: block;
+  float: left;
+}
+.olotap-editor__content.markdown-theme-default span.frame span span {
+  display: block;
+  padding: 5px 0 0;
+  clear: both;
+  color: var(--color-fg-default);
+}
+.olotap-editor__content.markdown-theme-default span.align-center {
+  display: block;
+  overflow: hidden;
+  clear: both;
+}
+.olotap-editor__content.markdown-theme-default span.align-center > span {
+  display: block;
+  margin: 13px auto 0;
+  overflow: hidden;
+  text-align: center;
+}
+.olotap-editor__content.markdown-theme-default span.align-center span img {
+  margin: 0 auto;
+  text-align: center;
+}
+.olotap-editor__content.markdown-theme-default span.align-right {
+  display: block;
+  overflow: hidden;
+  clear: both;
+}
+.olotap-editor__content.markdown-theme-default span.align-right > span {
+  display: block;
+  margin: 13px 0 0;
+  overflow: hidden;
+  text-align: right;
+}
+.olotap-editor__content.markdown-theme-default span.align-right span img {
+  margin: 0;
+  text-align: right;
+}
+.olotap-editor__content.markdown-theme-default span.float-left {
+  display: block;
+  float: left;
+  margin-right: 13px;
+  overflow: hidden;
+}
+.olotap-editor__content.markdown-theme-default span.float-left span {
+  margin: 13px 0 0;
+}
+.olotap-editor__content.markdown-theme-default span.float-right {
+  display: block;
+  float: right;
+  margin-left: 13px;
+  overflow: hidden;
+}
+.olotap-editor__content.markdown-theme-default span.float-right > span {
+  display: block;
+  margin: 13px auto 0;
+  overflow: hidden;
+  text-align: right;
+}
+.olotap-editor__content.markdown-theme-default code,
+.olotap-editor__content.markdown-theme-default tt {
+  padding: 0.2em 0.4em;
+  margin: 0;
+  font-size: 85%;
+  white-space: break-spaces;
+  background-color: var(--color-neutral-muted);
+  border-radius: 6px;
+}
+.olotap-editor__content.markdown-theme-default code br,
+.olotap-editor__content.markdown-theme-default tt br {
+  display: none;
+}
+.olotap-editor__content.markdown-theme-default del code {
+  text-decoration: inherit;
+}
+.olotap-editor__content.markdown-theme-default samp {
+  font-size: 85%;
+}
+.olotap-editor__content.markdown-theme-default pre code {
+  font-size: 100%;
+}
+.olotap-editor__content.markdown-theme-default pre > code {
+  padding: 0;
+  margin: 0;
+  word-break: normal;
+  white-space: pre;
+  background: transparent;
+  border: 0;
+}
+.olotap-editor__content.markdown-theme-default .highlight {
+  margin-bottom: 16px;
+}
+.olotap-editor__content.markdown-theme-default .highlight pre {
+  margin-bottom: 0;
+  word-break: normal;
+}
+.olotap-editor__content.markdown-theme-default .highlight pre,
+.olotap-editor__content.markdown-theme-default pre {
+  padding: 16px;
+  overflow: auto;
+  font-size: 85%;
+  line-height: 1.45;
+  background-color: var(--color-canvas-subtle);
+  border-radius: 6px;
+}
+.olotap-editor__content.markdown-theme-default pre code,
+.olotap-editor__content.markdown-theme-default pre tt {
+  display: inline;
+  max-width: auto;
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+  line-height: inherit;
+  word-wrap: normal;
+  background-color: transparent;
+  border: 0;
+}
+.olotap-editor__content.markdown-theme-default .csv-data td,
+.olotap-editor__content.markdown-theme-default .csv-data th {
+  padding: 5px;
+  overflow: hidden;
+  font-size: 12px;
+  line-height: 1;
+  text-align: left;
+  white-space: nowrap;
+}
+.olotap-editor__content.markdown-theme-default .csv-data .blob-num {
+  padding: 10px 8px 9px;
+  text-align: right;
+  background: var(--color-canvas-default);
+  border: 0;
+}
+.olotap-editor__content.markdown-theme-default .csv-data tr {
+  border-top: 0;
+}
+.olotap-editor__content.markdown-theme-default .csv-data th {
+  font-weight: var(--base-text-weight-semibold, 600);
+  background: var(--color-canvas-subtle);
+  border-top: 0;
+}
+.olotap-editor__content.markdown-theme-default [data-footnote-ref]::before {
+  content: "[";
+}
+.olotap-editor__content.markdown-theme-default [data-footnote-ref]::after {
+  content: "]";
+}
+.olotap-editor__content.markdown-theme-default .footnotes {
+  font-size: 12px;
+  color: var(--color-fg-muted);
+  border-top: 1px solid var(--color-border-default);
+}
+.olotap-editor__content.markdown-theme-default .footnotes ol {
+  padding-left: 16px;
+}
+.olotap-editor__content.markdown-theme-default .footnotes ol ul {
+  display: inline-block;
+  padding-left: 16px;
+  margin-top: 16px;
+}
+.olotap-editor__content.markdown-theme-default .footnotes li {
+  position: relative;
+}
+.olotap-editor__content.markdown-theme-default .footnotes li:target::before {
+  position: absolute;
+  inset: -8px -8px -8px -24px;
+  pointer-events: none;
+  content: "";
+  border: 2px solid var(--color-accent-emphasis);
+  border-radius: 6px;
+}
+.olotap-editor__content.markdown-theme-default .footnotes li:target {
+  color: var(--color-fg-default);
+}
+.olotap-editor__content.markdown-theme-default .footnotes .data-footnote-backref g-emoji {
+  font-family: monospace;
+}
+.olotap-editor__content.markdown-theme-default .pl-c {
+  color: var(--color-prettylights-syntax-comment);
+}
+.olotap-editor__content.markdown-theme-default .pl-c1,
+.olotap-editor__content.markdown-theme-default .pl-s .pl-v {
+  color: var(--color-prettylights-syntax-constant);
+}
+.olotap-editor__content.markdown-theme-default .pl-e,
+.olotap-editor__content.markdown-theme-default .pl-en {
+  color: var(--color-prettylights-syntax-entity);
+}
+.olotap-editor__content.markdown-theme-default .pl-smi,
+.olotap-editor__content.markdown-theme-default .pl-s .pl-s1 {
+  color: var(--color-prettylights-syntax-storage-modifier-import);
+}
+.olotap-editor__content.markdown-theme-default .pl-ent {
+  color: var(--color-prettylights-syntax-entity-tag);
+}
+.olotap-editor__content.markdown-theme-default .pl-k {
+  color: var(--color-prettylights-syntax-keyword);
+}
+.olotap-editor__content.markdown-theme-default .pl-s,
+.olotap-editor__content.markdown-theme-default .pl-pds,
+.olotap-editor__content.markdown-theme-default .pl-s .pl-pse .pl-s1,
+.olotap-editor__content.markdown-theme-default .pl-sr,
+.olotap-editor__content.markdown-theme-default .pl-sr .pl-cce,
+.olotap-editor__content.markdown-theme-default .pl-sr .pl-sre,
+.olotap-editor__content.markdown-theme-default .pl-sr .pl-sra {
+  color: var(--color-prettylights-syntax-string);
+}
+.olotap-editor__content.markdown-theme-default .pl-v,
+.olotap-editor__content.markdown-theme-default .pl-smw {
+  color: var(--color-prettylights-syntax-variable);
+}
+.olotap-editor__content.markdown-theme-default .pl-bu {
+  color: var(--color-prettylights-syntax-brackethighlighter-unmatched);
+}
+.olotap-editor__content.markdown-theme-default .pl-ii {
+  color: var(--color-prettylights-syntax-invalid-illegal-text);
+  background-color: var(--color-prettylights-syntax-invalid-illegal-bg);
+}
+.olotap-editor__content.markdown-theme-default .pl-c2 {
+  color: var(--color-prettylights-syntax-carriage-return-text);
+  background-color: var(--color-prettylights-syntax-carriage-return-bg);
+}
+.olotap-editor__content.markdown-theme-default .pl-sr .pl-cce {
+  font-weight: bold;
+  color: var(--color-prettylights-syntax-string-regexp);
+}
+.olotap-editor__content.markdown-theme-default .pl-ml {
+  color: var(--color-prettylights-syntax-markup-list);
+}
+.olotap-editor__content.markdown-theme-default .pl-mh,
+.olotap-editor__content.markdown-theme-default .pl-mh .pl-en,
+.olotap-editor__content.markdown-theme-default .pl-ms {
+  font-weight: bold;
+  color: var(--color-prettylights-syntax-markup-heading);
+}
+.olotap-editor__content.markdown-theme-default .pl-mi {
+  font-style: italic;
+  color: var(--color-prettylights-syntax-markup-italic);
+}
+.olotap-editor__content.markdown-theme-default .pl-mb {
+  font-weight: bold;
+  color: var(--color-prettylights-syntax-markup-bold);
+}
+.olotap-editor__content.markdown-theme-default .pl-md {
+  color: var(--color-prettylights-syntax-markup-deleted-text);
+  background-color: var(--color-prettylights-syntax-markup-deleted-bg);
+}
+.olotap-editor__content.markdown-theme-default .pl-mi1 {
+  color: var(--color-prettylights-syntax-markup-inserted-text);
+  background-color: var(--color-prettylights-syntax-markup-inserted-bg);
+}
+.olotap-editor__content.markdown-theme-default .pl-mc {
+  color: var(--color-prettylights-syntax-markup-changed-text);
+  background-color: var(--color-prettylights-syntax-markup-changed-bg);
+}
+.olotap-editor__content.markdown-theme-default .pl-mi2 {
+  color: var(--color-prettylights-syntax-markup-ignored-text);
+  background-color: var(--color-prettylights-syntax-markup-ignored-bg);
+}
+.olotap-editor__content.markdown-theme-default .pl-mdr {
+  font-weight: bold;
+  color: var(--color-prettylights-syntax-meta-diff-range);
+}
+.olotap-editor__content.markdown-theme-default .pl-ba {
+  color: var(--color-prettylights-syntax-brackethighlighter-angle);
+}
+.olotap-editor__content.markdown-theme-default .pl-sg {
+  color: var(--color-prettylights-syntax-sublimelinter-gutter-mark);
+}
+.olotap-editor__content.markdown-theme-default .pl-corl {
+  color: var(--color-prettylights-syntax-constant-other-reference-link);
+  text-decoration: underline;
+}
+.olotap-editor__content.markdown-theme-default g-emoji {
+  display: inline-block;
+  min-width: 1ch;
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 1em;
+  font-style: normal !important;
+  font-weight: var(--base-text-weight-normal, 400);
+  line-height: 1;
+  vertical-align: -0.075em;
+}
+.olotap-editor__content.markdown-theme-default g-emoji img {
+  width: 1em;
+  height: 1em;
+}
+.olotap-editor__content.markdown-theme-default .task-list-item {
+  list-style-type: none;
+}
+.olotap-editor__content.markdown-theme-default .task-list-item label {
+  font-weight: var(--base-text-weight-normal, 400);
+}
+.olotap-editor__content.markdown-theme-default .task-list-item.enabled label {
+  cursor: pointer;
+}
+.olotap-editor__content.markdown-theme-default .task-list-item + .task-list-item {
+  margin-top: 4px;
+}
+.olotap-editor__content.markdown-theme-default .task-list-item .handle {
+  display: none;
+}
+.olotap-editor__content.markdown-theme-default .task-list-item-checkbox {
+  margin: 0 0.2em 0.25em -1.4em;
+  vertical-align: middle;
+}
+.olotap-editor__content.markdown-theme-default .contains-task-list:dir(rtl) .task-list-item-checkbox {
+  margin: 0 -1.6em 0.25em 0.2em;
+}
+.olotap-editor__content.markdown-theme-default .contains-task-list {
+  position: relative;
+}
+.olotap-editor__content.markdown-theme-default .contains-task-list:hover .task-list-item-convert-container,
+.olotap-editor__content.markdown-theme-default .contains-task-list:focus-within .task-list-item-convert-container {
+  display: block;
+  width: auto;
+  height: 24px;
+  overflow: visible;
+  clip: auto;
+}
+.olotap-editor__content.markdown-theme-default::-webkit-calendar-picker-indicator {
+  filter: invert(50%);
+}
+
+/*# sourceMappingURL=classic-editor.css.map */
