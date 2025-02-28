@@ -21316,19 +21316,18 @@ img.ProseMirror-separator {
             class: ["olotap-editor", { "olotap-editor--fullscreen": $setup.isFullscreen }]
           }), {
             default: vue.withCtx(() => [
-              !$setup.isFullscreen ? vue.renderSlot(_ctx.$slots, "label", {
+              $props.label && !$setup.isFullscreen ? vue.renderSlot(_ctx.$slots, "label", {
                 key: 0,
                 isDark: $options.isDark
               }, () => [
-                $props.label ? (vue.openBlock(), vue.createBlock(_component_v_card_title, {
-                  key: 0,
+                vue.createVNode(_component_v_card_title, {
                   class: vue.normalizeClass($options.isDark ? "bg-grey-darken-3" : "bg-grey-lighten-3")
                 }, {
                   default: vue.withCtx(() => [
                     vue.createTextVNode(vue.toDisplayString($props.label), 1)
                   ]),
                   _: 1
-                }, 8, ["class"])) : vue.createCommentVNode("", true),
+                }, 8, ["class"]),
                 vue.createVNode(_component_v_divider)
               ]) : vue.createCommentVNode("", true),
               !$props.hideToolbar ? (vue.openBlock(), vue.createBlock(_component_TipTapToolbar, {

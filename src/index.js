@@ -1,4 +1,6 @@
 import OlotapEditor from "./components/OlotapEditor.vue";
+import ActionButton from "./ActionButton.vue";
+import ActionMenuButton from "./ActionMenuButton.vue";
 import * as Context from './hooks/use-context';
 import { defaultBubbleList } from './bubble';
 
@@ -10,7 +12,7 @@ const OlotapPlugin = {
   }
 };
 
-export { OlotapPlugin, OlotapEditor, defaultBubbleList, Context };
+export { OlotapPlugin, OlotapEditor, defaultBubbleList, Context, ActionButton, ActionMenuButton };
 
 
 // Usage
