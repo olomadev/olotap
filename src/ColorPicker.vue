@@ -12,10 +12,10 @@
       <v-sheet class="d-flex flex-wrap justify-between ma-1" fluid :max-width="230">
 
         <template v-for="color in getColorList" :key="color">
-          <v-btn v-if="color == ''" flat icon density="compact" @click="setColor(color)">
+          <v-btn v-if="color == ''" flat elevation="0" icon density="compact" @click="setColor(color)">
             <v-icon icon="mdi-circle-off-outline" :color="color" />
           </v-btn>
-          <v-btn v-else flat icon density="compact" @click="setColor(color)">
+          <v-btn v-else flat elevation="0" icon density="compact" @click="setColor(color)">
             <v-icon icon="mdi-circle" :color="color" />
           </v-btn>
         </template>
