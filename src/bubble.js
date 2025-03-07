@@ -120,7 +120,7 @@ const codeBlockMenus = (editor) => {
         icon: 'mdi-code-braces',
         action: () => {
           const newLang = prompt(_state.t('editor.codeblock.changeLang.prompt'), 'javascript');
-          if (! supportedCodes.includes(newLang)) {
+          if (newLang && ! supportedCodes.includes(newLang)) {
             const supportedLangs = supportedCodes.map(item => item).join(', ');
             alert(_state.t('editor.codeblock.changeLang.notSupport') + '\n\n' + supportedLangs);
             return;

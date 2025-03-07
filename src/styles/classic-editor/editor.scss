@@ -2,6 +2,12 @@ $white-color: #fff;
 $border-color: #dcdfe6;
 $primary-color: #409eff;
 $extra-light-primary-color: #ecf5ff;
+$tooltip-font-size: 12px;
+
+/* floating-vue tooltip popover font-size */
+.v-ftooltip {
+  font-size: $tooltip-font-size;
+}
 
 .olotap {
   overflow-wrap: anywhere;
@@ -141,56 +147,29 @@ $extra-light-primary-color: #ecf5ff;
       td,
       th {
         position: relative;
-        cursor: default;
-        /* right side */
-        &:hover {
-          cursor: ew-resize; 
-        }
-        /* left side */
-        &:hover {
-          cursor: ew-resize;
-        }
       }
-      .selectedCell {
-        position: relative;
-        cursor: grab;
-        &::after {
-          position: absolute;
-          inset: 0;
-          z-index: 2;
-          pointer-events: none;
-          content: '';
-          background: rgb(200 200 255 / 40%);
-        }
+      .selectedCell:after {
+        background: var(--gray-2);
+        content: "";
+        left: 0; right: 0; top: 0; bottom: 0;
+        pointer-events: none;
+        position: absolute;
+        z-index: 2;
       }
+      .column-resize-handle {
+        background-color: var(--purple);
+        bottom: -2px;
+        pointer-events: none;
+        position: absolute;
+        right: -2px;
+        top: 0;
+        width: 4px;
+      } 
     }
 
-    .tableWrapper {
-      td,
-      th {
-        position: relative;
-        cursor: default;
-        /* right side */
-        &:hover {
-          cursor: ew-resize; 
-        }
-        /* left side */
-        &:hover {
-          cursor: ew-resize;
-        }
-      }
-      .selectedCell {
-        position: relative;
-        cursor: grabbing;
-        &::after {
-          position: absolute;
-          inset: 0;
-          z-index: 2;
-          pointer-events: none;
-          content: '';
-          background: rgb(200 200 255 / 40%);
-        }
-      }
+    &.resize-cursor {
+      cursor: ew-resize;
+      cursor: col-resize;
     }
 
     .image-view {

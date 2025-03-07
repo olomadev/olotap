@@ -1,24 +1,32 @@
 <template>
   <v-btn
+    v-ftooltip="{
+      content: tooltip,
+      popperClass: 'v-ftooltip'
+    }"
     class="rounded me-1 ms-0"
     density="comfortable"
     size="small"
     :disabled="disabled"
     :color="color"
     icon
-    :class="{
-      'v-btn--active': isActive && isActive()
-    }"
+    :class="[ 
+      { 'v-btn--active': isActive && isActive() },
+    ]"
     @click="action"
   >
     <v-icon :icon="icon"></v-icon>
-    <v-tooltip :eager="false" activator="parent" location="top" :text="tooltip"></v-tooltip>
     <slot></slot>
   </v-btn>
 </template>
 
 <script>
+import { VTooltip } from 'floating-vue'
+
 export default {
+  directives: {
+    ftooltip: VTooltip
+  },
   props: {
     icon: {
       type: String,
@@ -44,6 +52,6 @@ export default {
       type: Function,
       default: undefined,
     },
-  },
+  }
 };
 </script>

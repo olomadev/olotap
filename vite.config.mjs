@@ -15,6 +15,7 @@ export default defineConfig({
   ],
   optimizeDeps: {
     include: ['vue'],
+    exclude: ['vuetify']
   },
   resolve: {
     alias: {
